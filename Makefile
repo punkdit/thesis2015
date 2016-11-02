@@ -10,8 +10,11 @@ thesis: thesis.tex refs.bib
 	pdflatex thesis.tex
 
 
-supplement.tex: ../fibonacci/supplement.tex 
-	./build.py ../fibonacci supplement.tex
+guide.tex: ../fibonacci/guide.tex 
+	./build.py ../fibonacci guide.tex
+
+#supplement.tex: ../fibonacci/supplement.tex 
+#	./build.py ../fibonacci supplement.tex
 
 repr.tex: ../spectrum2015/repr.tex 
 	./build.py ../spectrum2015 repr.tex
