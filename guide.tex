@@ -175,9 +175,29 @@
 % ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 %
 
-%\section{A physicist's primer on the description of (2+1)TQFTs}\label{secAbstract}
+%\section{Introduction}
 
-%\cggb{I reworded a few comments that I thought were a bit flowery for a technical appendix.}
+To the working physicist, anyon theory is meant to describe
+certain quasi-particle excitations occurring in two dimensional
+topologically ordered systems. 
+A typical calculation using this theory will involve operations
+such as $\otimes$ to combine anyons, 
+$F^{abc}_{d}$ to re-associate such combinations,
+and $R^{ab}_c$ to commute or braid these anyons. 
+Although there is a powerful string-diagram notation that greatly assists these
+manipulations, we still appear to be operating on particles
+arranged on a one-dimensional line, algebraically ordered from left to right.
+The obvious question is, where is the other dimension?
+The topological framework for considering these anyons as truly living in a 
+two dimensional space is known as a modular functor, or topological
+quantum field theory. 
+In this work we show how the apparently one-dimensional algebraic anyon theory
+is secretly the theory of anyons living in a fully two-dimensional system.
+The mathematical literature covering this secret is vast, 
+and we try to distill this down into something more manageable.
+
+
+\section{Overview}
 
 In this work we describe the theory of two-dimensional topologically ordered systems
 with anyonic excitations. 
@@ -302,7 +322,7 @@ modular functor.
 %
 %
 
-\subsection{Topological Exchange Statistics}
+\section{Topological Exchange Statistics}
 
 In this section we begin with the familiar question 
 of particle exchange statistics in three dimensions, whose answer is bosons and fermions.
@@ -558,7 +578,7 @@ geometric approaches to representing a twist.
 Any person that has struggled to untangle their headphone cable
 will immediately see what is going on here.
 \begin{center}
-\includegraphics[]{pic-framed.pdf}
+\includegraphics[width=1.0\columnwidth]{pic-framed.pdf}
 \end{center}
 On the left we have a loop; it is not a braid because it
 travels backwards in time.
@@ -612,7 +632,7 @@ be captured by the formalism of a modular functor which we turn to next.
 %
 %
 
-\subsection{Modular Functors}
+\section{Modular Functors}
 
 We list the axioms for a 
 \emph{2-dimensional unitary topological modular functor}.
@@ -1340,7 +1360,7 @@ a modular functor we get these equations ``for free''.
 %
 
 %\subsub{Refactoring theorem.}
-\subsection{Refactoring theorem}
+\section{Refactoring theorem}
 In this section we specialize to considering planar surfaces only.
 The theorem we are building towards shows that
 the $R$-moves act transitively
