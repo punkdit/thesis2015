@@ -650,8 +650,7 @@ c.writePDFfile("pic-braid-inverse.pdf")
 #
 #
 
-
-c = canvas.canvas()
+del c
 
 
 # hole spacing
@@ -679,7 +678,9 @@ for i in range(N+1):
 
 for frame in [0, 1]:
 
-    X = 11.5*w*frame
+    c = canvas.canvas()
+    #X = 11.5*w*frame
+    X = 0.
 
     tr = [trafo.translate(X, 0.)]
     timeslice(X, 0., 0., W=7*w)
@@ -711,15 +712,14 @@ for frame in [0, 1]:
             c.text(i*w, 0.5*H, "$%s$"%labels[i], center+tr)
 
 
-c.writePDFfile("pic-braid-sigma.pdf")
+    c.writePDFfile("pic-braid-sigma-%s.pdf"%frame)
 
-
+del c
 
 #############################################################################
 #
 #
 
-c = canvas.canvas()
 
 
 # hole spacing
@@ -740,7 +740,8 @@ def cos_dn(theta): # 0 -> -1 -> 0
 
 for frame in range(2):
 
-    X = 7.5*w*frame
+    c = canvas.canvas()
+    X = 0.
 
     ps0 = []
     ps1 = []
@@ -795,7 +796,7 @@ for frame in range(2):
         c.fill(path.circle(i*w, H, 0.06), tr)
 
 
-c.writePDFfile("pic-braid-YB.pdf")
+    c.writePDFfile("pic-braid-YB-%s.pdf"%frame)
 
 
 
