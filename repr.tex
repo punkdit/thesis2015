@@ -776,16 +776,19 @@ of spins and identical Hamiltonian up to some signs.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 
-%\subsubsection{The $XY$-model}
-%
-%The $XY$-model lives on a one dimensional chain of $n$ qubits.
-%We write the gauge group generators as
-%$$
-%    G_0 = \{ X_i X_{i+1}, Z_i Z_{i+1} \ \mbox{for}\ i=1,...,n \}
-%$$
-%with periodic boundary conditions.
-%
-%This example shares features of both the previous and the next examples.
+\subsubsection{The one dimensional $XY$-model}
+
+This example shares features of both the previous and the next examples.
+The $XY$-model lives on a one dimensional chain of $n$ qubits.
+We write the gauge group generators as
+$$
+    G_0 = \{ X_i X_{i+1}, Z_i Z_{i+1} \ \mbox{for}\ i=1,...,n \}
+$$
+with periodic boundary conditions.
+
+Normally these operators are written as 
+$\{ X_i X_{i+1}, Y_i Y_{i+1} \ \mbox{for}\ i=1,...,n \}$
+but note that there is an automorphism of the Pauli group...
 
 
 
@@ -1518,7 +1521,7 @@ being the representation theory of semi-simple Lie algebras.
 Recall \cite{Fulton2013} that an abstract 
 %(finite-dimensional)
 \emph{Lie algebra} $\lie$ is 
-a vector space with a bracket operation:
+a vector space together with a bilinear form:
 $$
     [\ ,\  ] : \lie \times \lie \to \lie
 $$
@@ -1545,8 +1548,9 @@ multiplication of operators, and only allow taking brackets (and linear
 combinations.)
 This is not as crazy as it may seem.
 The fundamental calculation in the theory of
-quantum stabilizer codes is actually a Lie
-algebra calculation. Consider a state $\ket{\psi}$
+quantum stabilizer codes is actually
+a Lie algebra calculation.
+Consider a state $\ket{\psi}$
 that is stabilized by some operator $s\in S:$
 $$
     s\ket{\psi} = \ket{\psi},
@@ -1559,6 +1563,8 @@ $$
 which shows that $t\ket{\psi}$ is a $-1$ eigenvalue of $s.$
 The key point here is that nowhere did we need to multiply (compose) two operators,
 it was all done using the bracket.
+%This calculation is basically the same as the fundamental
+%calculation used in the representation theory of Lie algebras.
 
 We continue the analysis of CSS gauge code Hamiltonians.
 The terms of the Hamiltonian block $H_{t_X,t_Z}$
@@ -1594,8 +1600,8 @@ will be more complicated than the corresponding group structure.
 But we do have the following:
 \begin{framed}
 %\noindent{\bf Important:}
-The Lie algebra $\lie_{t_X,t_Z}$ is a semi-simple
-subalgebra of $\sl_{2^n}(\Complex).$
+The Lie algebra $\lie_{t_X,t_Z}$ is a semi-simple Lie algebra.
+%subalgebra of $\sl_{2^n}(\Complex).$
 \end{framed}
 This follows from the characterization of
 semi-simple Lie algebras as those having no
