@@ -1695,7 +1695,7 @@ the square lattice of $l\times l$ qubits.
 %\includegraphics[width=0.3\columnwidth]{pic-gcolor-2.pdf}
 %\end{center}
 
-The three dimensional gauge color code \cite{Bombin2015,Bombin2015single}
+The three dimensional gauge color code \cite{Bombin2015,Bombin2015single,Kubica2015}
 is a self-dual CSS gauge code. 
 It is based on the following geometric construction known
 as a \emph{colex} \cite{Bombin2007exact}.
@@ -2014,16 +2014,18 @@ These results are obtained using exact diagonalization methods.
 For each instance we indicate the groundspace eigenvalue
 $\lambda_1$ which is obtained from $H_{0,0}.$
 Then we list the second eigenvalue of $H_{0,0}$ as
-well as the first eigenvalue of $H_{t_X,0}$ and
-the weight of the corresponding frustrated stabilizer $w(s_X).$
+well as the first eigenvalue of $H_{t_X,0}$ for $t_X\ne 0.$
+The weight of the corresponding frustrated stabilizer $w(s_X)$
+is defined as the minimum number of gauge operators needed
+to form $s_X.$
 The eigenvalue closest to $\lambda_1(H_{0,0})$ is marked
-with a tick, along with the value of the gap.
+with a tick, along with the value of the gap, $\lambda_1-\lambda_2.$
 We only show the results for a single frustrated
 stabilizer generator,
 as it was confirmed numerically that 
 adding further frustrated stabilizers never 
 produces a better candidate for $\lambda_2.$
-Also, we only consider non-isomorphic stabilizer generators,
+Also, we only show non-isomorphic stabilizer generators,
 under the lattice symmetry of the model.
 We use the iterative solvers in software library 
 {\tt SLEPc} \cite{Hernandez2005} to find these eigenvalues.
@@ -2048,7 +2050,7 @@ $n$ &  $t_X$    & $w(s_X)$ & $\lambda_1$ & $\lambda_2$ ? & gap \\
 \end{center}
 \end{samepage}
 
-The numerics for the compass model have been previously found \cite{Brzezicki2013}
+Such numerics for the compass model have been previously found \cite{Brzezicki2013}
 using similar methods. 
 
 \begin{samepage}
@@ -2074,12 +2076,12 @@ $n$ &  $t_X$    & $w(s_X)$ & $\lambda_1$ & $\lambda_2$ ?  & gap \\
 15  & 0         & &  25.455844  & 16.970563    &  \\
                  &   & 8 &              & 22.214755 \checkmark & 3.241089           \\
 \hline
-39  & 0         & &  64.476081   & 58.137233    &  \\
-                 &           & 8 &              & 60.706477    &   \\
-                 &           & 8 &              & 60.357053  &    \\
-                 &           & 12 &              & 61.366348   &  \\
-                 &           & 20 &              & 63.495916  \checkmark  & 0.980165 \\
-\hline
+%39  & 0         & &  64.476081   & 58.137233    &  \\
+%                 &           & 8 &              & 60.706477    &   \\
+%                 &           & 8 &              & 60.357053  &    \\
+%                 &           & 12 &              & 61.366348   &  \\
+%                 &           & 20 &              & 63.495916  \checkmark  & 0.980165 \\
+%\hline
 65  & 0         &    &  104.076026  & 99.014097     &    \\
                  &           & 8  &              &  100.429340   &            \\
                  &           & 12 &              &  100.585413   &            \\
@@ -2115,7 +2117,9 @@ that the gap of the compass model
 tends to zero as the lattice size grows.
 The second point to make
 is that the gap always corresponds to frustrating
-the stabilizer (generator) of largest weight. 
+a stabilizer ($t_X\ne 0.$) 
+Moreover, the stabilizer that
+gives rise to the gap is the one with largest weight.
 This is a crucial connection to make because the
 stabilizers of the compass model grow with the linear
 size of the model\footnote{Note the similar
