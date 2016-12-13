@@ -995,15 +995,19 @@ mutually anti-commuting string operators $R_0.$
 
 \def\Cn{\Complex[2^n]}
 \def\Cr{\Complex[2^r]}
-\def\Field{\mathcal{F}_2}
+%\def\Field{\mathcal{F}_2}
+\def\Field{\mathcal{F}}
 %\def\Fn{\Field[n]}
 %\def\Fr{\Field[r]}
 \def\Fn{\Field^n}
 \def\Fm{\Field^m}
 \def\Fr{\Field^r}
-\def\Fnd{\Field^{n*}}
-\def\Fmd{\Field^{m*}}
-\def\Frd{\Field^{r*}}
+%\def\Fnd{\Field^{n*}}
+%\def\Fmd{\Field^{m*}}
+%\def\Frd{\Field^{r*}}
+\def\Fnd{\Field_{n}}
+\def\Fmd{\Field_{m}}
+\def\Frd{\Field_{r}}
 
 \def\Im{\mathrm{im}}
 \def\Ker{\mathrm{ker}}
@@ -1011,24 +1015,25 @@ mutually anti-commuting string operators $R_0.$
 \def\Span#1{\langle #1 \rangle}
 
 %\section{Representations over the finite field $\Field$}
-\section{$\Field$-linear theoretic representations}
+\section{Symplectic representations}
 
 This is a way of ``brute-forcing'' the representations when
 we cannot find a way of writing them down in a closed form expression.
 For finite systems this yields an algorithm that is efficiently implementable.
 
-In this section, and the remainder of this paper,
+In this section, and the remainder of this chapter,
 we restrict our
 attention to gauge groups formed from terms 
 in $\Pauli_n^X\cup\Pauli_n^Z.$
 We call these \emph{CSS gauge codes.}
-We briefly review the $\Field$ symplectic structure of
+We briefly review the symplectic structure of
 these operators.
 
+Let $\Field$ denote the finite field with two elements $0$ and $1$.
 Both $\Pauli^X_n$ and $\Pauli^Z_n$ are abelian groups,
 and can be identified with the additive 
 group structure of the $n$ dimensional vector space
-over the finite field of two elements $\Field:$
+over $\Field:$
 $$
     \Pauli^X_n \cong \Fn,  \ \ 
     \Pauli^Z_n \cong \Fn. 
@@ -1060,12 +1065,12 @@ $$
 This is an $\Field$ scalar, just zero or one. We think of this
 as a ``syndrome''.
 This suggests that actually these $Z$-type operators
-live in the dual vector space $\Field^{n*}.$
+live in the dual vector space $\Fnd.$
 Because of the underlying symmetry
 (and notational confusion)
 between the $X$ and $Z$-type operators,
-we make the convenction that by default
-all our $\Field$ vectors come as row vectors (ie. dual vectors).
+we make the convention that by default
+all our $\Field$-vectors come as row vectors (ie. dual vectors).
 This means we use the transpose operator $^\top$ to
 indicate a primal (column) vector.
 %so a product $u v^\top$ of
@@ -1083,7 +1088,7 @@ $$
 This is an $\Field$ scalar which gives the commutator of the 
 two operators.
 
-A $\Field$-linear operator such as
+An $\Field$-linear operator such as
 $ A : \Fn \to \Fm $
 acts on the left as $ u^\top \mapsto A u^\top.$
 It also acts on dual vectors as
@@ -1142,7 +1147,7 @@ We first find the stabilizers $S_Z$.
 These are built out of $\Fnd$ vectors from the span of $G_Z$
 that commute with the rows of $G_X:$
 \begin{align*}
-    \Span{S_Z} &= \{\  vG_Z \ |\  v G_Z G_X^\top = 0, \ \ v \in F_2^{|G_Z|*}\ \} \\
+    \Span{S_Z} &= \{\  vG_Z \ |\  v G_Z G_X^\top = 0, \ \ v \in F_{|G_Z|}\ \} \\
                &= \{\  vG_Z \ |\  v^\top \in \Ker(G_X G_Z^\top)  \ \}.
 \end{align*}
 The generators (rows of $S_Z$) are then extracted
@@ -1152,7 +1157,7 @@ We swap the role of $X$ and $Z$ to find $S_X.$
 Once we have the stabilizers, in order to
 complete the above table as a presentation
 of the Pauli group we solve the
-following $\Field$ block matrix equation,
+following $\Field$-linear block matrix equation,
 %All of this can be summarized in the block matrix equation:
 $$
 \left( \begin{array}{l}
@@ -1431,11 +1436,11 @@ $$
     \mbox{syndrome}(u) = G_Z u^\top
 $$
 for $u^\top \in \Fn.$
-This is an $\Field$ vector that has one component for
+This is an $\Field$-vector that has one component for
 each row of $G_Z.$
 Writing $|G_Z|$ for the number of these rows, and 
 using a \emph{weight} function $w$ that just counts
-the number of non-zero entries in any $\Field$ vector
+the number of non-zero entries in any $\Field$-vector
 we have the following contributions to
 the Hamiltonian:
 $$
@@ -1468,14 +1473,14 @@ H_{t_X,0} = \sum_{\substack{v\in\Frd\\g_X\in G_X } }
     |G_Z| - 2w(G_Z R_X^\top v^\top + G_Z t_X^\top)
     \bigr) \ \ket{v}\bra{v}.
 $$
-Writing the difference explicitly:
-$$
-    H_{0,0} - H_{t_X,0} = 
-  \sum_{v\in\Frd} 2\bigl(
-    w(G_Z R_X^\top v^\top + G_Z t_X^\top)
-    -w(G_Z R_X^\top v^\top)
-    \bigr) \ \ket{v}\bra{v}.
-$$
+%Writing the difference explicitly:
+%$$
+%    H_{0,0} - H_{t_X,0} = 
+%  \sum_{v\in\Frd} 2\bigl(
+%    w(G_Z R_X^\top v^\top + G_Z t_X^\top)
+%    -w(G_Z R_X^\top v^\top)
+%    \bigr) \ \ket{v}\bra{v}.
+%$$
 The general form of
 each the Hamiltonian block is:
 \begin{align*}
@@ -1688,7 +1693,7 @@ $$
 A basis for each $\Gamma_{t_X}$ is given by a coset
 of $G_X$ in $\Fnd:$
 $$
-    \{ v S_X + u R_X + t_X \}_{v\in \Field^{m_X*}, u\in\Frd}.
+    \{ v S_X + u R_X + t_X \}_{v\in \Field_{m_X}, u\in\Frd}.
 $$
 
 %See \cite{Baez2012}
@@ -2653,7 +2658,7 @@ that is, one for every $s_X\in \Span{S_X}.$
 This is clear from examining the basis vectors for $\Gamma_{t_X}.$
 These are 
 $$
-    v S_X + u R_X + t_X, \smbox{where} v\in \Field^{m_X*}, u\in\Frd
+    v S_X + u R_X + t_X, \smbox{where} v\in \Field_{m_X}, u\in\Frd
 $$
 and those that satisfy the most $G_Z$ terms are
 precisely those with $u=0.$
