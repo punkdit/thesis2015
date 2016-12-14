@@ -33,7 +33,7 @@
 \newcommand{\ketbra}[2]{\ket{#1}\!\bra{#2}}
 \newcommand{\braket}[2]{\langle{#1}|{#2}\rangle}
 
-\newcommand{\todo}[1]{\textcolor{red}{#1}}
+%\newcommand{\todo}[1]{\textcolor{red}{#1}}
 
 \def\smbox#1{\ \ \mbox{#1}\ \ }
 
@@ -77,11 +77,12 @@ many examples.
 Then we turn to examine the low energy spectra.
 In particular we are interested in the gap between
 the energy of the groundstate and the first excited state.
-Constant gap is part of the story of topologically ordered phases
+Having a constant gap (bound from below)
+is part of the story of topologically ordered phases
 \cite{Kitaev2003,Brown2016}.
 %\cite{Wen1991} % 
 
-\subsection{An example: the four qubit gauge code}
+\subsection{Some motivating examples}
 
 We start our journey considering a two-dimensional state space.
 This space is blessed with two basis vectors $\ket{0}$ and $\ket{1}.$
@@ -203,6 +204,7 @@ with zero weight:
 \def\Xt{\tilde{X}}
 \def\Zt{\tilde{Z}}
 
+\todo{XXX and now for another formula}
 \begin{align*}
 \Ham &= XXII + IIXX + ZIZI + IZIZ \\
   &= \Xt_4 + \Zt_2\Xt_4 + \Zt_4 + \Zt_3\Zt_4 \\
@@ -791,7 +793,7 @@ with periodic boundary conditions.
 Normally these operators are written as 
 $\{ X_i X_{i+1}, Y_i Y_{i+1} \ \mbox{for}\ i=1,...,n \}$
 but note that there is an automorphism of the Pauli group...
-
+\todo{XXX}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -1366,7 +1368,7 @@ $$
     \Complex[2^n] \cong \Complex[\Fnd].
 $$
 The $(L,S,T,R)$-decomposition naturally
-splits $\Fnd$ into $2^{m_Z+k}$ affine subspaces:
+decomposes $\Fnd$ into $2^{m_Z+k}$ affine subspaces:
 $$
     \{ v R_X + t_X + l_X \}_{v\in\Frd}
 $$
@@ -1516,7 +1518,7 @@ theory for $CSS$ gauge code Hamiltonians.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 
-\section{Perron-Frobenius representations}
+\section{Perron-Frobenius theory}
 
 %We restrict our attention to Hamiltonians whose off-diagonal entries
 %are non-negative (in some basis).
@@ -1560,13 +1562,15 @@ where we write $P$ as an $n\times n$ permutation matrix.
 The compass model is then weakly self-dual when we transpose
 the square lattice of $l\times l$ qubits.
 
-We now turn to a coarser notion of reducibility.
+We now turn to another notion of reducibility, coarser than
+the group theoretic reducibility.
 The easiest way to understand this is via graph theory.
 Given a CSS gauge code Hamiltonian $H,$ 
 we see that 
 the diagonal terms (working in the computational basis)
 come from the $Z$ operators and the off-diagonal terms
 come from $X$ type operators.
+\todo{...stoquastic...}
 This suggests the following definition.
 We define a graph $\Gamma$ with vertices the $2^n$ computational
 basis elements, and edges:
@@ -1628,6 +1632,7 @@ $$v_1(\Gamma_{t_X})
 $$
 with positive components.
 \end{framed}
+\todo{PF theorem}
 
 Now we make the restriction that $H$
 comes from a weakly self-dual gauge code.
@@ -1818,21 +1823,12 @@ A graph automorphism is a permutation matrix $P$
 such that $P^T \Ham P = \Ham$.
 Equivalently, $P$ commutes with $\Ham$ and this means it preserves
 the eigenspaces of $\Ham$.
-%To show $P$ acts trivially on the groundstate we
-%need to check that it commutes with the logical
-%operators.
-
 \def\auto{A}
 The set of all such graph automorphisms 
 form a group $\auto$.
 We now define a new matrix $\Ham//\auto$
 that acts on the vector space with basis consisting
 of the orbits of $\auto.$
-%The groundspace wavefunction is constant
-%on each $\auto-$orbit.
-%The top eigenvalue of $\Ham//\auto$ will be the
-%same as the top eigenvalue of $\Ham.$
-
 The matrix components of $\Ham//\auto$ will be
 $$
     (\Ham//\auto)_{ij} = |\{ g\in G \smbox{s.t.} gv \in j \}| \smbox{for some}v\in i
@@ -1877,7 +1873,7 @@ but in general it is possible that $Aut(G) < \auto.$
 Note that the orbigraph is no longer Hermitian,
 and in general will not even be normal.
 
-We can also write $H//A = QHP$ using the following two matrices for $P$ and $Q:$
+We can also write $H//\auto = QHP$ using the following two matrices for $P$ and $Q:$
 $$
 Q = 
 \left(\begin{array}{rrrrrrrr}
@@ -1900,15 +1896,14 @@ P =
 $$
 The idea is that each column of $P$ sums over an orbit,
 and each row of $Q$ chooses one member of each orbit.
+See also \cite{Cvetkovic1980} chapter 5.
 
 The automorphisms of the gauge group, $Aut(G)$ will induce an
-automorphism of the graph by ...
+automorphism of the graph by \todo{XXX}...
 In particular, elements of the stabilizer group $\Stab$ induce graph 
-automorphisms by ...
+automorphisms by \todo{XXX}...
 In general there may be more symmetry in the graph that
 we cannot access via a group automorphism.
-
-See also \cite{Cvetkovic1980} chapter 5.
 
 In general, we will apply this idea to each of the blocks $H_t$.
 From {\bf Fact 2} above, and using the fact that we are
@@ -1923,8 +1918,8 @@ The orbigraph of $\Ham_{0,0}$ contains the ground eigenvalue of $\Ham_{0,0}.$
 \subsection{The compass model}
 For the next example we take the $l=3$ compass model.
 $\Ham_{0,0}$ acts on a 16 dimensional space.
-The order of $A$ is $72$, and we find three $A-$orbits.
-% This time $Aut(G) = A$ ???
+The order of $\auto$ is $72$, and we find three $\auto-$orbits.
+% This time $Aut(G) = \auto$ ???
 The orbigraph method can be applied in the case
 where the Hamiltonian weights for $X$ and $Z$ are uniform as $w_X$ and $w_Z.$
 We separate the $X$ and $Z$ terms of the orbigraph to show
@@ -1959,7 +1954,7 @@ we get the spectrum of $\Ham_{0,0}$ and note that the orbigraph lifts
 all degeneracy as well as missing some excited eigenspaces:
 \begin{center}
 \begin{tabular}{ c|c|c } 
-$\lambda$ & $\Ham_{0,0}$ degeneracy & $\Ham_{0,0}//A$ degeneracy \\
+$\lambda$ & $\Ham_{0,0}$ degeneracy & $\Ham_{0,0}//\auto$ degeneracy \\
 \hline
     11.2111025509 & 1 & 1 \\
     6.0 & 1 & 1 \\
@@ -1971,7 +1966,7 @@ $\lambda$ & $\Ham_{0,0}$ degeneracy & $\Ham_{0,0}//A$ degeneracy \\
 \end{tabular}
 \end{center}
 The reason we miss some excited spaces is that they do not contain
-any trivial irrep of $A.$
+any trivial irrep of $\auto.$
 Note that we miss the eigenspace with $\lambda = -6$
 even though this is one dimensional. It must contain some other non-trivial
 one dimensional irrep. This cannot happen with the groundspace because
@@ -1979,7 +1974,7 @@ those eigenvectors are all positive.
 
 If we want to make an orbigraph for these other spaces we would construct
 the orbigraph by
-summing over orbits using different characters of $A$
+summing over orbits using different characters of $\auto$
 (these are \emph{momenta} in the abelian terminology).
 See \cite{Cvetkovic1980} chapter 5 for more details.
 
@@ -1989,8 +1984,8 @@ See \cite{Cvetkovic1980} chapter 5 for more details.
 The smallest gauge color code has $n=15$ qubits,
 $G_0$ has $18$ each of X/Z-type gauge operators,
 and $4$ each of X/Z-type stabilizer generators.
-$\Ham_{0,0}$ acts on a 64 dimensional space, and $A$ has
-order 720, and we find 7 orbits:
+$\Ham_{0,0}$ acts on a 64 dimensional space, and $\auto$ has
+order 720. We find 7 orbits:
 $$
 \Ham_{0,0}//\auto = 
 \left(\begin{array}{rrrrrrr}
@@ -2019,7 +2014,7 @@ Numerics give the full spectrum of $\Ham_{0,0}$ and we note that the orbigraph l
 all degeneracy as well as preserving every eigenvalue:
 \begin{center}
 \begin{tabular}{ c|c|c } 
-$\lambda$ & $\Ham_{0,0}$ degeneracy & $\Ham_{0,0}//A$ degeneracy \\
+$\lambda$ & $\Ham_{0,0}$ degeneracy & $\Ham_{0,0}//\auto$ degeneracy \\
 \hline
     25.4558441227 & 1 & 1 \\
     16.9705627485 & 6 & 1 \\
@@ -2045,14 +2040,11 @@ $$\lambda_1 - \lambda_2 = 9\sqrt{2} - 3\sqrt{10} \cong 3.24108908.$$
 
 Here we tabulate graph automorphisms of $H_{t_X,0}$
 and the resulting orbigraph sizes.
-
-%We define a group of symmetries of the code as...
-
 We use the software library {\tt nauty}\cite{McKay2014} for computing graph automorphisms.
 
 \begin{center}
 \begin{tabular}{ l|c|c|c|c|c|c } 
-model &\ $n$\ &\ $r$\ &\ $t_X$\ & $|A|$ & $|\mathrm{orbits}|$ & Aut(code) \\
+model &\ $n$\ &\ $r$\ &\ $t_X$\ & $|\auto|$ & $|\mathrm{orbits}|$ & Aut(code) \\
 \hline
 %    1D xy & 4 &  2& 0 & 2 & 3 & 8 \\
 %       & 5 &  4& 0 & 10 & 4 & 10 \\
@@ -2083,20 +2075,37 @@ model &\ $n$\ &\ $r$\ &\ $t_X$\ & $|A|$ & $|\mathrm{orbits}|$ & Aut(code) \\
 \end{tabular}
 \end{center}
 
+Here we also show Aut(code) which is
+the automorphism group of the gauge code.
+Elements of this group act by permuting the $n$ qubits.
+In detail, such an action is given by three permutation matrices,
+$P_n, P_Z, P_X$ such that the following $\Field$-linear equations hold
+\begin{align*}
+    P_X G_X P_n &= G_X, \\
+    P_Z G_Z P_n &= G_Z.
+\end{align*}
+This implies that $P_n$ commutes with the Hamiltonian
+(as $\Complex$-linear operators):
+$$
+    P_n H = H P_n.
+$$
+\todo{why does this preserve $H_{0,0}$ ???}
+%This group also acts on $H_{0,0}$ 
+
 The mystery here is the graph automorphism group is
 bigger, sometimes much bigger, than the automorphism group of
 the underlying code.
 So where is the extra symmetry coming from?
 
 A crucial hint is provided by the fact that these graph
-symmetries respect the symplectic structure in the following
-sense...
+symmetries respect the symplectic structure in the following sense...
+\todo{XXX}
 
 All this suggests an examination of the commutation structure
 of the code.
 Indeed, this is captured by the notion of a Lie algebra, which we turn to next.
 
-%From this table it looks like $H_{0,0}$ for the compass model $|A| = 8l^2.$
+%From this table it looks like $H_{0,0}$ for the compass model $|\auto| = 8l^2.$
 %Note that for large graphs, numerically finding the orbigraph has comparable
 %difficulty to just (numerically) solving the original eigenvalue problem.
 
@@ -2180,7 +2189,7 @@ The simplest such example of this is the one qubit Lie algebra
 which is generated by $X$ and $Z.$
 This will have basis $\{X, Z, 2XZ = [X, Z]\}$
 and so is a three dimensional Lie algebra. In fact, it is isomorphic
-to $sl_2(\Complex)$ the Lie algebra of traceless two by two
+to $\mathfrak{sl}_2(\Complex)$ the Lie algebra of traceless two by two
 matrices.
 Notice that we do not include $I$ in these algebras as
 this is associated to the multiplicative (group) structure
@@ -2189,7 +2198,7 @@ with such terms as these just shift the spectrum by a constant.
 Notice also that if we try to build a larger Lie algebra
 from taking iterated brackets of
 the $n$-qubit operators $\{X_i, Z_i\}$ we still only get
-a direct sum of $n$ copies of $sl_2(\Complex).$
+a direct sum of $n$ copies of $\mathfrak{sl}_2(\Complex).$
 So while the group generated by products of $\{X_i, Z_i\}$ is the
 whole Pauli group $\Pauli_n$, as a Lie algebra we get something finer.
 This reflects the fact that these terms break up into $n$
@@ -2245,10 +2254,20 @@ corresponding to each ideal.
 
 \subsection{Ideal structure of gauge codes}
 
-The $XY$-model...
+Ideals are generated by anti-commuting operators,
+and so to find these ideals we search for a partition of
+the guage group operators such that operators from
+different partitions commute.
+
+The $XY$-model has gauge group
+terms $X_i X_{i+1}, Z_i Z_{i+1}$ for $i=1,...,n.$
+When $n=2k$ is even 
+these terms generate two Lie algebra ideals.
+For $i=1,...,k$
+the terms $X_{2i}X_{2i+1}$ and $Z_{2i+1}Z_{2i+2}$ 
+generate one ideal, and the other ideal comes from switching $X$ and $Z.$
 
 We next examine the Lie algebra ideal structure of the gauge color code.
-%An $X$-type gauge operator 
 Two faces operators, of $X$ and $Z$ type,
 will anti-commute only when
 they intersect on a single vertex.
@@ -2278,6 +2297,165 @@ diagonalization numerical results below.
 
 %Representations of Direct Sum of Lie Algebras 
 %http://math.stackexchange.com/questions/309617/representations-of-direct-sum-of-lie-algebras
+
+\todo{XXX How do ideals in the entire gauge group carry over into the semi-simple parts?}
+
+\subsection{Lie algebra classification}
+
+Here we explicitly compute decompositions of $\lie_{0,0}$
+into the direct sum of simple Lie algebras.
+First we review the classificiation of simple Lie algebras.
+
+Let $n$ be the rank of a simple lie algebra $\mathfrak{g}.$
+This is the dimension of the cartan subalgebra $\mathfrak{h}.$
+%This $n$ is also the subscript on the following Dynkin diagrams. 
+%Dynkin used these to classify simple Lie algebras in 1947.
+%The Cartan subalgebra $\mathfrak{h}$ is a maximal abelian Lie subalgebra 
+%of $\mathfrak{g}.$
+
+%Simple Lie algebras have connected Dynkin diagrams.
+The simple Lie algebras are classified into four infinite series
+$A_n, B_n, C_n, D_n$ as well as five other exceptional Lie
+algebras that we will not need.
+
+The $A_n$ series can be
+constructed as 
+$\mathfrak{sl}_{n+1}$ which are the traceless $(n+1)\times (n+1)$ matrices. 
+Therefore the algebra dimension is $n^2 + 2n.$
+%Number of roots is $n(n+1).$
+
+For $n\ge 2$ the $B_n$ series 
+comes from the Lie algebras
+$\mathfrak{so}_{2n+1}$.
+These can be constructed as $(2n+1)\times(2n+1)$ matrices
+in block form 
+$$
+\left(\begin{array}{lll}
+P & Q & T\\
+R & S & U\\
+V & W & 0\\
+\end{array}\right)
+$$
+with $Q,R$ anti-symmetric and 
+$P^{\top}=-S,T=-W^{\top},U=-V^{\top}.$
+This algebra therefore has dimension $2n^2 + n.$
+%Number of roots is $2n^2,$ number of short roots $2n.$
+
+For $n\ge 3$ the $C_n$ series
+comes from the Lie algebras
+$\mathfrak{sp}_{2n}$.
+These can be constructed as $2n\times2n$ matrices
+in block form 
+$$
+\left(\begin{array}{ll}
+P & Q \\
+R & S
+\end{array}\right)
+$$
+with 
+$Q,R$ symmetric and $P^{\top}=-S.$
+It follows that this algebra has dimension $2n^2 + n.$
+%Number of roots is $2n^2,$ number of short roots $2n(n-1).$
+
+For $n\ge 4$ the $D_n$ series
+is $\mathfrak{so}_{2n}$.
+These can be constructed as $2n\times2n$ matrices
+in block form 
+$$
+\left(\begin{array}{ll}
+P & Q \\
+R & S
+\end{array}\right)
+$$
+with $Q,R$ anti-symmetric and $P^{\top}=-S.$
+Therefore this algebra has dimension $2n^2 - n.$
+%Number of roots is $2n(n-1).$
+
+%For $n\ge 1:$
+%  \begin{tikzpicture}[scale=.4]
+%    \draw (-1,0) node[anchor=east]  {$A_n$};
+%    \foreach \x in {0,...,5}
+%    \draw[xshift=\x cm,thick] (\x cm,0) circle (.3cm);
+%    \draw[dotted,thick] (0.3 cm,0) -- +(1.4 cm,0);
+%    \foreach \y in {1.15,...,4.15}
+%    \draw[xshift=\y cm,thick] (\y cm,0) -- +(1.4 cm,0);
+%  \end{tikzpicture}
+%
+%For $n\ge 2:$
+%  \begin{tikzpicture}[scale=.4]
+%    \draw (-1,0) node[anchor=east]  {$B_n$};
+%    \foreach \x in {0,...,4}
+%    \draw[xshift=\x cm,thick] (\x cm,0) circle (.3cm);
+%    \draw[xshift=5 cm,thick,fill=black] (5 cm, 0) circle (.3 cm);
+%    \draw[dotted,thick] (0.3 cm,0) -- +(1.4 cm,0);
+%    \foreach \y in {1.15,...,3.15}
+%    \draw[xshift=\y cm,thick] (\y cm,0) -- +(1.4 cm,0);
+%    \draw[thick] (8.3 cm, .1 cm) -- +(1.4 cm,0);
+%    \draw[thick] (8.3 cm, -.1 cm) -- +(1.4 cm,0);
+%  \end{tikzpicture}
+%
+%For $n\ge 3:$
+%  \begin{tikzpicture}[scale=.4]
+%    \draw (-1,0) node[anchor=east]  {$C_n$};
+%    \foreach \x in {0,...,4}
+%    \draw[xshift=\x cm,thick,fill=black] (\x cm,0) circle (.3cm);
+%    \draw[xshift=5 cm,thick] (5 cm, 0) circle (.3 cm);
+%    \draw[dotted,thick] (0.3 cm,0) -- +(1.4 cm,0);
+%    \foreach \y in {1.15,...,3.15}
+%    \draw[xshift=\y cm,thick] (\y cm,0) -- +(1.4 cm,0);
+%    \draw[thick] (8.3 cm, .1 cm) -- +(1.4 cm,0);
+%    \draw[thick] (8.3 cm, -.1 cm) -- +(1.4 cm,0);
+%  \end{tikzpicture}
+%
+%For $n\ge 4:$
+%  \begin{tikzpicture}[scale=.4]
+%    \draw (-1,0) node[anchor=east]  {$D_n$};
+%    \foreach \x in {0,...,4}
+%    \draw[xshift=\x cm,thick] (\x cm,0) circle (.3cm);
+%    \draw[xshift=8 cm,thick] (30: 17 mm) circle (.3cm);
+%    \draw[xshift=8 cm,thick] (-30: 17 mm) circle (.3cm);
+%    \draw[dotted,thick] (0.3 cm,0) -- +(1.4 cm,0);
+%    \foreach \y in {1.15,...,3.15}
+%    \draw[xshift=\y cm,thick] (\y cm,0) -- +(1.4 cm,0);
+%    \draw[xshift=8 cm,thick] (30: 3 mm) -- (30: 14 mm);
+%    \draw[xshift=8 cm,thick] (-30: 3 mm) -- (-30: 14 mm);
+%  \end{tikzpicture}
+
+\subsection{A table of gauge code Lie algebras}
+
+Using brute-force computation
+we now find the dimension of the ideals in $\lie_{0,0}$
+and therefore which simple Lie algebra these correspond to.
+Note that here we switch back to
+using $n$ to denote the number of qubits,
+which in general is not the rank of the Lie algebra.
+\begin{center}
+\begin{tabular}{ l|c|c|c|l } 
+model &\ $n$\ &\ $r$\ &\ $t_X$\ & $\mathfrak{g}_{t_X,0}$   \\
+\hline
+    1D xy    &  7 &  6 & 0 & $D_7$   \\
+             &  8 &  6 & 0 & $D_4\oplus D_4$   \\
+             &  9 &  8 & 0 & $D_9$   \\
+             & 10 &  8 & 0 & $D_5\oplus D_5$   \\
+\hline
+    1D ising & $4,...,16$  & $n-1$  & 0  & $D_n$   \\
+\hline
+    2D compass & 9 & 4 & 0 &  $A_{15}$  \\
+            & 16 & 9 & 0 & $D_{256}$ \\
+\hline
+    3D gauge color & 15 & 6  & 0 & $6A_1$  \\
+                & 39 & 18 & 0 & $6A_{7}$ \\
+                & 65 & 32 & 0 & $4A_{31}\oplus 2A_{63} $  \\
+\end{tabular}
+\end{center}
+
+This verifies the ideal decompositions we found in the
+previous section, and also corroborates the large
+amount of symmetry found with the orbigraph method.
+For example, the $S_6$ symmetry of
+the $n=15$ gauge color code corresponds to
+%permutations of the six $\mathfrak{sl}_2$ ideals.
+permutations of the six $A_1$ ideals.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
@@ -2418,111 +2596,6 @@ be gapped.
 %Unfortunately, this does not lead to 
 %definitive conclusions; it appears that new
 %ideas are required.
-
-\subsection{Lie algebra classification}
-
-Let $n$ be the rank of a simple lie algebra $\mathfrak{g}.$
-This is the dimension of the cartan subalgebra $\mathfrak{h}.$
-This $n$ is also the subscript on the followin Dynkin diagrams. 
-Dynkin used these to classify simple Lie algebras in 1947.
-
-The Cartan subalgebra $\mathfrak{h}$ is a maximal abelian Lie subalgebra 
-of $\mathfrak{g}.$
-
-%Simple Lie algebras have connected Dynkin diagrams.
-
-Simple Lie algebras are classified into four infinite series
-$A_n, B_n, C_n, D_n$ as well as five other ``exceptional'' Lie
-algebras that we will not need.
-
-$A_n : \mathfrak{sl}_{n+1}$ traceless $(n+1)\times (n+1)$ matrices. 
-Algebra dimension is $n^2 + 2n.$
-Number of roots is $n(n+1).$
-
-$B_n : \mathfrak{so}_{2n+1}$.
-Algebra dimension is $2n^2 + n.$
-Number of roots is $2n^2,$ number of short roots $2n.$
-
-$C_n : \mathfrak{sp}_{2n}$.
-Algebra dimension is $2n^2 + n.$
-Number of roots is $2n^2,$ number of short roots $2n(n-1).$
-
-$D_n : \mathfrak{so}_{2n}$.
-Algebra dimension is $2n^2 - n.$
-Number of roots is $2n(n-1).$
-
-For $n\ge 1:$
-  \begin{tikzpicture}[scale=.4]
-    \draw (-1,0) node[anchor=east]  {$A_n$};
-    \foreach \x in {0,...,5}
-    \draw[xshift=\x cm,thick] (\x cm,0) circle (.3cm);
-    \draw[dotted,thick] (0.3 cm,0) -- +(1.4 cm,0);
-    \foreach \y in {1.15,...,4.15}
-    \draw[xshift=\y cm,thick] (\y cm,0) -- +(1.4 cm,0);
-  \end{tikzpicture}
-
-For $n\ge 2:$
-  \begin{tikzpicture}[scale=.4]
-    \draw (-1,0) node[anchor=east]  {$B_n$};
-    \foreach \x in {0,...,4}
-    \draw[xshift=\x cm,thick] (\x cm,0) circle (.3cm);
-    \draw[xshift=5 cm,thick,fill=black] (5 cm, 0) circle (.3 cm);
-    \draw[dotted,thick] (0.3 cm,0) -- +(1.4 cm,0);
-    \foreach \y in {1.15,...,3.15}
-    \draw[xshift=\y cm,thick] (\y cm,0) -- +(1.4 cm,0);
-    \draw[thick] (8.3 cm, .1 cm) -- +(1.4 cm,0);
-    \draw[thick] (8.3 cm, -.1 cm) -- +(1.4 cm,0);
-  \end{tikzpicture}
-
-For $n\ge 3:$
-  \begin{tikzpicture}[scale=.4]
-    \draw (-1,0) node[anchor=east]  {$C_n$};
-    \foreach \x in {0,...,4}
-    \draw[xshift=\x cm,thick,fill=black] (\x cm,0) circle (.3cm);
-    \draw[xshift=5 cm,thick] (5 cm, 0) circle (.3 cm);
-    \draw[dotted,thick] (0.3 cm,0) -- +(1.4 cm,0);
-    \foreach \y in {1.15,...,3.15}
-    \draw[xshift=\y cm,thick] (\y cm,0) -- +(1.4 cm,0);
-    \draw[thick] (8.3 cm, .1 cm) -- +(1.4 cm,0);
-    \draw[thick] (8.3 cm, -.1 cm) -- +(1.4 cm,0);
-  \end{tikzpicture}
-
-For $n\ge 4:$
-  \begin{tikzpicture}[scale=.4]
-    \draw (-1,0) node[anchor=east]  {$D_n$};
-    \foreach \x in {0,...,4}
-    \draw[xshift=\x cm,thick] (\x cm,0) circle (.3cm);
-    \draw[xshift=8 cm,thick] (30: 17 mm) circle (.3cm);
-    \draw[xshift=8 cm,thick] (-30: 17 mm) circle (.3cm);
-    \draw[dotted,thick] (0.3 cm,0) -- +(1.4 cm,0);
-    \foreach \y in {1.15,...,3.15}
-    \draw[xshift=\y cm,thick] (\y cm,0) -- +(1.4 cm,0);
-    \draw[xshift=8 cm,thick] (30: 3 mm) -- (30: 14 mm);
-    \draw[xshift=8 cm,thick] (-30: 3 mm) -- (-30: 14 mm);
-  \end{tikzpicture}
-
-Here we show the simple Lie algebras for each of the models:
-\begin{center}
-\begin{tabular}{ l|c|c|c|l } 
-model &\ $n$\ &\ $r$\ &\ $t_X$\ & $\mathfrak{g}_{t_X,0}$   \\
-\hline
-    1D xy    &  7 &  6 & 0 & $D_7$   \\
-             &  8 &  6 & 0 & $D_4\oplus D_4$   \\
-             &  9 &  8 & 0 & $D_9$   \\
-             & 10 &  8 & 0 & $D_5\oplus D_5$   \\
-\hline
-    1D ising & $4,...,16$  & $n-1$  & 0  & $D_n$   \\
-\hline
-    2D compass & 9 & 4 & 0 &  $A_{15}$  \\
-            & 16 & 9 & 0 & $D_{256}$ \\
-\hline
-    3D gauge color & 15 & 6  & 0 & $6A_1$  \\
-                & 39 & 18 & 0 & $6A_{7}$ \\
-                & 65 & 32 & 0 & $4A_{31}\oplus 2A_{63} $  \\
-\end{tabular}
-\end{center}
-
-
 
 \subsection{Cheeger cuts}
 
@@ -2870,6 +2943,9 @@ and then employ methods from PDE theory \cite{Andrews2011}.
 Also: \cite{Baume2016}. % Michaels' Phd thesis
 
 We expect generic local hamiltonians to be gapless \cite{Movassagh2016}.
+
+%Suzuki-Trotter expansions
+%https://en.wikipedia.org/wiki/Baker%E2%80%93Campbell%E2%80%93Hausdorff_formula
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
