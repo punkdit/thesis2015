@@ -5,6 +5,7 @@ out: thesis
 
 thesis: thesis.tex refs.bib
 	cp ../spectrum2015/pic-gap.pdf .
+	cp ../spectrum2015/pic-gap-stabs.pdf .
 	pdflatex thesis.tex
 	bibtex thesis
 	pdflatex thesis.tex

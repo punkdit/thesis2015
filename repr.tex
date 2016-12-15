@@ -1819,21 +1819,31 @@ $X/Z-$type operators supported on any region.
 
 \section{The orbigraph}
 
+Performing numerics on small gauge code models makes
+it evident that there is a great deal more symmetry than
+we have found using the above techniques.
+In particular, the components of eigenvectors 
+have many identical values.
+This motivates the following exploration of the symmetry 
+of the Hamiltonian.
+
 A graph automorphism is a permutation matrix $P$
-such that $P^T \Ham P = \Ham$.
-Equivalently, $P$ commutes with $\Ham$ and this means it preserves
-the eigenspaces of $\Ham$.
-\def\auto{A}
+such that 
+$$P^T \Ham P = \Ham.$$
+%Equivalently, $P$ commutes with $\Ham$ and this means it preserves
+%the eigenspaces of $\Ham$.
+\def\auto{\mathcal{A}}
 The set of all such graph automorphisms 
 form a group $\auto$.
+%form a group $\auto(H)$ or just $\auto$ when the graph is understood.
 We now define a new matrix $\Ham//\auto$
 that acts on the vector space with basis consisting
 of the orbits of $\auto.$
 The matrix components of $\Ham//\auto$ will be
+indexed by a pair of $\auto-$orbits $i$ and $j$ and have value
 $$
-    (\Ham//\auto)_{ij} = |\{ g\in G \smbox{s.t.} gv \in j \}| \smbox{for some}v\in i
+    (\Ham//\auto)_{ij} = |\{ g\in G \smbox{s.t.} gv \in j \}| \smbox{where}v\in i.
 $$
-for each pair of $\auto-$orbits $i$ and $j$.
 In other words, 
 $(\Ham//\auto)_{ij} $ counts the number of gauge group
 elements that sends any particular element $v$ of the 
@@ -1896,21 +1906,21 @@ P =
 $$
 The idea is that each column of $P$ sums over an orbit,
 and each row of $Q$ chooses one member of each orbit.
-See also \cite{Cvetkovic1980} chapter 5.
+%See also \cite{Cvetkovic1980} chapter 5.
 
-The automorphisms of the gauge group, $Aut(G)$ will induce an
-automorphism of the graph by \todo{XXX}...
-In particular, elements of the stabilizer group $\Stab$ induce graph 
-automorphisms by \todo{XXX}...
-In general there may be more symmetry in the graph that
-we cannot access via a group automorphism.
+%The automorphisms of the gauge group, $Aut(G)$ will induce an
+%automorphism of the graph by \todo{XXX}...
+%In particular, elements of the stabilizer group $\Stab$ induce graph 
+%automorphisms by \todo{XXX}...
+%In general there may be more symmetry in the graph that
+%we cannot access via a group automorphism.
 
-In general, we will apply this idea to each of the blocks $H_t$.
+In general, we will apply this idea to each of the blocks $H_{t_X,0}$.
 From {\bf Fact 2} above, and using the fact that we are
-summing over a trivial representation of $Aut(G)$ we have the following:
+summing over a trivial representation of $\auto$ we have the following:
 \begin{framed}
 \noindent{\bf Fact 3:}
-The orbigraph of $\Ham_{0,0}$ contains the ground eigenvalue of $\Ham_{0,0}.$
+The orbigraph of $\Ham_{t_X,0}$ contains the ground eigenvalue of $\Ham_{t_X,0}.$
 \end{framed}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -1947,8 +1957,8 @@ This can be solved analytically and we find $\lambda_1 = 4+2\sqrt{13} \cong 11.2
 Keep in mind that the original state space has dimension $2^9=512$ so we
 have come a long way down to 3.
 
-By exact\footnote{Exact in this context means that we do not do any
-perturbative approxiamations to the operator in question.}
+By exact%\footnote{Exact in this context means that we do not do any
+%perturbative approxiamations to the operator in question.}
 numerical diagonalization
 we get the spectrum of $\Ham_{0,0}$ and note that the orbigraph lifts
 all degeneracy as well as missing some excited eigenspaces:
@@ -1969,9 +1979,9 @@ The reason we miss some excited spaces is that they do not contain
 any trivial irrep of $\auto.$
 Note that we miss the eigenspace with $\lambda = -6$
 even though this is one dimensional. It must contain some other non-trivial
-one dimensional irrep. This cannot happen with the groundspace because
-those eigenvectors are all positive.
-
+one dimensional irrep. 
+%This cannot happen with the groundspace because
+%those eigenvectors are all positive.
 If we want to make an orbigraph for these other spaces we would construct
 the orbigraph by
 summing over orbits using different characters of $\auto$
@@ -2043,65 +2053,88 @@ and the resulting orbigraph sizes.
 We use the software library {\tt nauty}\cite{McKay2014} for computing graph automorphisms.
 
 \begin{center}
-\begin{tabular}{ l|c|c|c|c|c|c } 
-model &\ $n$\ &\ $r$\ &\ $t_X$\ & $|\auto|$ & $|\mathrm{orbits}|$ & Aut(code) \\
+\begin{tabular}{ l|c|c|c|l|c|c|c } 
+model &\ $n$\ &\ $r$\ &\ $t_X$\ & $\auto$ & $|\auto|$ & $|\auto-\mathrm{orbits}|$ & 
+$|\mathrm{Aut(code)}|$ \\
 \hline
-%    1D xy & 4 &  2& 0 & 2 & 3 & 8 \\
+%    1D $XY$ & 4 &  2& 0 & 2 & 3 & 8 \\
 %       & 5 &  4& 0 & 10 & 4 & 10 \\
 %       & 6 &  4& 0 & 72 & 3 & 12 \\
 %       & 7 &  6& 0 & 14 & 9 & 14 \\
 %       & 8 &  6& 0 & 4608 & 10 & 16 \\
-  1D xy & 9 &  8& 0 & 18 & 23 & 18  \\
-       & 10 & 8& 0 & 200 & 10 & 20  \\
-       & 11 & & 0 & 22 & 63 & 22  \\
-       & 12 & & 0 & 288 & 36 & 24  \\
+  1D $XY$ & 9 &  8& 0   & $\Z_2\ltimes\Z_9$                   & 18 & 23 & 18  \\
+        & 10 & 8& 0   & $\Z_2\ltimes(\Z_{10}\times\Z_{10})$ & 200 & 10 & 20  \\
+        & 11 & 10 & 0 & $\Z_2\ltimes\Z_{11}$                & 22 & 63 & 22  \\
+        & 12 & 10 & 0 & $\Z_2\ltimes(\Z_{12}\times\Z_{12})$ & 288 & 36 & 24  \\
 %\hline
 %    1D ising &   &   &   &   &   &   \\
 \hline
-    2D compass & 9 & 4 & 0 & 72 & 3 & 36 \\
-            & 9 & 4 & $t_X$ & 12 & 4 &  \\
-            & 16 & 9  & 0 & 128 & 24 & 64 \\
-            & 16 & 9  & $t_X$ & 16 & 48 &  \\
-            & 25 & 16 & 0 & 200 & 430 & 100 \\
-            & 25 & 16 & $t_X$ & 20  & 3418 &  \\
+    2D compass & 9 & 4 & 0 & & 72 & 3 & 36 \\
+            & 9 & 4 &    & & 12 & 4 &  \\
+            & 16 & 9  & 0 & & 128 & 24 & 64 \\
+            & 16 & 9  &    & & 16 & 48 &  \\
+            & 25 & 16 & 0 & & 200 & 430 & 100 \\
+            & 25 & 16 &    & & 20  & 3418 &  \\
 \hline
-    3D compass & 27 & 22 & 0     & 216  & 20609  &     \\
-               & 27 & 22 & $t_X$ &  72 & 60283   &  \\
+    3D compass & 27 & 22 & 0     & & 216  & 20609  &     \\
+               & 27 & 22 &    & &  72 & 60283   &  \\
 \hline
-    3D gauge color & 15 & 6  & 0 & $|S_6|=720$ & 7 & $|S_4|=24$ \\
-                & 15 & 6  & $t_X$ & 36 & 16 &  \\
-                & 39 & 18 & 0 & 36 & 14400 & $|\Z_3|=3$  \\
-                & 65 & 32 & 0 &    &       & $|\Z_4|=4$ \\
+    3D gauge color & 15 & 6  & 0 & $S_6$ & 720 & 7 & $|S_4|=24$ \\
+                & 15 & 6  &  & & 36 & 16 &  \\
+                & 39 & 18 & 0 & & 36 & 14400 & $|\Z_3|=3$  \\
+                & 65 & 32 & 0 & &    &       & $|\Z_4|=4$ \\
 \end{tabular}
 \end{center}
 
-Here we also show Aut(code) which is
+Here we also show the order of Aut(code) which is
 the automorphism group of the gauge code.
 Elements of this group act by permuting the $n$ qubits.
-In detail, such an action is given by three permutation matrices,
-$P_n, P_Z, P_X$ such that the following $\Field$-linear equations hold
+In detail, such an action is given by the $\Field$-linear
+permutation matrices
+$P_n, P_Z$ and $P_X,$ such that the following $\Field$-linear equations hold:
 \begin{align*}
     P_X G_X P_n &= G_X, \\
     P_Z G_Z P_n &= G_Z.
 \end{align*}
-This implies that $P_n$ commutes with the Hamiltonian
-(as $\Complex$-linear operators):
-$$
-    P_n H = H P_n.
-$$
-\todo{why does this preserve $H_{0,0}$ ???}
-%This group also acts on $H_{0,0}$ 
+This implies that the action of Aut(code)
+commutes with the Hamiltonian and preserves eigenvalues of
+the stabilizers. Therefore this group action restricts to an action
+on $H_{0,0}.$
+For $t_X\ne0$ we take the subgroup of Aut(code) that preserves
+the stabilizer eigenvalues for $H_{t_X,0}.$ \todo{do this}
+%Once again, trivial reps for this group survive on the groundspace of $H_{t_X,0}$
+%because these are all Perron-Frobenius.
 
-The mystery here is the graph automorphism group is
-bigger, sometimes much bigger, than the automorphism group of
+\begin{framed}
+\noindent{\bf Mystery:} 
+the graph automorphism group is
+often bigger, sometimes much bigger, than the automorphism group of
 the underlying code.
 So where is the extra symmetry coming from?
+\end{framed}
 
 A crucial hint is provided by the fact that these graph
-symmetries respect the symplectic structure in the following sense...
-\todo{XXX}
+symmetries respect the symplectic structure in the following sense.
+Recall that we defined graph symmetries via permutation
+matrices $P$ such that $P^{\top}HP=H.$
+In other words, $P$ is a permutation on the set
+of basis vectors $\Field^n.$
+It turns out that not only
+are these maps $\Field$-linear, but they also 
+preserve syndromes. 
+By this we mean we can find an $\Field$-linear
+map $Q$ such that the following diagram commutes:
+\[
+\begin{tikzcd}
+\Field^n \arrow{r}{G_z} \arrow[swap]{d}{P} & \Field^{|G_Z|} \arrow{d}{Q} \\
+\Field^n \arrow{r}{G_z} & \Field^{|G_Z|} 
+\end{tikzcd}
+\]
+That $P$ has this extra $\Field$-linear behaviour 
+is not true in general, but it holds for the orbigraphs in the above
+table.
 
-All this suggests an examination of the commutation structure
+All this suggests a further examination of the commutation structure
 of the code.
 Indeed, this is captured by the notion of a Lie algebra, which we turn to next.
 
@@ -2202,7 +2235,7 @@ a direct sum of $n$ copies of $\mathfrak{sl}_2(\Complex).$
 So while the group generated by products of $\{X_i, Z_i\}$ is the
 whole Pauli group $\Pauli_n$, as a Lie algebra we get something finer.
 This reflects the fact that these terms break up into $n$
-commuting ``pieces''. 
+commuting ``pieces'', which motivates the following definition. 
 
 An \emph{ideal} of a Lie algebra $\lie$
 is a Lie subalgebra $\lieh\subset\lie$ that ``eats''
@@ -2433,10 +2466,12 @@ which in general is not the rank of the Lie algebra.
 \begin{tabular}{ l|c|c|c|l } 
 model &\ $n$\ &\ $r$\ &\ $t_X$\ & $\mathfrak{g}_{t_X,0}$   \\
 \hline
-    1D xy    &  7 &  6 & 0 & $D_7$   \\
-             &  8 &  6 & 0 & $D_4\oplus D_4$   \\
-             &  9 &  8 & 0 & $D_9$   \\
+%    1D $XY$    &  7 &  6 & 0 & $D_7$   \\
+%             &  8 &  6 & 0 & $D_4\oplus D_4$   \\
+     1D $XY$  &  9 &  8 & 0 & $D_9$   \\
              & 10 &  8 & 0 & $D_5\oplus D_5$   \\
+             & 11 &  10 & 0 & $D_{11}$   \\
+             & 12 &  10 & 0 & $D_6\oplus D_6$   \\
 \hline
     1D ising & $4,...,16$  & $n-1$  & 0  & $D_n$   \\
 \hline
@@ -2473,9 +2508,8 @@ For each instance we indicate the groundspace eigenvalue
 $\lambda_1$ which is obtained from $H_{0,0}.$
 Then we list the second eigenvalue of $H_{0,0}$ as
 well as the first eigenvalue of $H_{t_X,0}$ for $t_X\ne 0.$
-The weight of the corresponding frustrated stabilizer $w(s_X)$
-is defined as the minimum number of gauge operators needed
-to form $s_X.$
+The weight of the corresponding frustrated stabilizer is $w(s_X).$
+%minimum number of gauge operators needed to form $s_X.$
 The eigenvalue closest to $\lambda_1(H_{0,0})$ is marked
 with a tick, along with the value of the gap, $\lambda_1-\lambda_2.$
 We only show the results for a single frustrated
@@ -2492,7 +2526,7 @@ We use the iterative solvers in software library
 \underline{2d compass code model}
 \begin{center}
 \begin{tabular}{ c|c|c|c|l|c } 
-$n$ &  $t_X$    & $w(s_X)$ & $\lambda_1$ & $\lambda_2$ ? & gap \\
+$n$ &  $t_X$    & $w(s_X)$ & $\lambda_1$ & $\ \ \ \ \lambda_2$ ? & gap \\
 \hline
 \hline
 16  &   0        &   &  19.012903&    16.335705          &            \\
@@ -2515,7 +2549,7 @@ using similar methods.
 \underline{3d compass code model}
 \begin{center}
 \begin{tabular}{ c|c|c|c|l|c } 
-$n$ &  $t_X$    & $w(s_X)$ & $\lambda_1$ & $\lambda_2$ ? & gap \\
+$n$ &  $t_X$    & $w(s_X)$ & $\lambda_1$ & $\ \ \ \ \lambda_2$ ? & gap \\
 \hline
 \hline
 27  &   0        &   & 60.295471  &    58.382445          &            \\
@@ -2528,7 +2562,7 @@ $n$ &  $t_X$    & $w(s_X)$ & $\lambda_1$ & $\lambda_2$ ? & gap \\
 \underline{3d gauge code model}
 \begin{center}
 \begin{tabular}{ c|c|c|c|l|c } 
-$n$ &  $t_X$    & $w(s_X)$ & $\lambda_1$ & $\lambda_2$ ?  & gap \\
+$n$ &  $t_X$    & $w(s_X)$ & $\lambda_1$ & $\ \ \ \ \lambda_2$ ?  & gap \\
 \hline
 \hline
 15  & 0         & &  25.455844  & 16.970563    &  \\
@@ -2563,8 +2597,24 @@ $n$ &  $t_X$    & $w(s_X)$ & $\lambda_1$ & $\lambda_2$ ?  & gap \\
 
 Here we plot the spectral gap versus the number of qubits $n$
 for these models.
+
+\newpage
 \begin{center}
 \includegraphics[width=1.0\columnwidth]{pic-gap.pdf}
+\end{center}
+
+The gap of the 3D gauge color code is clearly far more
+robust than the other models.
+%This is solely due to the geometry of the code...
+It does decrease with $n$, but note also that the
+stabilizers in the code are also growing.
+%They do not get any bigger after this.
+For larger codes in this family the stabilizers do not get
+bigger than weight at most 24.
+To emphasize this point we show another figure with
+the ground eigenvalues of all of these blocks $H_{t_X,0}:$
+\begin{center}
+\includegraphics[width=1.0\columnwidth]{pic-gap-stabs.pdf}
 \end{center}
 
 There are two main points to make about these numerics.
@@ -2775,9 +2825,9 @@ on every $\Gamma_0$ path between $\ket{v}$ and $s_X\ket{v}$ for all stabilizers 
 and basis vectors $\ket{v}.$
 
 In summary, the idea is that large stabilizers lead to
-widely separated well potentials and hense gapless behaviour,
+widely separated well potentials and hence gapless behaviour,
 while stabilizers of bounded weight force the cuts to
-appear close to the wells and hense maintain a gap.
+appear close to the wells and hence maintain a gap.
 Making these arguments rigorous appears to be difficult.
 
 Finally, we suspect that $H_{0,0}$ will not be gapped in
@@ -2787,10 +2837,6 @@ that double well behaviour can still be imitated even without
 stabilizers: merely having a large region of almost-stabilizer
 behaviour (large shallow well) could be enough to send the gap
 to zero.
-
-We expect generic local hamiltonians to be gapless \cite{Movassagh2016}.
-
-\subsection{The gap}
 
 The following fact would appear to be true under certain conditions,
 but is not at all true for example when $T$ is trivial.
