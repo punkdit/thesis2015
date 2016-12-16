@@ -1835,12 +1835,23 @@ $$P^T \Ham P = \Ham.$$
 \def\auto{\mathcal{A}}
 The set of all such graph automorphisms 
 form a group $\auto$.
+The goal here is to find eigenvectors of $H$ that are
+invariant under the action of $\auto.$
+Such an eigenvector will have components that
+are constant on the orbits of $\auto,$
+so therefore it will live naturally on the
+vector space whose basis is these orbits.
+We can do better than this, and actually 
+project the graph itself down onto this space.
+We can do this by constructing a new graph
+which we call the \emph{orbigraph}.
 %form a group $\auto(H)$ or just $\auto$ when the graph is understood.
-We now define a new matrix $\Ham//\auto$
-that acts on the vector space with basis consisting
+%We now define a new matrix $\Ham//\auto$
+The matrix for the orbigraph is written $\Ham//\auto$
+and acts on the vector space with basis consisting
 of the orbits of $\auto.$
-The matrix components of $\Ham//\auto$ will be
-indexed by a pair of $\auto-$orbits $i$ and $j$ and have value
+It follows that the components of $\Ham//\auto$,
+indexed by a pair of $\auto-$orbits $i$ and $j$, is defined by
 $$
     (\Ham//\auto)_{ij} = |\{ g\in G \smbox{s.t.} gv \in j \}| \smbox{where}v\in i.
 $$
@@ -2595,13 +2606,16 @@ $n$ &  $t_X$    & $w(s_X)$ & $\lambda_1$ & $\ \ \ \ \lambda_2$ ?  & gap \\
 \end{center}
 \end{samepage}
 
-Here we plot the spectral gap versus the number of qubits $n$
-for these models.
-
-\newpage
+\begin{figure}
 \begin{center}
 \includegraphics[width=1.0\columnwidth]{pic-gap.pdf}
+\caption{The spectral gap of four different gauge code Hamiltonians, versus the number
+of qubits $n$. The gap is defined as the difference between
+the ground eigenvalue and the first excited state.
+These results are obtained by exact diagonalization methods.
+}
 \end{center}
+\end{figure}
 
 The gap of the 3D gauge color code is clearly far more
 robust than the other models.
@@ -2612,10 +2626,20 @@ stabilizers in the code are also growing.
 For larger codes in this family the stabilizers do not get
 bigger than weight at most 24.
 To emphasize this point we show another figure with
-the ground eigenvalues of all of these blocks $H_{t_X,0}:$
+the ground eigenvalues of all of these blocks $H_{t_X,0}.$
+
+\begin{figure}
 \begin{center}
 \includegraphics[width=1.0\columnwidth]{pic-gap-stabs.pdf}
+\caption{
+Here we show the spectral gap
+for each Hamiltonian block $H_{t_X,0}$
+of three different size 3D gauge color code models.
+Each point is colored according to the weight of the
+frustrated stabilizer.
+}
 \end{center}
+\end{figure}
 
 There are two main points to make about these numerics.
 The first is that the gap of the compass model 
@@ -2638,7 +2662,8 @@ This would suggest that if this is the mechanism for
 gapless behaviour that the gauge color model may
 be gapped.
 
-\section{Appendix}
+
+\section{Cheeger cuts}
 
 %In this final section we give some heuristic
 %arguments for how the size of stabilizers is
@@ -2647,7 +2672,6 @@ be gapped.
 %definitive conclusions; it appears that new
 %ideas are required.
 
-\subsection{Cheeger cuts}
 
 The Perron-Frobenius structure theory places
 strong constraints on the first and second
@@ -2829,6 +2853,9 @@ widely separated well potentials and hence gapless behaviour,
 while stabilizers of bounded weight force the cuts to
 appear close to the wells and hence maintain a gap.
 Making these arguments rigorous appears to be difficult.
+
+\todo{actually the wavefunction becomes
+exponentially small but also it is exponentially wide}
 
 Finally, we suspect that $H_{0,0}$ will not be gapped in
 the generic case. Numerics show that these stabilizer-less
