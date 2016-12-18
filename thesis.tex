@@ -53,6 +53,13 @@
 
 \newcommand{\todo}[1]{\textcolor{red}{#1}}
 
+%\newcommand{\Eref}[1]{Eq.~(\ref{#1})}
+%\newcommand{\Fref}[1]{Fig.~\ref{#1}}
+%\newcommand{\Aref}[1]{Appendix~\ref{#1}}
+\newcommand{\SRef}[1]{section~\ref{#1}}
+
+
+
 
 \title{Exploring Abelian and Non-Abelian Quantum Codes}
 \author{Simon David Burton}
@@ -74,6 +81,57 @@
 \tableofcontents
 
 \chapter{Introduction}
+
+We begin our journey with a consideration of ``size'', or ``counting''.
+To count the size of something $A$ we write $\mu(A).$
+Size is \emph{additive} in the sense of 
+$\mu(A\cup B) = \mu(A) + \mu(B)$ except that
+$A$ and $B$ may have intersection.
+In this case we would have counted the 
+size of the intersection twice and so we modify this formula as
+$$
+    \mu(A\cup B) = \mu(A) + \mu(B) - \mu(A\cap B).
+$$
+We can continue this idea to find the
+size of the union of three pieces
+\begin{center}
+\includegraphics{pic-ABC.pdf}
+\end{center}
+In this case the formula reads:
+\begin{align*}
+\mu(A\cup B\cup C) = \ &\mu(A) + \mu(B) + \mu(C)  \\
+                     &- \mu(A\cap B) - \mu(A\cap C) - \mu(B\cap C) \\
+                     &+ \mu(A\cap B \cap C).
+\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{(*)}
+\end{align*}
+The point here is the alternating signs:
+each time we try to count a size we overcount by
+one intersections worth, subtracting those intersections
+goes too far in the opposite direction and so we need
+to add intersections of intersections, and so on.
+
+We now wish to apply this idea to count the
+size of a sphere. The trick here is to tile the
+sphere with the faces of a cube:
+\begin{center}
+\includegraphics{pic-cube.pdf}
+\end{center}
+So we have six tiles and one might suggest that 
+$\mu(S^2)=6$ but these are closed tiles, so they
+intersect on their edges, of which we have 12.
+But these edges intersect at vertices and there are
+8 of these. 
+We extend the above formula (*) to calculate:
+$$
+    \mu(S^2) = 6 - 12 + 8 = 2.
+$$
+So the sphere has ``size'' two!
+The magic here is that any other convex polyhedron would give
+the same answer of two.
+This, of course, is known as the \emph{Euler characteristic},
+and for a sphere this is indeed two.
+
+
 
 %\chapter{A Homological Perspective on Quantum Codes}
 %

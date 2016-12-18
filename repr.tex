@@ -14,6 +14,8 @@
 %{\endMakeFramed}
 
 
+
+
 \def\Complex{\mathbb{C}}
 \def\C{\mathbb{C}}
 \def\R{\mathbb{R}}
@@ -81,6 +83,8 @@ Having a constant gap (bound from below)
 is part of the story of topologically ordered phases
 \cite{Kitaev2003,Brown2016}.
 %\cite{Wen1991} % 
+
+%In \SRef{GroupReps} we do the group reps
 
 \subsection{Some motivating examples}
 
@@ -224,7 +228,7 @@ $$
 \end{array} \right) \otimes I
 $$
 
-\section{Group theoretic representations}
+\section{Group theoretic representations}\label{GroupReps}
 
 \subsection{The Pauli group}
 
@@ -1931,7 +1935,7 @@ From {\bf Fact 2} above, and using the fact that we are
 summing over a trivial representation of $\auto$ we have the following:
 \begin{framed}
 \noindent{\bf Fact 3:}
-The orbigraph of $\Ham_{t_X,0}$ contains the ground eigenvalue of $\Ham_{t_X,0}.$
+The spectrum of the orbigraph of $\Ham_{t_X,0}$ contains the ground eigenvalue of $\Ham_{t_X,0}.$
 \end{framed}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -2059,13 +2063,47 @@ $$\lambda_1 - \lambda_2 = 9\sqrt{2} - 3\sqrt{10} \cong 3.24108908.$$
 %
 \subsection{A table of orbigraphs}
 
-Here we tabulate graph automorphisms of $H_{t_X,0}$
-and the resulting orbigraph sizes.
+Here we tabulate the order of the graph automorphism group $\auto$ of $H_{t_X,0}$
+and the resulting orbigraph sizes, which is the number of $\auto-$orbits.
 We use the software library {\tt nauty}\cite{McKay2014} for computing graph automorphisms.
 
+%\begin{center}
+%\begin{tabular}{ l|c|c|c|l|c|c|c } 
+%model &\ $n$\ &\ $r$\ &\ $t_X$\ & $\auto$ & $|\auto|$ & $|\auto-\mathrm{orbits}|$ & 
+%$|\mathrm{Aut(code)}|$ \\
+%\hline
+%%    1D $XY$ & 4 &  2& 0 & 2 & 3 & 8 \\
+%%       & 5 &  4& 0 & 10 & 4 & 10 \\
+%%       & 6 &  4& 0 & 72 & 3 & 12 \\
+%%       & 7 &  6& 0 & 14 & 9 & 14 \\
+%%       & 8 &  6& 0 & 4608 & 10 & 16 \\
+%  1D $XY$ & 9 &  8& 0   & $\Z_2\ltimes\Z_9$                   & 18 & 23 & 18  \\
+%        & 10 & 8& 0   & $\Z_2\ltimes(\Z_{10}\times\Z_{10})$ & 200 & 10 & 20  \\
+%        & 11 & 10 & 0 & $\Z_2\ltimes\Z_{11}$                & 22 & 63 & 22  \\
+%        & 12 & 10 & 0 & $\Z_2\ltimes(\Z_{12}\times\Z_{12})$ & 288 & 36 & 24  \\
+%%\hline
+%%    1D ising &   &   &   &   &   &   \\
+%\hline
+%    2D compass & 9 & 4 & 0 & & 72 & 3 & 36 \\
+%            & 9 & 4 &    & & 12 & 4 &  \\
+%            & 16 & 9  & 0 & & 128 & 24 & 64 \\
+%            & 16 & 9  &    & & 16 & 48 &  \\
+%            & 25 & 16 & 0 & & 200 & 430 & 100 \\
+%            & 25 & 16 &    & & 20  & 3418 &  \\
+%\hline
+%    3D compass & 27 & 22 & 0     & & 216  & 20609  &     \\
+%               & 27 & 22 &    & &  72 & 60283   &  \\
+%\hline
+%    3D gauge color & 15 & 6  & 0 & $S_6$ & 720 & 7 & $|S_4|=24$ \\
+%                & 15 & 6  &  & & 36 & 16 &  \\
+%                & 39 & 18 & 0 & & 36 & 14400 & $|\Z_3|=3$  \\
+%                & 65 & 32 & 0 & &    &       & $|\Z_4|=4$ \\
+%\end{tabular}
+%\end{center}
+
 \begin{center}
-\begin{tabular}{ l|c|c|c|l|c|c|c } 
-model &\ $n$\ &\ $r$\ &\ $t_X$\ & $\auto$ & $|\auto|$ & $|\auto-\mathrm{orbits}|$ & 
+\begin{tabular}{ l|c|c|c|c|c|c } 
+model &\ $n$\ &\ $r$\ &\ $t_X$\ & $|\auto|$ & $|\auto-\mathrm{orbits}|$ & 
 $|\mathrm{Aut(code)}|$ \\
 \hline
 %    1D $XY$ & 4 &  2& 0 & 2 & 3 & 8 \\
@@ -2073,27 +2111,27 @@ $|\mathrm{Aut(code)}|$ \\
 %       & 6 &  4& 0 & 72 & 3 & 12 \\
 %       & 7 &  6& 0 & 14 & 9 & 14 \\
 %       & 8 &  6& 0 & 4608 & 10 & 16 \\
-  1D $XY$ & 9 &  8& 0   & $\Z_2\ltimes\Z_9$                   & 18 & 23 & 18  \\
-        & 10 & 8& 0   & $\Z_2\ltimes(\Z_{10}\times\Z_{10})$ & 200 & 10 & 20  \\
-        & 11 & 10 & 0 & $\Z_2\ltimes\Z_{11}$                & 22 & 63 & 22  \\
-        & 12 & 10 & 0 & $\Z_2\ltimes(\Z_{12}\times\Z_{12})$ & 288 & 36 & 24  \\
+  1D $XY$ & 9 &  8& 0   & 18 & 23 & 18  \\
+        & 10 & 8& 0   & 200 & 10 & 20  \\
+        & 11 & 10 & 0 & 22 & 63 & 22  \\
+        & 12 & 10 & 0 & 288 & 36 & 24  \\
 %\hline
 %    1D ising &   &   &   &   &   &   \\
 \hline
-    2D compass & 9 & 4 & 0 & & 72 & 3 & 36 \\
-            & 9 & 4 &    & & 12 & 4 &  \\
-            & 16 & 9  & 0 & & 128 & 24 & 64 \\
-            & 16 & 9  &    & & 16 & 48 &  \\
-            & 25 & 16 & 0 & & 200 & 430 & 100 \\
-            & 25 & 16 &    & & 20  & 3418 &  \\
+    2D compass & 9 & 4 & 0 & 72 & 3 & 36 \\
+            & 9 & 4 &    & 12 & 4 &  \\
+            & 16 & 9  & 0 & 128 & 24 & 64 \\
+            & 16 & 9  &    & 16 & 48 &  \\
+            & 25 & 16 & 0 & 200 & 430 & 100 \\
+            & 25 & 16 &    & 20  & 3418 &  \\
 \hline
-    3D compass & 27 & 22 & 0     & & 216  & 20609  &     \\
-               & 27 & 22 &    & &  72 & 60283   &  \\
+    3D compass & 27 & 22 & 0     & 216  & 20609  &     \\
+               & 27 & 22 &    &  72 & 60283   &  \\
 \hline
-    3D gauge color & 15 & 6  & 0 & $S_6$ & 720 & 7 & $|S_4|=24$ \\
-                & 15 & 6  &  & & 36 & 16 &  \\
-                & 39 & 18 & 0 & & 36 & 14400 & $|\Z_3|=3$  \\
-                & 65 & 32 & 0 & &    &       & $|\Z_4|=4$ \\
+    3D gauge color & 15 & 6  & 0 & 720 & 7 & $|S_4|=24$ \\
+                & 15 & 6  &  & 36 & 16 &  \\
+                & 39 & 18 & 0 & 36 & 14400 & $|\Z_3|=3$  \\
+                & 65 & 32 & 0 &    &       & $|\Z_4|=4$ \\
 \end{tabular}
 \end{center}
 
@@ -2278,7 +2316,8 @@ Therefore the representation of
 $\lie_{t_X,t_Z}$ on $\Complex[\Frd]$ is irreducible.
 
 Note that a decomposition of a Lie algebra
-into disjoint ideals will give a direct sum decomposition of
+into disjoint (apart from zero)
+ideals will give a direct sum decomposition of
 the Lie algebra.
 Also, any irreducible representation of a direct sum of Lie algebras can
 be considered as the tensor product of irreducible representations of the
@@ -2291,6 +2330,7 @@ Each such ideal corresponds to a direct summand of $\lie_{t_X,t_Z}$
 and so the spectrum of  $H_{t_X,t_Z}$
 can be written as a sum over spectra of smaller gauge code Hamiltonians
 corresponding to each ideal.
+\todo{... formula?}
 %whose representation is a factor in a 
 
 % See also: \cite{Barnum2003} where they use theory of semi-simple
@@ -2519,8 +2559,8 @@ For each instance we indicate the groundspace eigenvalue
 $\lambda_1$ which is obtained from $H_{0,0}.$
 Then we list the second eigenvalue of $H_{0,0}$ as
 well as the first eigenvalue of $H_{t_X,0}$ for $t_X\ne 0.$
-The weight of the corresponding frustrated stabilizer is $w(s_X).$
-%minimum number of gauge operators needed to form $s_X.$
+The weight of the corresponding frustrated stabilizer is $w(s_Z).$
+%minimum number of gauge operators needed to form $s_Z.$
 The eigenvalue closest to $\lambda_1(H_{0,0})$ is marked
 with a tick, along with the value of the gap, $\lambda_1-\lambda_2.$
 We only show the results for a single frustrated
@@ -2534,10 +2574,10 @@ We use the iterative solvers in software library
 {\tt SLEPc} \cite{Hernandez2005} to find these eigenvalues.
 
 \begin{samepage}
-\underline{2d compass code model}
+\underline{2D compass code model}
 \begin{center}
 \begin{tabular}{ c|c|c|c|l|c } 
-$n$ &  $t_X$    & $w(s_X)$ & $\lambda_1$ & $\ \ \ \ \lambda_2$ ? & gap \\
+$n$ &  $t_X$    & $w(s_Z)$ & $\lambda_1$ & $\ \ \ \ \lambda_2$ ? & gap \\
 \hline
 \hline
 16  &   0        &   &  19.012903&    16.335705          &            \\
@@ -2553,14 +2593,14 @@ $n$ &  $t_X$    & $w(s_X)$ & $\lambda_1$ & $\ \ \ \ \lambda_2$ ? & gap \\
 \end{center}
 \end{samepage}
 
-Such numerics for the compass model have been previously found \cite{Brzezicki2013}
-using similar methods. 
+Such numerics for the 2D compass model have been previously found 
+using similar methods \cite{Brzezicki2013}. 
 
 \begin{samepage}
-\underline{3d compass code model}
+\underline{3D compass code model}
 \begin{center}
 \begin{tabular}{ c|c|c|c|l|c } 
-$n$ &  $t_X$    & $w(s_X)$ & $\lambda_1$ & $\ \ \ \ \lambda_2$ ? & gap \\
+$n$ &  $t_X$    & $w(s_Z)$ & $\lambda_1$ & $\ \ \ \ \lambda_2$ ? & gap \\
 \hline
 \hline
 27  &   0        &   & 60.295471  &    58.382445          &            \\
@@ -2570,10 +2610,10 @@ $n$ &  $t_X$    & $w(s_X)$ & $\lambda_1$ & $\ \ \ \ \lambda_2$ ? & gap \\
 \end{samepage}
 
 \begin{samepage}
-\underline{3d gauge code model}
+\underline{3D gauge code model}
 \begin{center}
 \begin{tabular}{ c|c|c|c|l|c } 
-$n$ &  $t_X$    & $w(s_X)$ & $\lambda_1$ & $\ \ \ \ \lambda_2$ ?  & gap \\
+$n$ &  $t_X$    & $w(s_Z)$ & $\lambda_1$ & $\ \ \ \ \lambda_2$ ?  & gap \\
 \hline
 \hline
 15  & 0         & &  25.455844  & 16.970563    &  \\
@@ -2634,7 +2674,8 @@ the ground eigenvalues of all of these blocks $H_{t_X,0}.$
 \caption{
 Here we show the spectral gap
 for each Hamiltonian block $H_{t_X,0}$
-of three different size 3D gauge color code models.
+of the 3D gauge color code models of sizes $n=15,$ $n=65$ and $n=175.$
+This gap is defined as $\lambda_1(H) - \lambda_1(H_{t_X,0}).$
 Each point is colored according to the weight of the
 frustrated stabilizer.
 }
