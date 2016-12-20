@@ -40,7 +40,8 @@
 
 %\usepackage{epstopdf} % to include .eps graphics files with pdfLaTeX
 
-\usepackage[pdfpagelabels,pdftex,bookmarks,breaklinks]{hyperref}
+%\usepackage[pdfpagelabels,pdftex,bookmarks,breaklinks]{hyperref}
+
 \definecolor{darkblue}{RGB}{0,0,127} % choose colors
 \definecolor{darkgreen}{RGB}{0,150,0}
 %\hypersetup{colorlinks, linkcolor=darkblue, citecolor=darkgreen, filecolor=red, urlcolor=blue}
@@ -53,15 +54,46 @@
 
 \newcommand{\todo}[1]{\textcolor{red}{#1}}
 
-%\newcommand{\Eref}[1]{Eq.~(\ref{#1})}
+\newcommand{\Eref}[1]{(\ref{#1})}
 %\newcommand{\Fref}[1]{Fig.~\ref{#1}}
 %\newcommand{\Aref}[1]{Appendix~\ref{#1}}
 \newcommand{\SRef}[1]{section~\ref{#1}}
 
 
+\def\Complex{\mathbb{C}}
+\def\C{\mathbb{C}}
+\def\R{\mathbb{R}}
+\def\Z{\mathbb{Z}}
+%\def\Ham{\mathcal{H}} % meh..
+\def\Ham{H}
+\def\Pauli{\mathcal{P}}
+\def\Spec{\mbox{Spec}}
+\def\Proveit{{\it (Proof??)}}
+\def\GL{\mathrm{GL}}
+\def\half{\frac{1}{2}}
+\def\Stab{S}
 
 
-\title{Exploring Abelian and Non-Abelian Quantum Codes}
+\newcommand{\ket}[1]{|{#1}\rangle}
+\newcommand{\expect}[1]{\langle{#1}\rangle}
+\newcommand{\bra}[1]{\langle{#1}|}
+\newcommand{\ketbra}[2]{\ket{#1}\!\bra{#2}}
+\newcommand{\braket}[2]{\langle{#1}|{#2}\rangle}
+
+%\newcommand{\todo}[1]{\textcolor{red}{#1}}
+
+\def\smbox#1{\ \ \mbox{#1}\ \ }
+
+
+
+\newcommand{\Field}{\mathcal{F}}
+\def\Im{\mathrm{im}}
+\def\Ker{\mathrm{ker}}
+\def\Dim{\mathrm{dim}}
+\def\euler{\chi}
+
+
+\title{Non-Abelian Quantum Codes}
 \author{Simon David Burton}
 \date{2016}
 
@@ -82,15 +114,16 @@
 
 \chapter{Introduction}
 
+
 We begin our journey with a consideration of ``size'', or ``counting''.
-To count the size of something $A$ we write $\mu(A).$
+To count the size of something $A$ we write $\euler(A).$
 Size is \emph{additive} in the sense of 
-$\mu(A\cup B) = \mu(A) + \mu(B)$ except that
+$\euler(A\cup B) = \euler(A) + \euler(B)$ except that
 $A$ and $B$ may have intersection.
 In this case we would have counted the 
 size of the intersection twice and so we modify this formula as
 $$
-    \mu(A\cup B) = \mu(A) + \mu(B) - \mu(A\cap B).
+    \euler(A\cup B) = \euler(A) + \euler(B) - \euler(A\cap B).
 $$
 We can continue this idea to find the
 size of the union of three pieces
@@ -98,12 +131,11 @@ size of the union of three pieces
 \includegraphics{pic-ABC.pdf}
 \end{center}
 In this case the formula reads:
-\begin{align*}
-\mu(A\cup B\cup C) = \ &\mu(A) + \mu(B) + \mu(C)  \\
-                     &- \mu(A\cap B) - \mu(A\cap C) - \mu(B\cap C) \\
-                     &+ \mu(A\cap B \cap C).
-\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{(*)}
-\end{align*}
+\begin{align}\label{EulerAddSub}
+\euler(A\cup B\cup C) = \ &\euler(A) + \euler(B) + \euler(C)  \nonumber \\
+                     &- \euler(A\cap B) - \euler(A\cap C) - \euler(B\cap C) \nonumber \\
+                     &+ \euler(A\cap B \cap C).
+\end{align}
 The point here is the alternating signs:
 each time we try to count a size we overcount by
 one intersections worth, subtracting those intersections
@@ -116,20 +148,180 @@ sphere with the faces of a cube:
 \begin{center}
 \includegraphics{pic-cube.pdf}
 \end{center}
-So we have six tiles and one might suggest that 
-$\mu(S^2)=6$ but these are closed tiles, so they
+So we have six faces and one might suggest that 
+$\euler(S^2)=6$ but these are closed faces, so they
 intersect on their edges, of which we have 12.
 But these edges intersect at vertices and there are
 8 of these. 
-We extend the above formula (*) to calculate:
+We extend the above formula \Eref{EulerAddSub} to calculate:
 $$
-    \mu(S^2) = 6 - 12 + 8 = 2.
+    \euler(S^2) = 6 - 12 + 8 = 2.
 $$
 So the sphere has ``size'' two!
 The magic here is that any other convex polyhedron would give
 the same answer of two.
 This, of course, is known as the \emph{Euler characteristic},
 and for a sphere this is indeed two.
+
+We repeat this calculation for another surface, a torus.
+\begin{center}
+\includegraphics[width=1.0\columnwidth]{pic-torus.pdf}
+\end{center}
+This time we use four faces, eight edges and four vertices:
+$$
+    \euler(S^1\times S^1) = 4 - 8 + 4 = 0.
+$$
+
+The Euler characteristic has many equivalent definitions,
+and we now turn to one of these.
+%The first step is to consider vector spaces ...
+We are going to replace sets of things by vector
+spaces whose basis is the original set.
+And just to keep things simple we will 
+take our vector spaces over the finite field with
+two elements $\Field=\{0, 1\}.$
+%That is, we use mod 2 arithmetic when counting things.
+This has the distinct advantage
+of eliminating all sign errors!
+
+From the set of faces we form a vector space
+$C_2$ with basis the set of faces.
+Similarly, the one-dimensional pieces are the basis of $C_1$
+and the zero-dimensional pieces are the basis of $C_0$:
+\begin{align*}
+    C_2 &: \mbox{faces},\\
+    C_1 &: \mbox{edges},\\
+    C_0 &: \mbox{vertices.}
+\end{align*}
+So the formula for Euler characteristic now reads:
+\begin{align}\label{EulerEq}
+    \euler(C_{\bullet}) = \mbox{dim}(C_2) - \mbox{dim}(C_1) + \mbox{dim}(C_0).
+\end{align}
+But now things get more interesting,
+because we have linear operators:
+\begin{align}\label{Sequence}
+    C_2 \xrightarrow{\ \ \partial_2\ \ } C_1 \xrightarrow{\ \ \partial_1\ \ } C_0.
+\end{align}
+These operators are defined to take the ``boundary'' of a shape. 
+The operator $\partial_2$ gives the boundary of a face $f\in C_2$
+which is just the sum of edges incident to (contained by) that face:
+$$
+    \partial_2(f) = \sum_{\substack{e\in \text{edges},\\e\sim f}} e.
+$$
+where we use $\sim$ to indicate incidence, and we extend
+$\partial_2$ to all of $C_2$ by linearity.
+Similarly, $\partial_1$ is defined to take an edge
+to the sum over its vertex endpoints:
+$$
+    \partial_1(e) = \sum_{\substack{v\in \text{vertices},\\v\sim e}} v.
+$$
+
+Now with a small amount of thought one finds that 
+$$
+    \partial_1 \circ \partial_2 = 0.
+$$
+This is because each vertex around a face gets counted twice,
+and this is zero in $\Field$-linear arithmetic.
+\begin{center}
+%\includegraphics[width=1.0\columnwidth]{pic-bdy.pdf}
+\includegraphics{pic-bdy.pdf}
+\end{center}
+In other words, the boundary of the boundary is empty!
+Or equivalently,
+$$
+    \Im(\partial_2) \subset \Ker(\partial_1).
+$$
+%We call the subspace $\Ker(\partial_1)$ the \emph{cycles}
+%of $C_1$. 
+The subspace $\Ker(\partial_1)$ of $C_1$
+will be sums of edges that form closed loops, and we
+call these \emph{cycles}.
+The subspace $\Im(\partial_2)$ is the space of \emph{boundaries}.
+So the above formula
+says the space of boundaries is contained within the space of cycles.
+This allows us to define the following quotient,
+known as the first \emph{homology} group:
+$$
+    H_1 := \Ker(\partial_1) / \Im(\partial_2).
+$$
+These are the cycles modulo boundaries.
+
+With a bit more work we can extend the above sequence \Eref{Sequence} to
+$$
+  0 \xrightarrow{\ \ \partial_3\ \ } 
+    C_2 \xrightarrow{\ \ \partial_2\ \ } 
+    C_1 \xrightarrow{\ \ \partial_1\ \ } 
+    C_0 \xrightarrow{\ \ \partial_0\ \ } 0
+$$
+so that $\partial_i \circ \partial_{i+1}=0$ 
+for $i=0,1,2$
+and then define
+$$
+    H_i := \Ker(\partial_i) / \Im(\partial_{i+1}),\ \ \ \mbox{for}\ \ \ i=0,1,2.
+$$
+
+Now we have a new formula for the Euler characteristic,
+\begin{align}\label{EulerHom}
+    \euler(H_{\bullet}) = \mbox{dim}(H_2) - \mbox{dim}(H_1) + \mbox{dim}(H_0),
+\end{align}
+which follows from
+%from the homology condition
+%$\partial_i \circ \partial_{i+1}=0$  and
+an application of the rank-nullity theorem to
+equation \Eref{EulerEq}.
+
+Going back to the torus example, with four faces,
+eight edges and four vertices:
+\begin{center}
+\includegraphics{pic-torus-hom.pdf}
+\end{center}
+we see that the sum over all faces in $C_2$
+has zero boundary,
+$$
+    \partial_2(\sum_{f\in\text{faces}} f) = 0
+$$
+and this is the only vector with zero boundary so that
+that $\Dim(H_2)=1$.
+The space $H_1$ is two dimensional, with representative
+cycles given by a vertical or horizontal loop of edges.
+Finally, the space $H_0$ is one dimensional: these
+are single points.
+Putting this together we get
+$$
+    \euler(S^1\times S^1) = 
+    \mbox{dim}(H_2) - \mbox{dim}(H_1) + \mbox{dim}(H_0) = 1-2-1 = 0,
+$$
+which agrees with our previous calculation for the Euler
+characteristic of the torus.
+
+%Because we have $\partial_3=0$ and $\partial_0=0$ this formula
+%becomes
+%\begin{align}
+%    \euler(H_{\bullet}) = \Dim(\Ker{\partial_2}) - \dim(H_1) + \dim(\Im{\partial).
+%\end{align}
+
+This is all great but what does it have to do with quantum codes?
+If we think of our finite field $\Field=\{0,1\}$ as a classical
+bit, this would suggest that the passage to quantum codes involves
+taking superpositions over these two bit values.
+Indeed this is what we do.
+The two dimensional complex Hilbert space that we get
+is known as a \emph{qubit}:
+$$
+    \Complex[\Field] = \{ \alpha \ket{0} + \beta \ket{1} \}.
+$$
+Notice how we put the $\Field$-linear values inside the ket.
+Taking $n-$fold tensor products
+of a qubit corresponds to superpositions over
+$n$ dimensional $\Field$-linear values.
+This basis we call the \emph{computational basis.}
+
+%\[
+%\begin{tikzcd}
+%\Field^n \arrow{r}{G_z} \arrow[swap]{d}{P} & \Field^{|G_Z|} \arrow{d}{Q} \\
+%\Field^n \arrow{r}{G_z} & \Field^{|G_Z|} 
+%\end{tikzcd}
+%\]
 
 
 

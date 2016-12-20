@@ -24,12 +24,16 @@ center = [text.halign.boxcenter, text.valign.middle]
 st_dashed = [style.linestyle.dashed]
 st_dotted = [style.linestyle.dotted]
 
+st_thick = [style.linewidth.thick]
 st_Thick = [style.linewidth.Thick]
+st_THick = [style.linewidth.THick]
+st_THIck = [style.linewidth.THIck]
 
 
 text.set(mode="latex")
-text.set(docopt="10pt")
-text.preamble(r'\usepackage{amsmath,amsfonts,amssymb}')
+text.set(docopt="12pt")
+#text.preamble(r'\usepackage{amsmath,amsfonts,amssymb}')
+text.preamble(r'\usepackage{amsmath,amssymb}')
 #text.preamble(r"\def\I{\mathbb{I}}")
 text.preamble(r"\def\ket #1{|#1\rangle}")
 
@@ -81,10 +85,10 @@ def dopath(ps, extra=[], fill=[], closepath=False, smooth=0.0, stroke=True):
 
 
 stack = []
-def push():
+def push(*args):
     global c
     stack.append(c)
-    c = canvas.canvas()
+    c = canvas.canvas(*args)
 
 def pop(*args):
     global c
@@ -317,7 +321,6 @@ t.stroke(st_front)
 
 x, y = 1.0, -1.3
 vs = square(x, y, 2.4*R, st_Thick)
-print vs
 
 c.text(-1.7*R, 0., "$=$", center)
 
@@ -361,59 +364,285 @@ c.writePDFfile("pic-cube.pdf")
 #
 
 
-sys.exit(0)
 c = canvas.canvas()
 
-W = 5.
-H = 3.
-
-c.stroke(path.line(0.0, -0.2, 0., H), [deco.earrow()])
-c.stroke(path.line(-0.2, 0., W, 0), [deco.earrow()])
-my = 0.25
-c.stroke(path.line(-0.2, -my*0.2, 0.9*W, my*W), [deco.earrow()])
-
-x0, y0 = 0.3*W, 0.3*H
-x1, y1 = x0+0.3*W, y0+my*0.3*W
 
 
-#t = Turtle(x0, y0, pi/4)
-#t.penup().fwd(0.2).pendown()
-#theta, r = 0.25*pi, 2.0
-#t.right(theta, r).right(0.8*pi, 0.2).right(theta, r)
-#t.fwd(0.1).stroke([deco.earrow()])
 
-tr = trafo.scale(x=0.5*W, y=0.3*H, sx=1.3, sy=1.5)
+R0 = 4. 
+R1 = 1.
 
-c.fill(path.circle(x0, y0, 0.06), [tr])
-c.fill(path.circle(x1, y1, 0.06), [tr])
+X = -6.0
+Y = 0.
 
-def loop(x0, y0, r1, theta0, theta1, tpy):
-    t = Turtle(x0, y0, theta0)
-    #theta = 0.55*pi
-    theta = theta1
-    r2 = 2*r1*sin(theta - 0.5*pi)
-    t.penup().fwd(0.1*r1).pendown()
-    t.fwd(0.9*r1).right(theta).fwd(r2).right(theta).fwd(0.9*r1) 
-    t.stroke([deco.earrow(), 
-        deformer.smoothed(4.0), style.linewidth.Thick,
-        color.transparency(tpy), tr])
 
-r1 = 2.0
-tpy = 0.2
-theta = 0.37*pi
-theta1 = 0.55*pi
-for i in range(10):
-    tpy = 0.8
-    if i==0 or i==9:
-        tpy = 0.
-    loop(x0, y0, r1, theta, theta1, tpy)
-    #tpy += 0.05
-    theta -= 0.06*pi
-    #r1 = 0.9*r1
-    r1 -= 0.17
-    theta1 += 0.01*pi
+def torus(u, v, R0=R0, R1=R1):
+    x = (R0 + R1*cos(v))*cos(u)
+    y = (R0 + R1*cos(v))*sin(u)
+    z = R1*sin(v)
+    return x, y, z
+    
 
-#c.writePDFfile("pic-monodromy3d.pdf")
+def loop1(u, v0=0., v1=2*pi, N=50):
+    v = v0
+    dv = (v1-v0)/N
+    for i in range(N+1):
+        yield torus(u, v)
+        v += dv
+
+def loop2(v, u0=0., u1=2*pi, N=50):
+    u = u0
+    du = (u1-u0)/N
+    for i in range(N+1):
+        yield torus(u, v)
+        u += du
+
+
+def display(x, y, z):
+    return (x-0.2*y-0.0*z+X, 0.8*z-0.3*y+Y)
+
+
+ni = 60
+nj = 60
+u = 0.
+a = 0.01
+du = 2*pi/ni
+rects = []
+for i in range(ni):
+    #ps = [display(*p) for p in loop1(u)]
+    #dopath(ps)
+
+    v = 0.
+    dv = 2*pi/nj
+    for j in range(nj):
+        p0 = torus(u-a, v-a)
+        p1 = torus(u-a, v+dv+a)
+        p2 = torus(u+du+a, v+dv+a)
+        p3 = torus(u+du+a, v-a)
+        #dopath([p0, p1, p2, p3], fill=[grey])
+        cl = 0.3*(cos(-0.4*pi+v+0.0*u)+1.) + 0.15
+        rects.append([p0, p1, p2, p3, cl])
+        v += dv
+
+    u += du
+
+
+def order(rect):
+    y = sum(p[1] for p in rect[:4])
+    return y
+
+rects.sort(key = order)
+
+for rect in rects:
+    cl = rect[4]
+    cl = rgb(cl, cl, cl)
+    rect = [display(*p) for p in rect[:4]]
+    dopath(rect, fill=[cl], stroke=False)
+
+
+#st_front = [green]+st_Thick+[style.linecap.round]
+#st_back = [green]#+st_dotted+st_Thick
+
+st_front = [black]+[style.linewidth.Thick]+[style.linecap.round]
+st_back = [rgb(0.4,0.4,0.4)]+[style.linewidth.THin]
+
+t0, t1 = -0.30*pi, 0.63*pi
+dopath([display(*p) for p in loop1(0.2*pi, t1, t0+2*pi)], extra=st_back)
+
+t0, t1 = 0.4*pi, 1.3*pi
+dopath([display(*p) for p in loop1(1.2*pi, t1, t0+2*pi)], extra=st_back)
+
+t0, t1 = -0.05*pi, 0.95*pi
+dopath([display(*p) for p in loop2(0., t1, t0+2*pi)], extra=st_back)
+
+t0, t1 = -0.125*pi, 0.995*pi
+dopath([display(*p) for p in loop2(pi, t0, t1)], extra=st_back)
+
+t0, t1 = -0.30*pi, 0.63*pi
+dopath([display(*p) for p in loop1(0.2*pi, t0, t1)], extra=st_front)
+
+t0, t1 = 0.4*pi, 1.3*pi
+dopath([display(*p) for p in loop1(1.2*pi, t0, t1)], extra=st_front)
+
+t0, t1 = -0.05*pi, 0.95*pi
+dopath([display(*p) for p in loop2(0., t0, t1)], extra=st_front)
+
+t0, t1 = -0.125*pi, 0.995*pi
+dopath([display(*p) for p in loop2(pi, t1, t0+2*pi)], extra=st_front)
+
+
+
+c.text(0, 0, "$=$", center)
+
+W = 4.
+H = 4.
+x = 1.0
+y = -0.5*H
+
+c.fill(path.rect(x, y, W, H), [grey])
+
+st_front = [black]+[style.linewidth.Thick]
+
+c.stroke(path.line(x+0.4*W, y, x+0.4*W, y+H), st_front)
+c.stroke(path.line(x+0.8*W, y, x+0.8*W, y+H), st_front)
+
+c.stroke(path.line(x, y+0.2*H, x+W, y+0.2*H), st_front)
+c.stroke(path.line(x, y+0.6*H, x+W, y+0.6*H), st_front)
+
+for st in [[white]+st_thick,st_dashed+st_thick]:
+    c.stroke(path.line(x, y, x+W, y), st)
+    c.stroke(path.line(x, y+H, x+W, y+H), st)
+
+for st in [[white]+st_thick,st_dotted+st_thick]:
+    c.stroke(path.line(x, y, x, y+H), st)
+    c.stroke(path.line(x+W, y, x+W, y+H), st)
+
+c.writePDFfile("pic-torus.pdf")
+
+
+#############################################################################
+#
+#
+
+
+c = canvas.canvas()
+
+
+W = 2.0
+H = 2.0
+m = 0.3
+r = 0.10
+
+
+for i in range(2):
+    X = [-1.2*W, +1.2*W][i]
+
+    pos = [trafo.translate(X, 0.)]
+    
+    p = path.rect(0, 0, W, H)
+    c.fill(p, [grey]+pos)
+    c.stroke(p, pos)
+    
+    st = [style.linewidth.THick] + pos
+    c.stroke(path.line(-m, 0, -m, H), st)
+    c.stroke(path.line(W+m, 0, W+m, H), st)
+    c.stroke(path.line(0, -m, W, -m), st)
+    c.stroke(path.line(0, H+m, W, H+m), st)
+    
+    st = [] + pos
+    c.fill(path.circle(-m, -m, r), st)
+    c.fill(path.circle(-m, H+m, r), st)
+    c.fill(path.circle(W+m, H+m, r), st)
+    c.fill(path.circle(W+m, -m, r), st)
+    
+    st = [deco.earrow(size=0.2)] + pos
+
+    for theta in [0., 90., 180., 270.]:
+
+        rot = [trafo.rotate(theta, 0.5*W, 0.5*W)]
+
+        if i==0:
+            p = path.line(0.75*W, 0.5*H, 1.09*W, 0.5*H)
+            c.stroke(p, rot+pos+[
+                deco.earrow(size=0.35), 
+                style.linewidth.THick, black])
+    
+            p = path.line(0.77*W, 0.5*H, 1.05*W, 0.5*H)
+            c.stroke(p, rot+pos+[deco.earrow(size=0.2), white])
+
+            c.text(0.5*W, -4*m, r"$\partial_2$", center+pos)
+
+        else:
+
+            m1 = 1.6*m
+            p = path.line(1.0*W+m1, 0.65*H, 1.0*W+m1, 0.95*H)
+            c.stroke(p, rot+pos+[
+                deco.earrow(size=0.35), 
+                style.linewidth.THick, black])
+    
+            p = path.line(1.0*W+m1, 0.67*H, 1.0*W+m1, 0.91*H)
+            c.stroke(p, rot+pos+[deco.earrow(size=0.2), white])
+        
+            p = path.line(1.0*W+m1, H-0.65*H, 1.0*W+m1, H-0.95*H)
+            c.stroke(p, rot+pos+[
+                deco.earrow(size=0.35), 
+                style.linewidth.THick, black])
+    
+            p = path.line(1.0*W+m1, H-0.67*H, 1.0*W+m1, H-0.91*H)
+            c.stroke(p, rot+pos+[deco.earrow(size=0.2), white])
+    
+            c.text(0.5*W, -4*m, r"$\partial_1$", center+pos)
+
+
+
+c.writePDFfile("pic-bdy.pdf")
+
+
+#############################################################################
+#
+#
+
+
+
+
+W = 4.
+H = 4.
+x = 0.0
+y = 0.0
+
+m = 0.05
+
+c = canvas.canvas([canvas.clip(path.rect(-m, -m, W+2*m, H+2*m))])
+
+w = 0.5*W
+h = 0.5*H
+
+x0 = 0.7*w
+y0 = 0.3*h
+
+m = 0.18
+
+r = 0.07
+
+st_edge = [style.linewidth.THick]
+for i in range(-1, 2):
+  for j in range(-1, 2):
+    p = path.rect(x0 + i*w + m, y0 + j*h + m, w-2*m, h-2*m)
+    c.fill(p, [grey])
+    c.stroke(p)
+
+    p = path.line(x0 + i*w + m, y0 + j*h, x0 + (i+1)*w - m, y0+j*h)
+    c.stroke(p, st_edge)
+
+    p = path.line(x0 + i*w, y0 + j*h + m, x0 + i*w, y0+(j+1)*h-m)
+    c.stroke(p, st_edge)
+
+    c.fill(path.circle(x0 + i*w, y0 + j*h, r))
+
+
+st_front = [black]+[style.linewidth.Thick]
+
+#c.stroke(path.line(x+0.4*W, y, x+0.4*W, y+H), st_front)
+#c.stroke(path.line(x+0.8*W, y, x+0.8*W, y+H), st_front)
+#
+#c.stroke(path.line(x, y+0.2*H, x+W, y+0.2*H), st_front)
+#c.stroke(path.line(x, y+0.6*H, x+W, y+0.6*H), st_front)
+
+
+# border:
+
+m = 0.03
+for st in [[white]+st_THIck, st_dashed+st_thick]:
+    c.stroke(path.line(x-m, y-m, x+W+m, y-m), st)
+    c.stroke(path.line(x-m, y+H+m, x+W-m, y+H+m), st)
+
+for st in [[white]+st_THIck, st_dotted+st_thick]:
+    c.stroke(path.line(x-m, y-m, x-m, y+H+m), st)
+    c.stroke(path.line(x+W+m, y+m, x+W+m, y+H+m), st)
+
+
+
+c.writePDFfile("pic-torus-hom.pdf")
 
 
 
