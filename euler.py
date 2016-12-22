@@ -164,6 +164,33 @@ class Turtle(object):
 c = canvas.canvas()
 
 
+
+R = 1.0
+dw = 2*pi/3
+w = -dw/4
+for i in range(3):
+
+    c.stroke(path.path(path.arc(
+        0., 0., R, 
+        360*(w+0.2)/(2*pi), 360*(w+dw-0.2)/(2*pi))), st_THick)
+
+    c.fill(path.circle(R*cos(w), R*sin(w), 0.10))
+
+    w += dw
+
+
+c.writePDFfile("pic-circle-hom.pdf")
+
+
+
+
+#############################################################################
+#
+#
+
+c = canvas.canvas()
+
+
 def blob(x, y, R):
     #t = Turtle(0., 0., 0.)
     p = path.circle(x, y, R)
@@ -643,6 +670,83 @@ for st in [[white]+st_THIck, st_dotted+st_thick]:
 
 
 c.writePDFfile("pic-torus-hom.pdf")
+
+
+#############################################################################
+#
+#
+
+W = 5.
+H = 5.
+x = 0.0
+y = 0.0
+
+m = 0.05
+c = canvas.canvas([canvas.clip(path.rect(-m, -m, W+2*m, H+2*m))])
+
+w = 0.5*W
+h = 0.5*H
+
+x0 = 0.7*w
+y0 = 0.3*h
+
+m = 0.28
+
+r = 0.15
+
+st_edge = [style.linewidth.THICK, grey]
+count = 0
+for i in range(-1, 2):
+  for j in range(-1, 2):
+    p = path.rect(x0 + i*w + m, y0 + j*h + m, w-2*m, h-2*m)
+    c.fill(p, [grey])
+    #c.stroke(p)
+
+    p = path.line(x0 + i*w + m, y0 + j*h, x0 + (i+1)*w - m, y0+j*h)
+    c.stroke(p, st_edge)
+
+    p = path.line(x0 + i*w, y0 + j*h + m, x0 + i*w, y0+(j+1)*h-m)
+    c.stroke(p, st_edge)
+
+    c.fill(path.circle(x0 + i*w, y0 + j*h, r), [grey])
+
+count = 1
+for j in [1, 0]:
+  for i in range(2):
+    c.text(x0 + i*w, y0 + j*h, "%s"%count, center)
+    c.text(x0 + (i-0.5)*w, y0 + (j+0.5)*h, "%s"%count, center)
+
+    c.text(x0 + (i-0.5)*w, y0 + (j+0.0)*h, "%s"%(2*count), center)
+    c.text(x0 + (i-0.0)*w, y0 + (j+0.5)*h, "%s"%(2*count-1), center)
+
+    count += 1
+    
+
+
+st_front = [black]+[style.linewidth.Thick]
+
+#c.stroke(path.line(x+0.4*W, y, x+0.4*W, y+H), st_front)
+#c.stroke(path.line(x+0.8*W, y, x+0.8*W, y+H), st_front)
+#
+#c.stroke(path.line(x, y+0.2*H, x+W, y+0.2*H), st_front)
+#c.stroke(path.line(x, y+0.6*H, x+W, y+0.6*H), st_front)
+
+
+# border:
+
+m = 0.03
+for st in [[white]+st_THIck, st_dashed+st_thick]:
+    c.stroke(path.line(x-m, y-m, x+W+m, y-m), st)
+    c.stroke(path.line(x-m, y+H+m, x+W-m, y+H+m), st)
+
+for st in [[white]+st_THIck, st_dotted+st_thick]:
+    c.stroke(path.line(x-m, y-m, x-m, y+H+m), st)
+    c.stroke(path.line(x+W+m, y+m, x+W+m, y+H+m), st)
+
+
+
+c.writePDFfile("pic-torus-count.pdf")
+
 
 
 
