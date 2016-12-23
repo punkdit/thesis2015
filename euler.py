@@ -995,18 +995,26 @@ faces = {}
 #faces[1, 2] = 1
 
 edges = {}
-edges[1, 3, 0] = 1
-edges[1, 2, 1] = 1
+#edges[1, 3, 0] = 1
+#edges[1, 2, 1] = 1
+#edges[1, 1, 1] = 1
+#edges[3, 2, 0] = 1
+#edges[3, 2, 1] = 1
+
 edges[1, 1, 1] = 1
-edges[3, 2, 0] = 1
+edges[1, 2, 1] = 1
+edges[3, 1, 1] = 1
 edges[3, 2, 1] = 1
 
 verts = {}
+#verts[1, 1] = 1
+#verts[2, 3] = 1
+#verts[3, 3] = 1
+#verts[4, 2] = 1
 verts[1, 1] = 1
-verts[2, 3] = 1
-
+verts[3, 1] = 1
+verts[1, 3] = 1
 verts[3, 3] = 1
-verts[4, 2] = 1
 
 push()
 draw(faces, edges, verts)
@@ -1019,18 +1027,25 @@ pop([trafo.translate(-1.2*W, 0)])
 faces = {}
 
 edges = {}
+#edges[2, 3, 0] = 1
+#edges[1, 1, 0] = 1
+#edges[2, 1, 0] = 1
+#edges[3, 1, 0] = 1
+#edges[4, 1, 1] = 1
 edges[2, 3, 0] = 1
-edges[1, 1, 0] = 1
+edges[1, 3, 0] = 1
 edges[2, 1, 0] = 1
-edges[3, 1, 0] = 1
-edges[4, 1, 1] = 1
+edges[1, 1, 0] = 1
 
 verts = {}
+#verts[1, 1] = 1
+#verts[2, 3] = 1
+#verts[3, 3] = 1
+#verts[4, 2] = 1
 verts[1, 1] = 1
-verts[2, 3] = 1
-
+verts[3, 1] = 1
+verts[1, 3] = 1
 verts[3, 3] = 1
-verts[4, 2] = 1
 
 push()
 draw(faces, edges, verts)
@@ -1046,4 +1061,45 @@ c.writePDFfile("pic-toric-nonab.pdf")
 #############################################################################
 #
 #
+
+c = canvas.canvas()
+
+def square(i, j):
+    edges[i, j, 0]       = (edges.get((i, j,       0), 0) + 1)%2
+    edges[i, (j+1)%N, 0] = (edges.get((i, (j+1)%N, 0), 0) + 1)%2
+    edges[i, j, 1]       = (edges.get((i, j,       1), 0) + 1)%2
+    edges[(i+1)%N, j, 1] = (edges.get(((i+1)%N, j, 1), 0) + 1)%2
+
+# ---------------------------------------
+
+X = 0.
+
+for i in range(3):
+
+    faces = {}
+    
+    edges = {}
+    for i in range(N):
+      for j in range(N):
+        if random()<0.5:
+            square(i, j)
+    
+    verts = {}
+    
+    push()
+    draw(faces, edges, verts)
+    pop([trafo.translate(X, 0)])
+
+
+    X += 1.2*W
+
+    c.text(X-3.0*m, 0.5*H, r"$+$", center)
+
+# ---------------------------------------
+
+c.text(X+0.0*m, 0.5*H, r"$...$", north)
+
+c.writePDFfile("pic-toric-liquid.pdf")
+
+
 
