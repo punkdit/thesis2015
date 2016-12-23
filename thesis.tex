@@ -117,8 +117,6 @@
 %\chapter{A Homological Perspective on Quantum Codes}
 %\input{stabilizer.tex}
 
-%Homology theory goes back to Poincar\'ewho was trying to
-%deal with topological issues as they arise in complex analysis~\cite{Lefschetz1970}.
 
 
 We begin our journey with a consideration of ``size'', or ``counting''.
@@ -168,6 +166,8 @@ The magic here is that any other convex polyhedron would give
 the same answer of two.
 This, of course, is known as the \emph{Euler characteristic},
 and for a sphere this is indeed two.
+\footnote{This approach to defining Euler characteristic is
+discussed in the fascinating book \cite{Klain1997}.}
 
 We repeat this calculation for another surface, a torus.
 \begin{center}
@@ -179,8 +179,11 @@ $$
 $$
 
 The Euler characteristic has many equivalent definitions,
-and we now turn to one of these.
+and we now turn to one of these, which is the idea of a homology.
+This theory goes back to Poincar\'e who was trying to
+deal with topological issues as they arise in complex analysis~\cite{Lefschetz1970}.
 %The first step is to consider vector spaces ...
+
 We are going to replace sets of things by vector
 spaces whose basis is the original set.
 And just to keep things simple we will 
@@ -199,16 +202,16 @@ and the zero-dimensional pieces are the basis of $C_0$:
     C_1 &: \mbox{edges},\\
     C_0 &: \mbox{vertices.}
 \end{align*}
-So the formula for Euler characteristic now reads:
+The formula for Euler characteristic now reads:
 \begin{align}\label{EulerEq}
     \euler(C_{\bullet}) = \mbox{dim}(C_2) - \mbox{dim}(C_1) + \mbox{dim}(C_0).
 \end{align}
 But now things get more interesting,
-because we have linear operators:
+because we have the following linear operators:
 \begin{align}\label{Sequence}
     C_2 \xrightarrow{\ \ \partial_2\ \ } C_1 \xrightarrow{\ \ \partial_1\ \ } C_0.
 \end{align}
-These operators are defined to take the ``boundary'' of a shape. 
+These are defined to take the ``boundary'' of a shape. 
 The operator $\partial_2$ gives the boundary of a face $f\in C_2$
 which is just the sum of edges incident to (contained by) that face:
 $$
@@ -451,6 +454,61 @@ a stabilizer code.
 %\Field^n \arrow{r}{G_z} & \Field^{|G_Z|} 
 %\end{tikzcd}
 %\]
+$$
+    \Field^{m_X} \xrightarrow{\ \ S_X^\top\ \ } 
+    \Field^{n} \xrightarrow{\ \ S_Z\ \ } 
+    \Field^{m_Z}
+$$
+
+To see the error correction process more vividly, we expand the
+code dimensions.
+Here we show a $m_X = 5\times 5$ tiling of the torus.
+There are two edges per tile, so this code has $n=50$ qubits.
+
+Here we show a noise process that acts by bitflip errors
+and the resulting syndrome.
+The noise process acts on qubits, this is a vector in $\Field^n:$
+$$
+    c \in \Field^n = C_1.
+$$
+So the error process is represented as some collection of edges.
+The syndrome operator $S_Z$ gives the boundary of these
+edges, shown as black vertices below.
+The error correction procedure takes these boundary vertices
+as input and attempts to reconstruct the most likely collection of
+edges with this boundary. This then is the operator $c'\in\Field^n$
+that is applied to correct the error.
+Note that $c+c'$ is a cycle because the vertices of $c$ and $c'$ cancel out.
+If the resulting operator $c+c'$ is in the image of $S_X,$
+ie. a boundary, then the error correction has succeeded.
+\begin{center}
+\includegraphics[width=1.0\columnwidth]{pic-toric-suc.pdf}
+\end{center}
+
+Otherwise, $c+c'$ is not a boundary and represents a non-trivial
+operator in $H_1$ and will therefore alter the encoded qubits:
+\begin{center}
+\includegraphics[width=1.0\columnwidth]{pic-toric-fail.pdf}
+\end{center}
+
+Phase flip errors.
+Given any homology $\partial_1 \partial_2 = 0$
+we get another homology by taking the transpose:
+ $\partial_2^\top \partial_1^\top = 0.$
+
+We can also build a Hamiltonian operator:
+$$
+    H = \sum_{s\in S} s.
+$$
+Note that in this thesis we use a neg-Hamiltonian convention,
+so that the groundspace belongs to the largest eigenvalue.
+For stabilizer codes $S$ this Hamiltonian is easily diagonalizable.
+
+% ------------------------------------------------------------------
+
+\begin{center}
+* \ \ \ \ \ \ \ \ \ \ * \ \ \ \ \ \ \ \ \ \ *
+\end{center}
 
 There are two approaches to non-Abelian codes
 explored in this thesis.
@@ -469,6 +527,16 @@ we take as we describe the theory of anyons and modular
 functors in chapter 3 and then go on to show how
 error correction can be applied to these systems in
 chapter 4.
+In the abelian theory the following two
+processes are equivalent (homologous), but for
+general anyon theories this is not the case.
+\begin{center}
+\includegraphics[width=0.5\columnwidth]{pic-toric-nonab.pdf}
+\end{center}
+
+\begin{center}
+* \ \ \ \ \ \ \ \ \ \ * \ \ \ \ \ \ \ \ \ \ *
+\end{center}
 
 It seems that physics has a long history of surprising encounters
 with advanced mathematical concepts,

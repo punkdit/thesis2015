@@ -157,6 +157,7 @@ class Turtle(object):
 
 
 
+"""
 #############################################################################
 #
 #
@@ -747,6 +748,302 @@ for st in [[white]+st_THIck, st_dotted+st_thick]:
 
 c.writePDFfile("pic-torus-count.pdf")
 
+"""
+
+#############################################################################
+#
+#
 
 
+
+
+W = 4.
+H = 4.
+x = 0.0
+y = 0.0
+
+m = 0.05
+
+N = 5
+w = W/N
+h = H/N
+
+x0 = 0.0*w
+y0 = 0.0*h
+
+m = 0.15
+
+r = 0.07
+
+st_edge = [style.linewidth.THick]
+st_on = [black]
+st_off = [grey]
+
+def draw(faces, edges, verts):
+    for i in range(N):
+      for j in range(N):
+    
+        p = path.rect(x0 + i*w + m, y0 + j*h + m, w-2*m, h-2*m)
+        if faces.get((i, j)):
+            c.fill(p, [grey])
+            c.stroke(p)
+        else:
+            c.stroke(p, st_off)
+    
+        p = path.line(x0 + i*w + m, y0 + j*h, x0 + (i+1)*w - m, y0+j*h)
+        st = st_edge+st_on if edges.get((i, j, 0)) else st_off
+        c.stroke(p, st)
+    
+        p = path.line(x0 + i*w, y0 + j*h + m, x0 + i*w, y0+(j+1)*h-m)
+        st = st_edge+st_on if edges.get((i, j, 1)) else st_off
+        c.stroke(p, st)
+    
+        v = verts.get((i, j))
+        st = st_on if v else st_off
+        c.fill(path.circle(x0 + i*w, y0 + j*h, (r if v else 0.5*r)), st)
+
+
+c = canvas.canvas()
+
+# ---------------------------------------
+
+faces = {}
+#faces[1, 2] = 1
+
+edges = {}
+edges[1, 3, 0] = 1
+edges[1, 2, 1] = 1
+edges[1, 1, 1] = 1
+edges[3, 2, 0] = 1
+edges[3, 2, 1] = 1
+
+verts = {}
+verts[1, 1] = 1
+verts[2, 3] = 1
+
+verts[3, 3] = 1
+verts[4, 2] = 1
+
+push()
+draw(faces, edges, verts)
+
+ty = -0.15*H
+c.text(0.5*W, ty, r"noise \& syndrome", south)
+pop([trafo.translate(-1.2*W, 0)])
+
+# ---------------------------------------
+
+faces = {}
+
+edges = {}
+edges[2, 3, 0] = 1
+edges[1, 1, 0] = 1
+edges[2, 1, 0] = 1
+edges[3, 1, 0] = 1
+edges[4, 1, 1] = 1
+
+verts = {}
+verts[1, 1] = 1
+verts[2, 3] = 1
+
+verts[3, 3] = 1
+verts[4, 2] = 1
+
+push()
+draw(faces, edges, verts)
+#c.text(-.1*W-0.5*m, 0.5*H, "$\cdot$", center)
+c.text(-.1*W-0.5*m, 0.5*H, "$+$", center)
+c.text(0.5*W, ty, "error correction", south)
+pop([trafo.translate(-0.0*W, 0)])
+
+# ---------------------------------------
+
+faces = {}
+faces[1, 2] = 1
+faces[1, 1] = 1
+faces[2, 1] = 1
+faces[2, 2] = 1
+faces[3, 1] = 1
+
+edges = {}
+edges[1, 3, 0] = 1
+edges[1, 2, 1] = 1
+edges[1, 1, 1] = 1
+edges[3, 2, 0] = 1
+edges[3, 2, 1] = 1
+
+edges[2, 3, 0] = 1
+edges[1, 1, 0] = 1
+edges[2, 1, 0] = 1
+edges[3, 1, 0] = 1
+edges[4, 1, 1] = 1
+
+verts = {}
+
+push()
+draw(faces, edges, verts)
+c.text(-.1*W-0.5*m, 0.5*H, "$=$", center)
+c.text(0.5*W, ty, "success", south)
+pop([trafo.translate(+1.2*W, 0)])
+
+# ---------------------------------------
+
+
+
+c.writePDFfile("pic-toric-suc.pdf")
+
+
+#############################################################################
+#
+#
+
+
+
+c = canvas.canvas()
+
+# ---------------------------------------
+
+faces = {}
+#faces[1, 2] = 1
+
+edges = {}
+edges[1, 3, 0] = 1
+edges[1, 2, 1] = 1
+edges[1, 1, 1] = 1
+edges[3, 2, 0] = 1
+edges[3, 2, 1] = 1
+
+verts = {}
+verts[1, 1] = 1
+verts[2, 3] = 1
+
+verts[3, 3] = 1
+verts[4, 2] = 1
+
+push()
+draw(faces, edges, verts)
+
+ty = -0.15*H
+c.text(0.5*W, ty, r"noise \& syndrome", south)
+pop([trafo.translate(-1.2*W, 0)])
+
+# ---------------------------------------
+
+faces = {}
+
+edges = {}
+edges[0, 1, 0] = 1
+edges[0, 1, 1] = 1
+edges[2, 3, 0] = 1
+edges[4, 2, 0] = 1
+
+verts = {}
+verts[1, 1] = 1
+verts[2, 3] = 1
+
+verts[3, 3] = 1
+verts[4, 2] = 1
+
+push()
+draw(faces, edges, verts)
+#c.text(-.1*W-0.5*m, 0.5*H, "$\cdot$", center)
+c.text(-.1*W-0.5*m, 0.5*H, "$+$", center)
+c.text(0.5*W, ty, "error correction", south)
+pop([trafo.translate(-0.0*W, 0)])
+
+# ---------------------------------------
+
+faces = {}
+
+edges = {}
+edges[1, 3, 0] = 1
+edges[1, 2, 1] = 1
+edges[1, 1, 1] = 1
+edges[3, 2, 0] = 1
+edges[3, 2, 1] = 1
+
+edges[0, 1, 0] = 1
+edges[0, 1, 1] = 1
+edges[2, 3, 0] = 1
+edges[4, 2, 0] = 1
+
+verts = {}
+
+push()
+draw(faces, edges, verts)
+c.text(-.1*W-0.5*m, 0.5*H, "$=$", center)
+c.text(0.5*W, ty, "fail", south)
+pop([trafo.translate(+1.2*W, 0)])
+
+# ---------------------------------------
+
+
+
+c.writePDFfile("pic-toric-fail.pdf")
+
+
+###############################################################################
+#
+#
+
+
+c = canvas.canvas()
+
+# ---------------------------------------
+
+faces = {}
+#faces[1, 2] = 1
+
+edges = {}
+edges[1, 3, 0] = 1
+edges[1, 2, 1] = 1
+edges[1, 1, 1] = 1
+edges[3, 2, 0] = 1
+edges[3, 2, 1] = 1
+
+verts = {}
+verts[1, 1] = 1
+verts[2, 3] = 1
+
+verts[3, 3] = 1
+verts[4, 2] = 1
+
+push()
+draw(faces, edges, verts)
+
+ty = -0.15*H
+pop([trafo.translate(-1.2*W, 0)])
+
+# ---------------------------------------
+
+faces = {}
+
+edges = {}
+edges[2, 3, 0] = 1
+edges[1, 1, 0] = 1
+edges[2, 1, 0] = 1
+edges[3, 1, 0] = 1
+edges[4, 1, 1] = 1
+
+verts = {}
+verts[1, 1] = 1
+verts[2, 3] = 1
+
+verts[3, 3] = 1
+verts[4, 2] = 1
+
+push()
+draw(faces, edges, verts)
+c.text(-.1*W-0.5*m, 0.5*H, r"$\ne$", center)
+pop([trafo.translate(-0.0*W, 0)])
+
+# ---------------------------------------
+
+
+c.writePDFfile("pic-toric-nonab.pdf")
+
+
+#############################################################################
+#
+#
 
