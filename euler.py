@@ -755,8 +755,6 @@ c.writePDFfile("pic-torus-count.pdf")
 #
 
 
-
-
 W = 4.
 H = 4.
 x = 0.0
@@ -1064,6 +1062,46 @@ c.writePDFfile("pic-toric-nonab.pdf")
 
 c = canvas.canvas()
 
+W = 4.
+H = 4.
+x = 0.0
+y = 0.0
+
+m = 0.0
+
+N = 10
+w = W/N
+h = H/N
+
+x0 = 0.4*w
+y0 = 0.4*h
+
+st_edge = [style.linewidth.THick, style.linecap.round]
+st_on = [black]
+st_off = [grey]
+
+def draw(edges):
+    st = st_off
+    for i in range(-1, N):
+      for j in range(-1, N):
+        p = path.line(x0 + i*w + m, y0 + j*h, x0 + (i+1)*w - m, y0+j*h)
+        c.stroke(p, st_off)
+        p = path.line(x0 + i*w, y0 + j*h + m, x0 + i*w, y0+(j+1)*h-m)
+        c.stroke(p, st_off)
+
+    st = st_edge+st_on
+    for i in range(-1, N):
+      for j in range(-1, N):
+    
+        p = path.line(x0 + i*w + m, y0 + j*h, x0 + (i+1)*w - m, y0+j*h)
+        if edges.get((i%N, j%N, 0)):
+            c.stroke(p, st)
+    
+        p = path.line(x0 + i*w, y0 + j*h + m, x0 + i*w, y0+(j+1)*h-m)
+        if edges.get((i%N, j%N, 1)):
+            c.stroke(p, st)
+
+
 def square(i, j):
     edges[i, j, 0]       = (edges.get((i, j,       0), 0) + 1)%2
     edges[i, (j+1)%N, 0] = (edges.get((i, (j+1)%N, 0), 0) + 1)%2
@@ -1076,24 +1114,19 @@ X = 0.
 
 for i in range(3):
 
-    faces = {}
-    
     edges = {}
     for i in range(N):
       for j in range(N):
         if random()<0.5:
             square(i, j)
     
-    verts = {}
-    
-    push()
-    draw(faces, edges, verts)
+    push([canvas.clip(path.rect(-m, -m, W+2*m, H+2*m))])
+    draw(edges)
     pop([trafo.translate(X, 0)])
-
 
     X += 1.2*W
 
-    c.text(X-3.0*m, 0.5*H, r"$+$", center)
+    c.text(X-0.1*W, 0.5*H, r"$+$", center)
 
 # ---------------------------------------
 
