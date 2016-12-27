@@ -1,15 +1,124 @@
 
+\chapter{Error Correction in a Non-Abelian Topologically Ordered System}
+
+The work in this chapter is based on the collaboration \cite{Burton2015}.
+
+In this chapter we apply the methods of Chapter 3 
+to develop a simulation of noise processes in a two dimensional
+system with non-Abelian anyons.
+
+Topologically ordered quantum systems in two dimensions show great promise for 
+long-term storage and processing of 
+quantum information~\cite{Kitaev2003, Dennis2002, Nayak2008}. 
+The topological features of such systems are insensitive to local 
+perturbations~\cite{Bravyi2010, Bravyi2011a, Michalakis2013}, and they
+have quasiparticle excitations exhibiting anyonic
+statistics~\cite{Wilczek1990}. These systems can be used as
+quantum memories~\cite{Kitaev2003, Dennis2002} or to
+perform universal topological
+quantum computation~\cite{Freedman2002, Nayak2008}.
+
+Quantum error correction is vital
+to harnessing the computational power of topologically
+ordered systems. When coupled to
+a heat bath at any non-zero temperature, thermal fluctuations
+will create spurious anyons that diffuse and quickly corrupt the stored quantum 
+information~\cite{Pastawski2010}. Thus, the passive protection provided by the mass gap
+at low temperature must be augmented by an \emph{active} decoding procedure. 
+
+In order to efficiently classically simulate an error-correction protocol for
+a topologically ordered quantum memory, it is necessary to simulate  
+the physical noise processes, the decoding algorithm, and the physical recovery operations.
+Decoding algorithms are typically designed to run efficiently on a 
+classical computer, but there is generally no guarantee that the  
+noise and recovery processes should be classically simulable.
+Because of this, almost all of the sizable research effort 
+on active quantum error correction for topological systems has focused
+on the case of abelian
+anyons~\cite{Dennis2002, Duclos-Cianci2010, Duclos-Cianci2010a, Wang2010, Wang2010a,
+Duclos-Cianci2013, Bravyi2011, Bombin2012, Wootton2012, Anwar2014,
+Watson2014, Hutter2014a, Bravyi2014, Wootton2015, Fowler2015,
+Andrist2015}, which can be efficiently
+simulated due to the fact that they cannot be used for quantum computation.
+%Systems of abelian anyons are well suited to studying quantum 
+%error correction because (at the RG fixed point) noise and 
+%recovery processes can be efficiently simulated numerically, allowing lattice simulations 
+%of decoding with over 1 million sites~\cite{Duclos-Cianci2010}. 
+%Standard algorithms are specifically tailored to exploit the abelian nature 
+%of these particles,
+%particularly that abelian anyons cannot be used for quantum computation. 
+
+Recent investigations have begun to
+explore quantum error correction for nonabelian anyon
+models~\cite{Brell2013, Wootton2013, Hutter2014, Wootton2015b, Hutter2015continuous}.
+Nonabelian anyon models are especially interesting 
+because braiding and fusion of
+these anyons in general allows for the implementation of universal quantum 
+computation. However, the initial studies
+of error-correction in nonabelian anyon
+systems have focused on specific models, such as the Ising 
+anyons~\cite{Brell2013, Hutter2015continuous} and the so-called $\Phi$-$\Lambda$
+model~\cite{Wootton2013, Hutter2014} that, while nonabelian,
+are not universal for quantum
+computation. The general dynamics of
+these particular anyon models is
+known to be efficiently classically simulable, a fact
+that was exploited to enable efficient simulation of error correction
+in these systems. When considering more general anyon models, their 
+ability to perform universal quantum computation would seem a significant
+barrier to their simulation on a classical computer. While simulation 
+of general dynamics does indeed seem intractable, we argue that 
+the kinds of processes that are typical of thermal noise 
+are sufficiently structured  to allow for their classical simulation
+in the regimes where we expect successful error correction to
+be possible. This insight allows us to simulate the noise
+and recovery processes for a quantum code based on a universal anyon model.
+
+Concretely, we consider quantum error correction in a two-dimensional
+system with Fibonacci anyons, a class of nonabelian anyons that are universal for quantum
+computation~\cite{Freedman2002, Nayak2008}. Fibonacci anyons are
+experimentally motivated as the
+expected excitations of the $\nu=\frac{12}{5}$ fractional quantum Hall
+states~\cite{Slingerland2001}, and can be realized in several spin
+models~\cite{Levin2005, Bonesteel2012, Kapit2013, Palumbo2014} and composite
+heterostructures~\cite{Mong2014}.
+Any of these physical systems
+could be used to perform
+universal topological quantum computation, and
+can be modelled by our
+simulations. Natural sources of noise
+from thermal fluctuations or external
+perturbations will be suppressed by
+the energy gap but must still be corrected to allow for scalable computation.
+
+We use a flexible phenomenological model of dynamics and thermal
+noise to describe a system with Fibonacci anyon excitations. Within
+this model, we apply existing general topological error-correction protocols, and
+simulate the successful preservation of quantum information encoded in topological
+degrees of freedom. Topological quantum computation protocols using nonabelian anyons
+typically implicitly assume the existence of an error-correction protocol to
+correct for diffusion or unwanted creation of anyons.
+The ability to simulate the details of how and when
+these techniques succeed on finite
+system sizes has not previously
+been available, and so our
+results are the first explicit
+demonstration that such a scheme
+will be successful when applied
+to a universal topological quantum computer.
+
 \section{Physical model}
 
 The manifold underlying our system is a torus.
-We endow this with a $L\times L$ square lattice of observables:
+We endow this with an $L\times L$ square lattice of observables:
 $$
     \Lambda := \bigl\{ \gamma_{ij} \bigr\}_{i,j=1,...,L}
 $$
 These observables are the physically accessible observables of
 the noise reduction procedure we call the \emph{decoder.}
 We call each such $\gamma_{ij}$ a \emph{tile.}
-We show a small gap between the tiles but this is not meant
+In the diagrams below 
+there is a small gap between the tiles but this is not meant
 to reflect an actual physical gap.
 
 The noise process acts to populate the manifold with
@@ -124,6 +233,7 @@ $ \bigl<_{\mbox{\tt in}}\bigl>_{\mbox{\tt out}}*_{\mbox{\tt in}}
     \bigr<_{\mbox{\tt in}}\bigl>_{\mbox{\tt out}}\bigr>_{\mbox{\tt in}}.
 $
 
+\vskip 10pt
 {\bf (II)} We will record,
 for each intersection with the tile edge, 
 a numeral indicating which of the four
@@ -133,6 +243,7 @@ Numbering these clockwise from the top as $1, 2, 3, 4$ we have for the above cur
 $\bigl<_1\bigl<_2\bigr>_2\bigr>_3\bigl<_3\bigr>_4$ 
 and $\bigl<_1\bigr>_1*_2\bigl<_3\bigl<_3\bigr>_4\bigr>_4.$
 
+\vskip 10pt
 {\bf (III)} Finally, we will also decorate these symbols with anyons.
 This will be an index to a leaf of a (sum of) fusion tree(s).
 This means that anyons only reside on the curve close
@@ -161,6 +272,8 @@ and $\bigr>_{\mbox{\tt out},4}\bigr>_{\mbox{\tt in},4}$
 symbols with opposite order so that
 $\bigl<_{\mbox{\tt out},2}\sim\bigr>_{\mbox{\tt in},4}$
 and $\bigr>_{\mbox{\tt in},2} \sim \bigr>_{\mbox{\tt out},4}.$ 
+
+\vskip 5pt
 
 %Two other consistency relations are enforced on such a combinatorial curve diagram:
 %we require adjacent tiles to agree on their boundaries, 
@@ -299,11 +412,8 @@ the page:
 \includegraphics[]{pic-process.pdf}
 \end{center}
 
-So far we have discussed the simulation of the (quantum) system
-and now we turn to the decoder algorithm.
-Here is a pseudo-code listing for this,
-and we explain each step via an example below.
-
+%\begin{samepage}
+\begin{figure}
 \begin{verbatim}
  1:  def decode():
  2:      syndrome = get_syndrome()
@@ -333,6 +443,15 @@ and we explain each step via an example below.
 26:      # success !
 27:      return True
 \end{verbatim} % see decode.py
+%\end{samepage}
+\caption{Pseudo-code listing for the (classical) decoding algorithm.}
+\label{PseudoCode}
+\end{figure}
+
+So far we have discussed the simulation of the (quantum) system
+and now we turn to the decoder algorithm.
+In Figure\ref{PseudoCode} we show a pseudo-code listing for this,
+and we explain each step via an example below.
 
 First, we show the result of the initial call to {\tt get\_syndrome()}, on line 2.
 The locations of anyon charges are highlighted in red.
@@ -341,12 +460,16 @@ Each cluster is shown as a gray shaded area.
 \begin{center}
 \includegraphics[]{pic-decode-0.pdf}
 \end{center}
+
+\begin{samepage}
 The next step is the call to {\tt join(clusters, 1)}, on line 8,
 which joins clusters that are separated by at most one lattice
 spacing. We now have seven clusters:
 \begin{center}
 \includegraphics[]{pic-decode-1.pdf}
 \end{center}
+\end{samepage}
+
 Each cluster is structured as a rooted tree, as indicated by
 the arrows which point in the direction from the leaves to
 the root of the tree. 
@@ -357,6 +480,7 @@ fusing with the charge at the root.
 \begin{center}
 \includegraphics[]{pic-decode-2.pdf}
 \end{center}
+
 For each cluster, the resulting charge at the root is taken as the charge of
 that cluster. Any cluster with vacuum total charge is then discarded (line 17).
 %In our example, we assume all these charges are non-vacuum.
@@ -366,6 +490,7 @@ and join (merge) any overlapping clusters (line 24).
 \begin{center}
 \includegraphics[]{pic-decode-3.pdf}
 \end{center}
+
 %Now we are down to two clusters.
 Note that we can choose the root of each cluster arbitrarily,
 as we are only interested in the total charge of each cluster.
@@ -379,57 +504,91 @@ of non-vacuum clusters, and the decoder succeeds (line 27).
 Note that for simplicity we have neglected the boundary of the lattice in
 this example.
 
-%\cggb{Maybe it is worthwhile to briefly recall the broad structure of our simulation somewhere here to help structure the discussion. I.e.~we have first noise creation, then we iterate \{syndrome measurement, classical decoding algorithm, transport\} until failure or success.}
-%\simon{I agree the structure needs work.}
 
-\section{Computation of homologically non-trivial operators}\label{s:homnontrivial}
+\section{Numerical results}
 
-Specializing to the Fibonacci case,
-we write the non-trivial $F$-moves as the following
-skein relations:
-\begin{align*}
-\includegraphics[]{pic-skein1.pdf}
-\end{align*}
 
-The sollid lines represent Fibonacci world-lines.
-The dotted lines represent vacuum charges,
-and we are free to include these lines or not.
-We leave these anyon paths
-as undirected because Fibonacci anyons are
-self-inverse.
-The non-trivial $R$-moves are:
-\begin{align*}
-\includegraphics[]{pic-skein2.pdf}
-\end{align*}
+\begin{figure}
+\begin{center}
+\includegraphics[width=0.8\columnwidth]{anyons-kyle.pdf}
+\caption{
+Results of monte-carlo sampling of the decoding simulation for
+various lattice sizes $L$ and expected pair-creation events per
+edge $t_{\mbox{sim}}.$
+}
+\label{AnyonsKyle}
+\end{center}
+\end{figure}
 
-Removing bubbles:
-\begin{align*}
-\includegraphics[]{pic-bubble.pdf}
-\end{align*}
+The results of simulating the noise plus decoder are shown in
+Figure \ref{AnyonsKyle}.
+We run a monte-carlo simulation, for various lattice sizes $L$,
+and error rate per edge $t_{\mbox{sim}}.$
+The number of pair-creation
+processes accross each edge of the lattice
+is sampled from a poisson process,
+and $t_{\mbox{sim}}$ indicates the expected value of this number.
 
-Here we show a process where a 
-Fibonacci anyon travels around the torus and
-anihilates itself. Twice.
-The vertical lines represent a periodic
-identification.
-\begin{align*}
-\includegraphics[]{pic-logops.pdf}
-\end{align*}
+The decoder failure rate shows a clear threshold at around 
+$t_{\mbox{sim}}=0.124\pm0.002.$ 
+Below this threshold errors are increaslingly suppressed 
+as the lattice size grows.
 
-The state is not normalized.
-Also involves post-selection, as there is
-another process that involves leakage...
-The first equation is an $F$-move, 
-the second equation is a translation in the
-horizontal direction, and the last equation
-follows from the rule for collapsing bubbles.
+The appearance of this threshold is perhaps not surprising as
+the underlying processes resemble a kind of percolation problem.
+\todo{XXX}
 
-Continuing in this way, we compute the $k$-fold
-logical operator:
-\begin{align*}
-\includegraphics[]{pic-kfold.pdf}
-\end{align*}
+%\section{Computation of homologically non-trivial operators}\label{s:homnontrivial}
+%
+%Specializing to the Fibonacci case,
+%we write the non-trivial $F$-moves as the following
+%skein relations:
+%\begin{align*}
+%\includegraphics[]{pic-skein1.pdf}
+%\end{align*}
+%
+%The sollid lines represent Fibonacci world-lines.
+%The dotted lines represent vacuum charges,
+%and we are free to include these lines or not.
+%We leave these anyon paths
+%as undirected because Fibonacci anyons are
+%self-inverse.
+%The non-trivial $R$-moves are:
+%\begin{align*}
+%\includegraphics[]{pic-skein2.pdf}
+%\end{align*}
+%
+%Removing bubbles:
+%\begin{align*}
+%\includegraphics[]{pic-bubble.pdf}
+%\end{align*}
+%
+%Here we show a process where a 
+%Fibonacci anyon travels around the torus and
+%anihilates itself. Twice.
+%The vertical lines represent a periodic
+%identification.
+%\begin{align*}
+%\includegraphics[]{pic-logops.pdf}
+%\end{align*}
+%
+%The state is not normalized.
+%Also involves post-selection, as there is
+%another process that involves leakage...
+%The first equation is an $F$-move, 
+%the second equation is a translation in the
+%horizontal direction, and the last equation
+%follows from the rule for collapsing bubbles.
+%
+%Continuing in this way, we compute the $k$-fold
+%logical operator:
+%\begin{align*}
+%\includegraphics[]{pic-kfold.pdf}
+%\end{align*}
+%
+%where $f_k$ is the $k$-th element of the Fibonacci
+%sequence $\{1, 1, 2, 3...\}.$
 
-where $f_k$ is the $k$-th element of the Fibonacci
-sequence $\{1, 1, 2, 3...\}.$
+
+
 

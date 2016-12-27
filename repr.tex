@@ -71,7 +71,8 @@ which in turn lends weight to the possibility that these may
 be self-correcting quantum memories.
 
 While there are
-some hints of this theory in the literature \cite{Bacon2006quantum,Brzezicki2013}
+some hints of this theory in the literature 
+\cite{Bacon2006quantum,Yoshida2010} %,Brzezicki2013}
 here we spell out in detail how this works and much more.
 Partly it's because these models are new and we don't have
 many examples.
@@ -1032,7 +1033,7 @@ we restrict our
 attention to gauge groups formed from terms 
 in $\Pauli_n^X\cup\Pauli_n^Z.$
 We call these \emph{CSS gauge codes.}
-We briefly review the symplectic structure of
+We next turn to a discussion of the symplectic structure of
 these operators.
 
 Let $\Field$ denote the finite field with two elements $0$ and $1$.
@@ -1831,12 +1832,11 @@ have many identical values.
 This motivates the following exploration of the symmetry 
 of the Hamiltonian.
 
-A graph automorphism is a permutation matrix $P$
+\def\auto{\mathcal{A}}
+
+A \emph{graph automorphism} is a permutation matrix $P$
 such that 
 $$P^T \Ham P = \Ham.$$
-%Equivalently, $P$ commutes with $\Ham$ and this means it preserves
-%the eigenspaces of $\Ham$.
-\def\auto{\mathcal{A}}
 The set of all such graph automorphisms 
 form a group $\auto$.
 The goal here is to find eigenvectors of $H$ that are
@@ -1847,20 +1847,20 @@ so therefore it will live naturally on the
 vector space whose basis is these orbits.
 We can do better than this, and actually 
 project the graph itself down onto this space.
-We can do this by constructing a new graph
+We do this by constructing a new graph
 which we call the \emph{orbigraph}.
 %form a group $\auto(H)$ or just $\auto$ when the graph is understood.
-%We now define a new matrix $\Ham//\auto$
-The matrix for the orbigraph is written $\Ham//\auto$
+%We now define a new matrix $\Ham/\auto$
+The matrix for the orbigraph is written $\Ham/\auto$
 and acts on the vector space with basis consisting
 of the orbits of $\auto.$
-It follows that the components of $\Ham//\auto$,
+It follows that the components of $\Ham/\auto$,
 indexed by a pair of $\auto-$orbits $i$ and $j$, is defined by
 $$
-    (\Ham//\auto)_{ij} = |\{ g\in G \smbox{s.t.} gv \in j \}| \smbox{where}v\in i.
+    (\Ham/\auto)_{ij} = |\{ g\in G \smbox{s.t.} gv \in j \}| \smbox{where}v\in i.
 $$
 In other words, 
-$(\Ham//\auto)_{ij} $ counts the number of gauge group
+$(\Ham/\auto)_{ij} $ counts the number of gauge group
 elements that sends any particular element $v$ of the 
 $\auto-$orbit $i$ to the $\auto-$orbit $j.$
 
@@ -1884,7 +1884,7 @@ where we indicate zero entries with a dot.
 In this case, the automorphism group is $\auto=S_3,$
 there are four $\auto-$orbits, and
 $$
-H//\auto = \left(\begin{array}{rrrr}
+H/\auto = \left(\begin{array}{rrrr}
  3 &  3 &  . &  . \cr
   1 &  1 &  2 &  . \cr
   . &  2 & -1 &  1 \cr
@@ -1898,7 +1898,7 @@ but in general it is possible that $Aut(G) < \auto.$
 Note that the orbigraph is no longer Hermitian,
 and in general will not even be normal.
 
-We can also write $H//\auto = QHP$ using the following two matrices for $P$ and $Q:$
+We can also write $H/\auto = QHP$ using the following two matrices for $P$ and $Q:$
 $$
 Q = 
 \left(\begin{array}{rrrrrrrr}
@@ -1950,7 +1950,7 @@ where the Hamiltonian weights for $X$ and $Z$ are uniform as $w_X$ and $w_Z.$
 We separate the $X$ and $Z$ terms of the orbigraph to show
 how this works:
 $$
-\Ham_{0,0}//\auto = 
+\Ham_{0,0}/\auto = 
 \left(\begin{array}{rrr}
  . &  9 &  . \cr
   1 &  4 &  4 \cr
@@ -1979,7 +1979,7 @@ we get the spectrum of $\Ham_{0,0}$ and note that the orbigraph lifts
 all degeneracy as well as missing some excited eigenspaces:
 \begin{center}
 \begin{tabular}{ c|c|c } 
-$\lambda$ & $\Ham_{0,0}$ degeneracy & $\Ham_{0,0}//\auto$ degeneracy \\
+$\lambda$ & $\Ham_{0,0}$ degeneracy & $\Ham_{0,0}/\auto$ degeneracy \\
 \hline
     11.2111025509 & 1 & 1 \\
     6.0 & 1 & 1 \\
@@ -2012,7 +2012,7 @@ and $4$ each of X/Z-type stabilizer generators.
 $\Ham_{0,0}$ acts on a 64 dimensional space, and $\auto$ has
 order 720. We find 7 orbits:
 $$
-\Ham_{0,0}//\auto = 
+\Ham_{0,0}/\auto = 
 \left(\begin{array}{rrrrrrr}
 18 & 18 &  . &  . &  . &  . &  . \cr
   3 & 12 & 15 &  . &  . &  . &  . \cr
@@ -2039,7 +2039,7 @@ Numerics give the full spectrum of $\Ham_{0,0}$ and we note that the orbigraph l
 all degeneracy as well as preserving every eigenvalue:
 \begin{center}
 \begin{tabular}{ c|c|c } 
-$\lambda$ & $\Ham_{0,0}$ degeneracy & $\Ham_{0,0}//\auto$ degeneracy \\
+$\lambda$ & $\Ham_{0,0}$ degeneracy & $\Ham_{0,0}/\auto$ degeneracy \\
 \hline
     25.4558441227 & 1 & 1 \\
     16.9705627485 & 6 & 1 \\
@@ -2061,7 +2061,7 @@ $$\lambda_1 - \lambda_2 = 9\sqrt{2} - 3\sqrt{10} \cong 3.24108908.$$
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
-\subsection{A table of orbigraphs}
+\subsection{A table of orbigraphs}\label{OrbigraphTable}
 
 Here we tabulate the order of the graph automorphism group $\auto$ of $H_{t_X,0}$
 and the resulting orbigraph sizes, which is the number of $\auto-$orbits.
@@ -2135,10 +2135,10 @@ $|\mathrm{Aut(code)}|$ \\
 \end{tabular}
 \end{center}
 
-Here we also show the order of Aut(code) which is
-the automorphism group of the gauge code.
+We also show the order of Aut(code) which is
+the automorphism group of the gauge code, defined as follows.
 Elements of this group act by permuting the $n$ qubits.
-In detail, such an action is given by the $\Field$-linear
+Such an action is given by the $\Field$-linear
 permutation matrices
 $P_n, P_Z$ and $P_X,$ such that the following $\Field$-linear equations hold:
 \begin{align*}
@@ -2206,7 +2206,7 @@ Indeed, this is captured by the notion of a Lie algebra, which we turn to next.
 
 We now turn to a finer notion of representation theory,
 being the representation theory of semi-simple Lie algebras.
-In this section we outline the theory of representations
+We outline the theory of representations
 of semi-simple Lie algebras \cite{Fulton2013} and show
 how this applies to CSS gauge code Hamiltonians.
 
@@ -2545,6 +2545,12 @@ the $n=15$ gauge color code corresponds to
 %permutations of the six $\mathfrak{sl}_2$ ideals.
 permutations of the six $A_1$ ideals.
 
+There is a remaining mystery of where
+the extra $\Z_2$ symmetry of the 2D compass model is coming from.
+This symmetry was found with the orbigraph method in section~\ref{OrbigraphTable}.
+It would be interesting if this symmetry turns out to be an element
+of the Weyl group of the Lie algebra $\lie_{t_X,0}.$
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 
@@ -2648,7 +2654,7 @@ $n$ &  $t_X$    & $w(s_Z)$ & $\lambda_1$ & $\ \ \ \ \lambda_2$ ?  & gap \\
 \end{center}
 \end{samepage}
 
-\begin{figure}
+\begin{figure}\label{PicGap}
 \begin{center}
 \includegraphics[width=1.0\columnwidth]{pic-gap.pdf}
 \caption{The spectral gap of four different gauge code Hamiltonians, versus the number
@@ -2670,7 +2676,7 @@ bigger than weight at most 24.
 To emphasize this point we show another figure with
 the ground eigenvalues of all of these blocks $H_{t_X,0}.$
 
-\begin{figure}
+\begin{figure}\label{PicGapStabs}
 \begin{center}
 \includegraphics[width=1.0\columnwidth]{pic-gap-stabs.pdf}
 \caption{

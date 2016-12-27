@@ -157,7 +157,89 @@ class Turtle(object):
 
 
 
-"""
+#############################################################################
+#
+#
+
+
+c = canvas.canvas()
+
+
+W = 2.0
+H = 2.0
+m = 0.3
+r = 0.10
+
+
+for i in range(2):
+
+    X = [-1.4*W, +1.4*W][i]
+
+    pos = [trafo.translate(X, 0.)]
+    
+    push([canvas.clip(path.rect(X-0.25*W-m, -0.25*H-m, 1.5*W+2*m, 1.5*H+2*m))])
+
+    for dx in [-0.5*W - m, +0.5*W + m]:
+      for dy in [-0.5*H - m, +0.5*H + m]:
+        p = path.rect(0+dx, 0+dy, W, H)
+        c.fill(p, [grey]+pos)
+        c.stroke(p, pos)
+    
+    st = [style.linewidth.THick] + pos + [trafo.translate(0.5*W, 0.5*H)]
+    c.stroke(path.line(0, +m, 0, H), st)
+    c.stroke(path.line(0, -H, 0, -m), st)
+    c.stroke(path.line(+m, 0, W, 0), st)
+    c.stroke(path.line(-W, 0, -m, 0), st)
+    
+    st = [] + pos
+    c.fill(path.circle(0.5*W, 0.5*H, r), st)
+
+    pop()
+    
+    st = [deco.earrow(size=0.2)] + pos
+
+    for theta in [0., 90., 180., 270.]:
+
+        rot = [trafo.rotate(theta, 0.5*W, 0.5*W)]
+
+        if i==0:
+            p = path.line(0.65*W, 0.5*H, 1.04*W, 0.5*H)
+            c.stroke(p, rot+pos+[
+                deco.earrow(size=0.35), 
+                style.linewidth.THick, black])
+    
+            p = path.line(0.67*W, 0.5*H, 1.00*W, 0.5*H)
+            c.stroke(p, rot+pos+[deco.earrow(size=0.2), white])
+
+            c.text(0.5*W, -5*m, r"$\partial_1^\top$", center+pos)
+
+        else:
+
+            m1 = 1.0*m
+            p = path.line(1.0*W+m1, 0.60*H, 1.0*W+m1, 0.92*H)
+            c.stroke(p, rot+pos+[
+                deco.earrow(size=0.35), 
+                style.linewidth.THick, black])
+    
+            p = path.line(1.0*W+m1, 0.62*H, 1.0*W+m1, 0.88*H)
+            c.stroke(p, rot+pos+[deco.earrow(size=0.2), white])
+        
+            p = path.line(1.0*W+m1, H-0.60*H, 1.0*W+m1, H-0.92*H)
+            c.stroke(p, rot+pos+[
+                deco.earrow(size=0.35), 
+                style.linewidth.THick, black])
+    
+            p = path.line(1.0*W+m1, H-0.62*H, 1.0*W+m1, H-0.88*H)
+            c.stroke(p, rot+pos+[deco.earrow(size=0.2), white])
+    
+            c.text(0.5*W, -5*m, r"$\partial_2^\top$", center+pos)
+
+
+
+c.writePDFfile("pic-cobdy.pdf")
+
+sys.exit(0)
+
 #############################################################################
 #
 #
@@ -748,7 +830,6 @@ for st in [[white]+st_THIck, st_dotted+st_thick]:
 
 c.writePDFfile("pic-torus-count.pdf")
 
-"""
 
 #############################################################################
 #
