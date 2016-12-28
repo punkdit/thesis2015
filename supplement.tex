@@ -5,7 +5,7 @@ The work in this chapter is based on the collaboration \cite{Burton2015}.
 
 In this chapter we apply the methods of Chapter 3 
 to develop a simulation of noise processes in a two dimensional
-system with non-Abelian anyons.
+system with non-abelian anyons.
 
 Topologically ordered quantum systems in two dimensions show great promise for 
 long-term storage and processing of 
@@ -49,16 +49,16 @@ simulated due to the fact that they cannot be used for quantum computation.
 %particularly that abelian anyons cannot be used for quantum computation. 
 
 Recent investigations have begun to
-explore quantum error correction for nonabelian anyon
+explore quantum error correction for non-abelian anyon
 models~\cite{Brell2013, Wootton2013, Hutter2014, Wootton2015b, Hutter2015continuous}.
 Nonabelian anyon models are especially interesting 
 because braiding and fusion of
 these anyons in general allows for the implementation of universal quantum 
 computation. However, the initial studies
-of error-correction in nonabelian anyon
+of error-correction in non-abelian anyon
 systems have focused on specific models, such as the Ising 
 anyons~\cite{Brell2013, Hutter2015continuous} and the so-called $\Phi$-$\Lambda$
-model~\cite{Wootton2013, Hutter2014} that, while nonabelian,
+model~\cite{Wootton2013, Hutter2014} that, while non-abelian,
 are not universal for quantum
 computation. The general dynamics of
 these particular anyon models is
@@ -75,7 +75,7 @@ be possible. This insight allows us to simulate the noise
 and recovery processes for a quantum code based on a universal anyon model.
 
 Concretely, we consider quantum error correction in a two-dimensional
-system with Fibonacci anyons, a class of nonabelian anyons that are universal for quantum
+system with Fibonacci anyons, a class of non-abelian anyons that are universal for quantum
 computation~\cite{Freedman2002, Nayak2008}. Fibonacci anyons are
 experimentally motivated as the
 expected excitations of the $\nu=\frac{12}{5}$ fractional quantum Hall
@@ -95,7 +95,7 @@ We use a flexible phenomenological model of dynamics and thermal
 noise to describe a system with Fibonacci anyon excitations. Within
 this model, we apply existing general topological error-correction protocols, and
 simulate the successful preservation of quantum information encoded in topological
-degrees of freedom. Topological quantum computation protocols using nonabelian anyons
+degrees of freedom. Topological quantum computation protocols using non-abelian anyons
 typically implicitly assume the existence of an error-correction protocol to
 correct for diffusion or unwanted creation of anyons.
 The ability to simulate the details of how and when
@@ -107,8 +107,95 @@ demonstration that such a scheme
 will be successful when applied
 to a universal topological quantum computer.
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%
+
+\section{Fibonacci anyons}
+
+The defining difference between abelian and non-abelian
+anyon theories is that in
+an abelian theory particle content
+alone uniquely determines the outcome
+of joint charge measurements.
+In
+contrast, outcomes for non-abelian charge
+measurements depend on the history
+of the particles as well
+as their type.
+We consider a system supporting non-abelian Fibonacci
+anyon excitations, denoted by $\tau$.
+Two such anyons can have total charge
+that is either $\tau$ or $\vac$ (vacuum), or any superposition of these, and
+so the fusion space in this case is 2-dimensional.
+
+For Fibonacci anyons, the non-trivial $R$ and $F$ moves are
+\begin{equation*}
+        R_{\vac}^{\tau\tau} = \e^{\frac{-4\pi i}{5}} 
+        \ \ , \ \
+        R_\tau^{\tau\tau}= \e^{\frac{3\pi i}{5}} 
+        \ \ , \ \
+        F_{\tau}^{\tau\tau\tau} = \begin{pmatrix}\varphi^{-1}&\varphi^{-\frac{1}{2}}\\\varphi^{-\frac{1}{2}}&-\varphi^{-1}\end{pmatrix} \,,
+\end{equation*}
+where the matrix is given in a
+basis labelled $(\vac,\tau)$.
+
+In terms of skeins we have:
+\begin{align*}
+\includegraphics[]{pic-skein1.pdf}
+\end{align*}
+The solid lines represent Fibonacci world-lines.
+The dotted lines represent vacuum charges,
+and we are free to include these lines or not.
+We leave these anyon paths
+as undirected because Fibonacci anyons are
+self-inverse.
+The non-trivial $R$-moves are:
+\begin{align*}
+\includegraphics[]{pic-skein2.pdf}
+\end{align*}
+
+For more details of the Fibonacci anyon
+theory, see e.g.\ Ref.~\cite{Nayak2008} and references therein.
+
+In addition to the fusion space there is also a
+global degeneracy associated with the topology of the
+manifold on which the anyons reside.
+We consider systems on a torus,
+which for the Fibonacci anyons gives rise to a 2-fold degeneracy.
+This extra degree of freedom can be thought of being
+associated with the total anyonic charge (or flux) running through
+the torus itself. Since there are two different possible charges
+in the Fibonacci anyon model, the global degeneracy is 2.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%
+
 \section{Physical model}
 
+\begin{figure}
+\begin{center}
+\includegraphics[]{pic-process.pdf}
+\end{center}
+\caption{
+The simulation of a single round of
+error correction involves two components: 
+the classical decoder, and the quantum system.
+After the noise process has been applied to the
+system, the simulation proceeds as a dialogue between
+the decoder and the system. 
+Decoding is successful when all charges have been eliminated,
+resulting in an empty syndrome.
+}
+\label{PicProcess}
+\end{figure}
+
+
+
+We consider encoding a qubit of quantum information in the global degeneracy associated
+with the topology of the manifold of our system.
 The manifold underlying our system is a torus.
 We endow this with an $L\times L$ square lattice of observables:
 $$
@@ -157,10 +244,187 @@ the result of which is recorded on the original curve:
 %the data structures and algorithm, we have not yet described
 %and this is what we turn to next.
 
+We consider this treatment of anyon dynamics to be a phenomenological model in that
+it neglects any microscopic details of the system.
+This is consistent with the principles of topologically
+ordered systems and anyonic physics, where the key universal features describing the
+anyon model correspond to large length-scale physics, while the microscopic physics plays
+a less important (and non-universal) role. Note also that our analysis applies equally well to either a continuum setting, or to discrete lattice models supporting anyonic excitations.
+%Additionally, while we model a continuum anyon theory, our analysis can be trivially reinterpreted to apply directly to lattice spin models or other systems where space is fundamentally discrete.
+
+In order to perform a logical error on our code, a noise process must have support on a
+a homologically nontrivial region of the manifold.
+These correspond to processes in which anyonic charge is transported around a non-trivial loop before
+annihilating to vacuum.
+
+
+
+
 %
 % ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 %
-\section{Combinatorial curve diagrams}
+
+\section{Decoding algorithm}
+
+After the noise process is applied to the system,
+the error correction proceeds as a dialogue between the
+decoder and the system. 
+The decoder measures succesively larger and larger
+regions of the lattice
+until there are no more charges 
+or a topologically non-trivial operation has occured
+(an operation that spans the entire lattice.)
+In Figure \ref{PicProcess}
+we show this in a process diagram, with time running up
+the page.
+Note that unlike the case of abelian anyons, the decoder
+cannot determine the charge of each cluster given only the syndrome information (as in \cite{Bravyi2011}),
+and so must repeatedly physically query the system to measure these charges.
+
+
+%\begin{samepage}
+\begin{figure}
+\begin{verbatim}
+ 1:  def decode():
+ 2:      syndrome = get_syndrome()
+ 3:      
+ 4:      # build a cluster for each charge
+ 5:      clusters = [Cluster(charge) for charge in syndrome]
+ 6:  
+ 7:      # join any neighbouring clusters
+ 8:      join(clusters, 1)
+ 9:      
+10:      while clusters:
+11:      
+12:          # find total charge on each cluster
+13:          for cluster in clusters:
+14:              fuse_cluster(cluster)
+15:      
+16:          # discard vacuum clusters
+17:          clusters = [cluster for cluster in clusters if non_vacuum(cluster)]
+18:      
+19:          # grow each cluster by 1 unit
+20:          for cluster in clusters:
+21:              grow_cluster(cluster, 1)
+22:      
+23:          # join any intersecting clusters
+24:          join(clusters, 0)
+25:  
+26:      # success !
+27:      return True
+\end{verbatim} % see decode.py
+%\end{samepage}
+\caption{Pseudo-code listing for the (classical) decoding algorithm.}
+\label{PseudoCode}
+\end{figure}
+
+%So far we have discussed the simulation of the (quantum) system
+%and now we turn to the decoder algorithm.
+In Figure \ref{PseudoCode} we show a pseudo-code listing for the
+decoder algorithm,
+and we explain each step via an example below.
+
+First, we show the result of the initial call to {\tt get\_syndrome()}, on line 2.
+The locations of anyon charges are highlighted in red.
+For each of these charges we build a {\tt Cluster}, on line 5.
+Each cluster is shown as a gray shaded area.
+\begin{center}
+\includegraphics[]{pic-decode-0.pdf}
+\end{center}
+
+\begin{samepage}
+The next step is the call to {\tt join(clusters, 1)}, on line 8,
+which joins clusters that are separated by at most one lattice
+spacing. We now have seven clusters:
+\begin{center}
+\includegraphics[]{pic-decode-1.pdf}
+\end{center}
+\end{samepage}
+
+Each cluster is structured as a rooted tree, as indicated by
+the arrows which point in the direction from the leaves to
+the root of the tree. 
+This tree structure is used in the call to {\tt fuse\_cluster()},
+on line 14.
+This moves anyons in the tree along the arrows to the root, 
+fusing with the charge at the root.
+\begin{center}
+\includegraphics[]{pic-decode-2.pdf}
+\end{center}
+
+For each cluster, the resulting charge at the root is taken as the charge of
+that cluster. Any cluster with vacuum total charge is then discarded (line 17).
+%In our example, we assume all these charges are non-vacuum.
+In our example, we find two clusters with vacuum charge and we discard these.
+The next step is to grow the remaining clusters by one lattice spacing (line 20-21),
+and join (merge) any overlapping clusters (line 24).
+\begin{center}
+\includegraphics[]{pic-decode-3.pdf}
+\end{center}
+
+%Now we are down to two clusters.
+Note that we can choose the root of each cluster arbitrarily,
+as we are only interested in the total charge of each cluster.
+
+We repeat these steps of fusing, growing and then joining clusters (lines 10-24.)
+If at any point this causes a topologically 
+non-trivial operation, the simulation aborts and a failure
+to decode is recorded.
+Otherwise we eventually run out
+of non-vacuum clusters, and the decoder succeeds (line 27).
+Note that for simplicity we have neglected the boundary of the lattice in
+this example.
+
+
+%
+% ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+%
+
+\section{Simulation of the quantum system}
+
+It is known that the process of braiding and fusing
+Fibonacci anyons is sufficient to implement universal quantum
+computing, so at first sight it seems foolish to try to simulate
+this using classical computers. % \cite{Freedman2002, Nayak2008|
+
+However, it turns out to indeed be possible, up to some reasonably
+large system sizes. 
+The reasons why are outlined in a heuristic manner as follows.
+The decoding threshold (see Figure \ref{AnyonsKyle})
+occurs far below the bond percolation threshold.
+Below this percolation threshold, error processes 
+decompose into separate components of
+average size $O(\log(L))$ and variance $O(1)$~\cite{Bazant2000}.
+Each such component can be simulated separately, ie.
+each component corresponds to a tensor factor of the
+Hilbert space of the system 
+(this is the monoidal axiom, Section \ref{ModularFunctors}).
+Because the average size of such a component
+is $O(\log(L))$ the corresponding fusion space will have 
+dimension $O(\mathrm{poly}(L)).$
+
+Working against this system separability is the
+action of the decoder, which will tend to join (fuse)
+nearby anyons and thereby also at times connect separate
+components. 
+All is not lost, however, as this act of fusing also
+reduces the number of anyons needed to be simulated.
+
+At some point, with high enough error rate, the combined action of
+noise plus decoder will become exponentially difficult to simulate.
+Nevertheless, we are able to simulate error-correction in
+the regime around the error-correction threshold for linear lattice sizes up to $L=128$.
+See Figure \ref{AnyonsKyle} below.
+
+We now turn to a description of the data-structures and algorithm
+used to simulate the quantum system.
+This relies heavily on the theory developed in Chapter 3.
+
+%
+% ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+%
+
+\subsection{Combinatorial curve diagrams}
 
 The basic data structure involved in the
 simulation we term a \emph{combinatorial curve diagram.}
@@ -219,18 +483,18 @@ apply to such intersection points.
 {\bf (I)} We will record the direction of each piece-of-curve,
 this will be either an {\tt in} or {\tt out} decoration for each symbol.
 Such decorations need to balance according to the brackets.
-The decorated symbols $*_{\mbox{\tt in}}$ and 
-$*_{\mbox{\tt out}}$ 
+The decorated symbols $*_{\mathrm{\tt in}}$ and 
+$*_{\mathrm{\tt out}}$ 
 will denote respectively either
 %the head, $c(1)$ or the tail $c(0)$ of a curve.
 the head or the tail of a curve.
 The words for the diagrams above now read as
-$ \bigl<_{\mbox{\tt in}}\bigl<_{\mbox{\tt out}}\bigr>_{\mbox{\tt in}}
-    \bigr>_{\mbox{\tt out}}\bigl<_{\mbox{\tt out}}\bigr>_{\mbox{\tt in}}$
+$ \bigl<_{\mathrm{\tt in}}\bigl<_{\mathrm{\tt out}}\bigr>_{\mathrm{\tt in}}
+    \bigr>_{\mathrm{\tt out}}\bigl<_{\mathrm{\tt out}}\bigr>_{\mathrm{\tt in}}$
 and
-$ \bigl<_{\mbox{\tt in}}\bigl>_{\mbox{\tt out}}*_{\mbox{\tt in}}
-    \bigr<_{\mbox{\tt out}}
-    \bigr<_{\mbox{\tt in}}\bigl>_{\mbox{\tt out}}\bigr>_{\mbox{\tt in}}.
+$ \bigl<_{\mathrm{\tt in}}\bigl>_{\mathrm{\tt out}}*_{\mathrm{\tt in}}
+    \bigr<_{\mathrm{\tt out}}
+    \bigr<_{\mathrm{\tt in}}\bigl>_{\mathrm{\tt out}}\bigr>_{\mathrm{\tt in}}.
 $
 
 \vskip 10pt
@@ -267,11 +531,11 @@ Because the word for a tile proceeds conter-clockwise
 around the tile, this pairing will always reverse the
 sequential order of the symbols of adjacent tiles.
 For example, given the above two tiles we sequentially pair the 
-$\bigl<_{\mbox{\tt out},2}\bigr>_{\mbox{\tt in},2}$ 
-and $\bigr>_{\mbox{\tt out},4}\bigr>_{\mbox{\tt in},4}$
+$\bigl<_{\mathrm{\tt out},2}\bigr>_{\mathrm{\tt in},2}$ 
+and $\bigr>_{\mathrm{\tt out},4}\bigr>_{\mathrm{\tt in},4}$
 symbols with opposite order so that
-$\bigl<_{\mbox{\tt out},2}\sim\bigr>_{\mbox{\tt in},4}$
-and $\bigr>_{\mbox{\tt in},2} \sim \bigr>_{\mbox{\tt out},4}.$ 
+$\bigl<_{\mathrm{\tt out},2}\sim\bigr>_{\mathrm{\tt in},4}$
+and $\bigr>_{\mathrm{\tt in},2} \sim \bigr>_{\mathrm{\tt out},4}.$ 
 
 \vskip 5pt
 
@@ -320,10 +584,11 @@ This number will take one of the values $-2, -1, 0, 1, 2:$
 % ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 %
 
-\section{The paperclip algorithm}
+\subsection{The paperclip algorithm}
 
 In the description of the refactoring theorem
-above we thought of $R$-moves as acting on the basis of
+in Section \ref{RefactoringTheorem}
+we thought of $R$-moves as acting on the basis of
 the system as in the Heisenberg picture.
 Now we switch to an equivelant perspective and
 consider $R$-moves as transport of anyon charges
@@ -392,119 +657,6 @@ considering the winding number of the simple closed curve made
 by combining the body of the curve diagram with the path followed by
 the anyon (appropriately reversing direction as needed).
 
-%
-% ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-%
-
-\section{Decoding algorithm}
-
-After the noise process is applied to the system,
-the error correction proceeds as a dialogue between the
-decoder and the system. 
-The decoder measures succesively larger and larger
-regions of the lattice
-until there are no more charges 
-or a topologically non-trivial operation has occured
-(an operation that spans the entire lattice.)
-Here we show this in a process diagram, with time running up
-the page:
-\begin{center}
-\includegraphics[]{pic-process.pdf}
-\end{center}
-
-%\begin{samepage}
-\begin{figure}
-\begin{verbatim}
- 1:  def decode():
- 2:      syndrome = get_syndrome()
- 3:      
- 4:      # build a cluster for each charge
- 5:      clusters = [Cluster(charge) for charge in syndrome]
- 6:  
- 7:      # join any neighbouring clusters
- 8:      join(clusters, 1)
- 9:      
-10:      while clusters:
-11:      
-12:          # find total charge on each cluster
-13:          for cluster in clusters:
-14:              fuse_cluster(cluster)
-15:      
-16:          # discard vacuum clusters
-17:          clusters = [cluster for cluster in clusters if non_vacuum(cluster)]
-18:      
-19:          # grow each cluster by 1 unit
-20:          for cluster in clusters:
-21:              grow_cluster(cluster, 1)
-22:      
-23:          # join any intersecting clusters
-24:          join(clusters, 0)
-25:  
-26:      # success !
-27:      return True
-\end{verbatim} % see decode.py
-%\end{samepage}
-\caption{Pseudo-code listing for the (classical) decoding algorithm.}
-\label{PseudoCode}
-\end{figure}
-
-So far we have discussed the simulation of the (quantum) system
-and now we turn to the decoder algorithm.
-In Figure\ref{PseudoCode} we show a pseudo-code listing for this,
-and we explain each step via an example below.
-
-First, we show the result of the initial call to {\tt get\_syndrome()}, on line 2.
-The locations of anyon charges are highlighted in red.
-For each of these charges we build a {\tt Cluster}, on line 5.
-Each cluster is shown as a gray shaded area.
-\begin{center}
-\includegraphics[]{pic-decode-0.pdf}
-\end{center}
-
-\begin{samepage}
-The next step is the call to {\tt join(clusters, 1)}, on line 8,
-which joins clusters that are separated by at most one lattice
-spacing. We now have seven clusters:
-\begin{center}
-\includegraphics[]{pic-decode-1.pdf}
-\end{center}
-\end{samepage}
-
-Each cluster is structured as a rooted tree, as indicated by
-the arrows which point in the direction from the leaves to
-the root of the tree. 
-This tree structure is used in the call to {\tt fuse\_cluster()},
-on line 14.
-This moves anyons in the tree along the arrows to the root, 
-fusing with the charge at the root.
-\begin{center}
-\includegraphics[]{pic-decode-2.pdf}
-\end{center}
-
-For each cluster, the resulting charge at the root is taken as the charge of
-that cluster. Any cluster with vacuum total charge is then discarded (line 17).
-%In our example, we assume all these charges are non-vacuum.
-In our example, we find two clusters with vacuum charge and we discard these.
-The next step is to grow the remaining clusters by one lattice spacing (line 20-21),
-and join (merge) any overlapping clusters (line 24).
-\begin{center}
-\includegraphics[]{pic-decode-3.pdf}
-\end{center}
-
-%Now we are down to two clusters.
-Note that we can choose the root of each cluster arbitrarily,
-as we are only interested in the total charge of each cluster.
-
-We repeat these steps of fusing, growing and then joining clusters (lines 10-24.)
-If at any point this causes a topologically 
-non-trivial operation, the simulation aborts and a failure
-to decode is recorded.
-Otherwise we eventually run out
-of non-vacuum clusters, and the decoder succeeds (line 27).
-Note that for simplicity we have neglected the boundary of the lattice in
-this example.
-
-
 \section{Numerical results}
 
 
@@ -514,7 +666,7 @@ this example.
 \caption{
 Results of monte-carlo sampling of the decoding simulation for
 various lattice sizes $L$ and expected pair-creation events per
-edge $t_{\mbox{sim}}.$
+edge $t_{\mathrm{sim}}.$
 }
 \label{AnyonsKyle}
 \end{center}
@@ -523,20 +675,20 @@ edge $t_{\mbox{sim}}.$
 The results of simulating the noise plus decoder are shown in
 Figure \ref{AnyonsKyle}.
 We run a monte-carlo simulation, for various lattice sizes $L$,
-and error rate per edge $t_{\mbox{sim}}.$
+and error rate per edge $t_{\mathrm{sim}}.$
 The number of pair-creation
 processes accross each edge of the lattice
 is sampled from a poisson process,
-and $t_{\mbox{sim}}$ indicates the expected value of this number.
+and $t_{\mathrm{sim}}$ indicates the expected value of this number.
 
 The decoder failure rate shows a clear threshold at around 
-$t_{\mbox{sim}}=0.124\pm0.002.$ 
-Below this threshold errors are increaslingly suppressed 
+$t_{\mathrm{sim}}=0.125\pm0.003.$ 
+Below this threshold errors are increasingly suppressed 
 as the lattice size grows.
 
-The appearance of this threshold is perhaps not surprising as
-the underlying processes resemble a kind of percolation problem.
-\todo{XXX}
+%The appearance of this threshold is perhaps not surprising as
+%the underlying processes resemble a kind of percolation problem.
+%\todo{XXX}
 
 %\section{Computation of homologically non-trivial operators}\label{s:homnontrivial}
 %
