@@ -135,12 +135,14 @@ For Fibonacci anyons, the non-trivial $R$ and $F$ moves are
         \ \ , \ \
         R_\tau^{\tau\tau}= \e^{\frac{3\pi i}{5}} 
         \ \ , \ \
-        F_{\tau}^{\tau\tau\tau} = \begin{pmatrix}\varphi^{-1}&\varphi^{-\frac{1}{2}}\\\varphi^{-\frac{1}{2}}&-\varphi^{-1}\end{pmatrix} \,,
+        F_{\tau}^{\tau\tau\tau} = \begin{pmatrix}\phi^{-1}&\phi^{-\frac{1}{2}}\\\phi^{-\frac{1}{2}}&-\phi^{-1}\end{pmatrix} \,,
 \end{equation*}
 where the matrix is given in a
-basis labelled $(\vac,\tau)$.
+basis labelled $(\vac,\tau)$ and 
+$ \phi=\frac{1+\sqrt{5}}{2} $
+is the golden ratio.
 
-In terms of skeins we have:
+In terms of skeins we write the F-moves as:
 \begin{align*}
 \includegraphics[]{pic-skein1.pdf}
 \end{align*}
@@ -269,6 +271,24 @@ annihilating to vacuum.
 After the noise process is applied to the system,
 the error correction proceeds as a dialogue between the
 decoder and the system. 
+In this section we describe the decoder side of this dialogue,
+the quantum side is much more difficult and is discussed in the
+following sections.
+%
+%Our error-correction algorithm begins by measuring the charge on
+%each tile of the lattice, producing a \emph{syndrome}
+%of occupied sites. Following this, it joins nearby
+%occupied tiles into clusters, and measures the total charge within each cluster.
+%Clusters with trivial charge are
+%discarded, and then nearby clusters
+%are merged (agglomeratively~\cite{Hastie2009}).
+%The merging process iterates at
+%linearly increasing length scales, at
+%each step measuring total charge
+%and discarding trivial clusters, before concluding when
+%there is at most a single cluster remaining (see \Fref{f:decode}).
+%
+%
 The decoder measures succesively larger and larger
 regions of the lattice
 until there are no more charges 
@@ -278,8 +298,11 @@ In Figure \ref{PicProcess}
 we show this in a process diagram, with time running up
 the page.
 Note that unlike the case of abelian anyons, the decoder
-cannot determine the charge of each cluster given only the syndrome information (as in \cite{Bravyi2011}),
+cannot determine the charge of each cluster 
+given only the syndrome information (as in \cite{Bravyi2011}),
 and so must repeatedly physically query the system to measure these charges.
+
+
 
 
 %\begin{samepage}
@@ -323,14 +346,20 @@ and so must repeatedly physically query the system to measure these charges.
 In Figure \ref{PseudoCode} we show a pseudo-code listing for the
 decoder algorithm,
 and we explain each step via an example below.
+This decoder is based on
+a hierarchical clustering algorithm~\cite{Hastie2009, Wootton2015b},
+and follows a similar strategy to
+the hard-decision renormalization group decoder~\cite{Bravyi2011}.
 
+\begin{samepage}
 First, we show the result of the initial call to {\tt get\_syndrome()}, on line 2.
-The locations of anyon charges are highlighted in red.
+The locations of anyon charges are indicated by the thick black circles.
 For each of these charges we build a {\tt Cluster}, on line 5.
-Each cluster is shown as a gray shaded area.
+Each cluster is shown as a gray shaded area in the following diagrams.
 \begin{center}
 \includegraphics[]{pic-decode-0.pdf}
 \end{center}
+\end{samepage}
 
 \begin{samepage}
 The next step is the call to {\tt join(clusters, 1)}, on line 8,
@@ -372,7 +401,7 @@ non-trivial operation, the simulation aborts and a failure
 to decode is recorded.
 Otherwise we eventually run out
 of non-vacuum clusters, and the decoder succeeds (line 27).
-Note that for simplicity we have neglected the boundary of the lattice in
+For simplicity we have neglected the boundary of the lattice in
 this example.
 
 
@@ -427,23 +456,26 @@ This relies heavily on the theory developed in Chapter 3.
 \subsection{Combinatorial curve diagrams}
 
 The basic data structure involved in the
-simulation we term a \emph{combinatorial curve diagram.}
-% XXX define "piece of curve"
-Firstly, we will require each curve to intersect 
-the edges of tiles transversally,
-and in particular a curve will not touch a tile corner.
-
-For each tile in the lattice,
+simulation of the quantum system
+we term a \emph{combinatorial curve diagram.}
+This is essentially a combinatorial formulation of the
+theory of modular functors presented in Chapter 3.
+The sole purpose of this formulation is to
+be able to simulate fusion outcomes for each of the observables in the
+lattice $\Lambda := \bigl\{ \gamma_{ij} \bigr\}_{i,j=1,...,L}.$
+For each tile in this lattice,
 we store a combinatorial
 description of the curve(s) intersected with that tile.
-Each component of such an intersection we call a \emph{piece-of-curve.}
 \begin{center}
 \includegraphics[]{pic-cells.pdf}
 \end{center}
-
-We follow essentially the same approach as taken in \cite{Abramsky2007} 
+Each component of such an intersection we call a \emph{piece-of-curve.}
+We follow essentially the same approach as taken in Ref.~\cite{Abramsky2007} 
 to describe elements of a Temperley-Leib algebra, but
 with some extra decorations.
+Firstly, we will require each curve to intersect 
+the edges of tiles transversally,
+and in particular a curve will not touch a tile corner.
 The key idea is to store a \emph{word} for each tile, comprised of
 the letters $\bigl<$ and $\bigr>$.
 %The encoding works as follows.
@@ -527,7 +559,7 @@ This will entail sequentially pairing symbols in the
 words for adjacent tiles
 and requiring that 
 the {\tt in} and {\tt out} decorations are matched.
-Because the word for a tile proceeds conter-clockwise
+Because the word for a tile proceeds counter-clockwise
 around the tile, this pairing will always reverse the
 sequential order of the symbols of adjacent tiles.
 For example, given the above two tiles we sequentially pair the 
