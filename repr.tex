@@ -46,41 +46,46 @@
 
 \section{Introduction}
 
-What is an operator?
+Physicists often like to solve Hamiltonians 
+using a change of basis, or spin transform.
+But we can also work with transformations on the level of a
+group of operators,
+and later on figure out the spin transform (if needed).
+This is in line with the thinking of 
+Gottesman and Heisenberg \cite{Gottesman1998}, where states are
+specified by the operators that act on them, instead of
+actually performing operations on states.
+This is often times harder than just manipulating the
+states themselves, but when it works it can yield
+new perspectives on the dynamics of the system.
+This is also
+the philosophy of category theory, where the goal is to lift
+information about elements of some mathematical object
+up to the level of the operators (morphisms) on the
+objects themselves.
+However, forgetting about the meaning of the symbols in this way 
+leaves one with the question:
+``What is an operator?''
+
 From the perspective of a quantum code these are the
 things that we use to diagnose errors and perform error correction.
 We can also interpret these operators as the terms of a Hamiltonian, whose
 groundspace corresponds to the energetically protected codespace.
 In the case of mutually commuting operators we can easily diagonalize the
-Hamiltonian, but for gauge (subsystem) codes this does not hold.
-From the mathematical perspective we examine three different notions of
-representation theory, with a view to extracting
+Hamiltonian, but for other systems of interest this does not hold.
+
+The mathematicians have a name for this question ``what is an operator?''
+This is known as \emph{representation theory.}
+We examine three different notions of
+such representations, with a view to extracting
 spectral information about the Hamiltonian.
 Group theory representations give 
 a block diagonalisation of the Hamiltonian as labeled by stabilizer eigenvalues.
-
 The coarser tool of Perron-Frobenius theory gives information about the
 spectral layout of these blocks in the case of CSS gauge codes.
 At the finest level, the operators in each of these blocks form a semisimple Lie
 algebra and ideals in this algebra correspond to tensor products of
 representations. 
-Using all of these tools we 
-perform exact diagonalisation on some 
-large instances of the 3-dimensional gauge color code Hamiltonian.
-These numerics support the conjecture that these models are gapped,
-which in turn lends weight to the possibility that these may
-be self-correcting quantum memories.
-
- People (physicists) always do this stuff using a spin transform.
- But we can also work with transformations on the group level,
- and later on figure out the spin transform (if needed).
- This is in line with Gottesman's thesis, where states are
- specified by the operators that act on them, instead of
- actually performing operations on states. This is also
- the philosophy of category theory, which tries to lift
- information about elements of some mathematical object
- up to the level of the operators (morphisms) on the
- objects themselves.
 
 While there are
 some hints of this theory in the literature 
@@ -89,12 +94,20 @@ here we spell out in detail how this works and much more.
 Partly it's because these models are new and we don't have
 many examples.
 
-Then we turn to examine the low energy spectra.
-In particular we are interested in the gap between
-the energy of the groundstate and the first excited state.
+Using all of these tools we 
+perform exact diagonalisation on some 
+large instances of the 3-dimensional gauge color code 
+Hamiltonian \cite{Bombin2015,Bombin2015single,Kubica2015}.
+These numerics support the conjecture that these models are gapped,
+which in turn lends weight to the possibility that these may
+be self-correcting quantum memories.
+%Then we turn to examine the low energy spectra.
+%In particular we are interested in the gap between
+%the energy of the groundstate and the first excited state.
 Having a constant gap (bound from below)
 is part of the story of topologically ordered phases
 \cite{Kitaev2003,Brown2016}.
+
 %\cite{Wen1991} % 
 
 %In \SRef{GroupReps} we do the group reps
@@ -831,58 +844,59 @@ of spins and identical Hamiltonian up to some signs.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 
-\subsection{The 1D models}
+%\subsection{The 1D models}
+%
+%We define the \emph{Jordan-Wigner presentation} of $\Pauli_n$
+%using the following set of $2n$ independent generators \cite{Jordan1928}:
+%$$
+%%\mathrm{JW}_Z :=
+%\big\{c_{2j}^Z:=Z_1...Z_{j-1} X_j,\ c_{2j+1}^Z:=Z_1...Z_{j-1} Y_j\ \ 
+%\mbox{for}\ 1\le j\le n\big\}.
+%$$
+%That these operators are independant and
+%generate $\Pauli_n$ can be seen by considering
+%the abelianization of $\Pauli_n$ which is the group $\Z_2^{2n}.$
+%There are two other ways of writing this presentation:
+%\begin{align*}
+%%\mathrm{JW}_X &:=
+%\big\{c_{2j}^X:=X_1...X_{j-1} Y_j,\ c_{2j+1}^X:=X_1...X_{j-1} Z_j\ \ 
+%\mbox{for}\ 1\le j\le n\big\},\\
+%%\mathrm{JW}_Y &:=
+%\big\{c_{2j}^Y:=Y_1...Y_{j-1} X_j,\ c_{2j+1}^Y:=Y_1...X_{j-1} Z_j\ \ 
+%\mbox{for}\ 1\le j\le n\big\}.
+%\end{align*}
+%
+%%This example shares features of both the previous and the next examples.
+%The $XY$-model 
+%lives on a one dimensional chain of $n$ qubits.
+%We write the gauge group generators as
+%$$
+%    G_0 = \{ X_i X_{i+1}, Z_i Z_{i+1}\ \ \mbox{for}\ \ i=1,...,n \}
+%$$
+%with periodic boundary conditions.
+%For $n$ even this model has no logical operators, one 
+%$X$-type stabilizer and one $Z$-type stabilizer.
+%With $n$ odd, there are no stabilizers and $k=1.$
+%Normally the gauge operators are written as 
+%$\{ X_i X_{i+1}, Y_i Y_{i+1} \ \mbox{for}\ i=1,...,n \}$
+%but note that there is an automorphism of the Pauli group
+%that sends $G_0$ to these operators.
+%For $n$ even, this model is exactly solvable,
+%and the gap goes to zero
+%as the system size grows \cite{Lieb1961}.
+%
+%For the one dimensional transverse field
+%Ising model, we have 
+%$$
+%    G_0 = \{ X_i, Z_i Z_{i+1}\ \ \mbox{for}\ \ i=1,...,n \},
+%$$
+%with periodic boundary conditions.
+%This model has one 
+%$X$-type stabilizer and no logical operators.
+%This model is also exactly solvable, with gap going to zero
+%as the system size grows \cite{Pfeuty1970}.
 
-We define the \emph{Jordan-Wigner presentation} of $\Pauli_n$
-using the following set of $2n$ independent generators:
-$$
-\mathrm{JW}_Z :=
-\big\{c_{2j}:=Z_1...Z_{j-1} X_j,\ c_{2j+1}:=Z_1...Z_{j-1} Y_j\ \ 
-\mbox{for}\ 1\le j\le n\big\}.
-$$
-That these operators generate $\Pauli_n$ can be seen by considering
-the abelianization of $\Pauli_n$ which is the group $\Z_2^{2n}.$
-There are two other ways of writing this presentation:
-\begin{align*}
-\mathrm{JW}_X &:=
-\big\{c_{2j}:=X_1...X_{j-1} Y_j,\ c_{2j+1}:=X_1...X_{j-1} Z_j\ \ 
-\mbox{for}\ 1\le j\le n\big\},\\
-\mathrm{JW}_Y &:=
-\big\{c_{2j}:=Y_1...Y_{j-1} X_j,\ c_{2j+1}:=Y_1...X_{j-1} Z_j\ \ 
-\mbox{for}\ 1\le j\le n\big\}.
-\end{align*}
 
-%This example shares features of both the previous and the next examples.
-The $XY$-model 
-lives on a one dimensional chain of $n$ qubits.
-We write the gauge group generators as
-$$
-    G_0 = \{ X_i X_{i+1}, Z_i Z_{i+1}\ \ \mbox{for}\ \ i=1,...,n \}
-$$
-with periodic boundary conditions.
-For $n$ even this model has no logical operators, one 
-$X$-type stabilizer and one $Z$-type stabilizer.
-With $n$ odd, there are no stabilizers and $k=1.$
-Normally the gauge operators are written as 
-$\{ X_i X_{i+1}, Y_i Y_{i+1} \ \mbox{for}\ i=1,...,n \}$
-but note that there is an automorphism of the Pauli group
-that sends $G_0$ to these operators.
-For $n$ even, this model is exactly solvable,
-and the gap goes to zero
-as the system size grows \cite{Lieb1961}.
-
-For the one dimensional transverse field
-Ising model, we have 
-$$
-    G_0 = \{ X_i, Z_i Z_{i+1}\ \ \mbox{for}\ \ i=1,...,n \}.
-$$
-This model has one 
-$X$-type stabilizer and no logical operators.
-This model is also exactly solvable, with gap going to zero
-as the system size grows \cite{Pfeuty1970}.
-
-
-%A similar analysis applies to the Ising model, Jordan-Wigner... 
 %http://arxiv.org/pdf/1504.01444 page 86.
 
 
@@ -1605,6 +1619,40 @@ theory for $CSS$ gauge code Hamiltonians.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 
+\section{Gapless 1D models}
+
+In this section we briefly introduce two important
+one dimensional models that fit into the CSS gauge code framework.
+
+The $XY$-model 
+lives on a one dimensional chain of $n$ qubits.
+We write the gauge group generators as
+$$
+    G_0 = \{ X_i X_{i+1}, Z_i Z_{i+1}\ \ \mbox{for}\ \ i=1,...,n \}
+$$
+with periodic boundary conditions.
+For $n$ even this model has no logical operators, one 
+$X$-type stabilizer and one $Z$-type stabilizer.
+With $n$ odd, there are no stabilizers and $k=1.$
+Normally the gauge operators are written as 
+$\{ X_i X_{i+1}, Y_i Y_{i+1} \ \mbox{for}\ i=1,...,n \}$
+but note that there is an automorphism of the Pauli group
+that sends $G_0$ to these operators.
+For $n$ even, this model is exactly solvable,
+and the gap goes to zero
+as the system size grows \cite{Lieb1961}.
+
+For the one dimensional transverse field
+Ising model, we have 
+$$
+    G_0 = \{ X_i, Z_i Z_{i+1}\ \ \mbox{for}\ \ i=1,...,n \},
+$$
+with periodic boundary conditions.
+This model has one 
+$X$-type stabilizer and no logical operators.
+This model is also exactly solvable, with gap going to zero
+as the system size grows \cite{Pfeuty1970}.
+
 \section{Perron-Frobenius theory}
 
 %We restrict our attention to Hamiltonians whose off-diagonal entries
@@ -1638,7 +1686,7 @@ theory for $CSS$ gauge code Hamiltonians.
 We begin this section with the following two definitions.
 A CSS gauge code is \emph{self-dual} when the $X$ and $Z$ type
 gauge generators are equal: $$G_X = G_Z.$$
-The $XY$-model is an example of a self-dual code.
+The $XY$-model is an example of a self-dual CSS gauge code.
 A CSS gauge code is \emph{weakly self-dual}
 when there is a permutation $P$ on the set of $n$ qubits
 that induces equality of the gauge generators:
@@ -1651,13 +1699,14 @@ the square lattice of $l\times l$ qubits.
 
 We now turn to another notion of reducibility, coarser than
 the group theoretic reducibility.
-The easiest way to understand this is via graph theory.
+One way to understand this is via graph theory.
 Given a CSS gauge code Hamiltonian $H,$ 
 we see that 
 the diagonal terms (working in the computational basis)
 come from the $Z$ operators and the off-diagonal terms
 come from $X$ type operators.
-\todo{...stoquastic...}
+We think of the $Z$ operators as potential energy, and the
+$X$ operators as kinetic terms.
 This suggests the following definition.
 We define a graph $\Gamma$ with vertices the $2^n$ computational
 basis elements, and edges:
@@ -1704,9 +1753,12 @@ The off-diagonal entries of $H$ are all positive.
 If we use a spectral shift operator, a constant multiple of the identity $+cI$,
 we find that $H+cI$ is a non-negative matrix. 
 We call such a matrix \emph{Perron-Frobenius.}
+These are also known as \emph{Stoquastic} Hamiltonians
+in the literature~\cite{Bravyi2008}.
 %Now we invoke the Peron-Frobenius theorem.
 Each of the blocks $\Gamma_{t_X}$ is also Perron-Frobenius
-and in combination with their irreducibility this means the following:
+and in combination with their irreducibility, the Perron-Frobenius
+theorem gives:
 \begin{framed}
 \noindent For each $t_X\in\Span{T_X}$
 the largest eigenvalue 
@@ -1719,7 +1771,6 @@ $$v_1(\Gamma_{t_X})
 $$
 with positive components.
 \end{framed}
-\todo{PF theorem}
 
 Now we make the restriction that $H$
 comes from a weakly self-dual gauge code.
@@ -1792,17 +1843,17 @@ We extend the above argument:
 \begin{framed}
 \noindent For a weakly self-dual gauge code
 Hamiltonian,
-and $t_X\ne 0$, $t_Z\ne 0$
 \begin{align*}
 \lambda_1(\Ham_{t_X,0}) &< 
     \lambda_1(\Ham_{t_X,t_Z}) \ \smbox{and}\\
 \lambda_1(\Ham_{0,t_Z}) &< 
-    \lambda_1(\Ham_{t_X,t_Z}).
+    \lambda_1(\Ham_{t_X,t_Z}),
 \end{align*}
+where $t_X\ne 0$ and $t_Z\ne 0.$
 \end{framed}
 
 In summary, 
-to find the spectral gap of a weakly self-dual Hamiltonian,
+to find the spectral gap of a weakly self-dual gauge code Hamiltonian,
 which is the difference of the top two eigenvalues of the Hamiltonian,
 we need only examine the top two eigenvalues of $H_{0,0}$ and 
 the top eigenvalue of $H_{t_X,0}$ for each $t_X\in T_X.$ 
@@ -1820,7 +1871,6 @@ the top eigenvalue of $H_{t_X,0}$ for each $t_X\in T_X.$
 
 We now turn to the central animal that motivated
 the theory developed in this chapter.
-
 
 The three dimensional gauge color code \cite{Bombin2015,Bombin2015single,Kubica2015}
 is a self-dual CSS gauge code. 
@@ -2231,8 +2281,8 @@ This implies that the action of Aut(code)
 commutes with the Hamiltonian and preserves eigenvalues of
 the stabilizers. Therefore this group action restricts to an action
 on $H_{0,0}.$
-For $t_X\ne0$ we take the subgroup of Aut(code) that preserves
-the stabilizer eigenvalues for $H_{t_X,0}.$ \todo{do this}
+%For $t_X\ne0$ we take the subgroup of Aut(code) that preserves
+%the stabilizer eigenvalues for $H_{t_X,0}.$ \todo{do this}
 %Once again, trivial reps for this group survive on the groundspace of $H_{t_X,0}$
 %because these are all Perron-Frobenius.
 
@@ -2414,7 +2464,7 @@ Each such ideal corresponds to a direct summand of $\lie_{t_X,t_Z}$
 and so the spectrum of  $H_{t_X,t_Z}$
 can be written as a sum over spectra of smaller gauge code Hamiltonians
 corresponding to each ideal.
-\todo{... formula?}
+%\todo{... formula?}
 %whose representation is a factor in a 
 
 % See also: \cite{Barnum2003} where they use theory of semi-simple
@@ -2466,7 +2516,7 @@ diagonalization numerical results below.
 %Representations of Direct Sum of Lie Algebras 
 %http://math.stackexchange.com/questions/309617/representations-of-direct-sum-of-lie-algebras
 
-\todo{XXX How do ideals in the entire gauge group carry over into the semi-simple parts?}
+%\todo{XXX How do ideals in the entire gauge group carry over into the semi-simple parts?}
 
 \subsection{Lie algebra classification}
 
@@ -2747,17 +2797,6 @@ These results are obtained by exact diagonalization methods.
 \end{center}
 \end{figure}
 
-The gap of the 3D gauge color code is clearly far more
-robust than the other models.
-%This is solely due to the geometry of the code...
-It does decrease with $n$, but note also that the
-stabilizers in the code are also growing.
-%They do not get any bigger after this.
-For larger codes in this family the stabilizers do not get
-bigger than weight at most 24.
-To emphasize this point we show another figure with
-the ground eigenvalues of all of these blocks $H_{t_X,0}.$
-
 \begin{figure}\label{PicGapStabs}
 \begin{center}
 \includegraphics[width=1.0\columnwidth]{pic-gap-stabs.pdf}
@@ -2772,6 +2811,17 @@ frustrated stabilizer.
 \end{center}
 \end{figure}
 
+The gap of the 3D gauge color code is clearly far more
+robust than the other models.
+%This is solely due to the geometry of the code...
+It does decrease with $n$, but note also that the
+stabilizers in the code are also growing.
+%They do not get any bigger after this.
+For larger codes in this family the stabilizers do not get
+bigger than weight at most 24.
+To emphasize this point we show another figure with
+the ground eigenvalues of all of these blocks $H_{t_X,0}.$
+
 There are two main points to make about these numerics.
 The first is that the gap of the compass model 
 is decreasing much faster than the gap in the gauge color model.
@@ -2785,10 +2835,11 @@ Moreover, the stabilizer that
 gives rise to the gap is the one with largest weight.
 This is a crucial connection to make because the
 stabilizers of the compass model grow with the linear
-size of the model\footnote{Note the similar
-behaviour of the 1D $XY$-model and transverse field Ising model.},
+size of the model
 while those of the gauge color model
 do not need to grow beyond a constant bound.
+%Note the similar
+%behaviour of the 1D $XY$-model and transverse field Ising model.
 This would suggest that if this is the mechanism for
 gapless behaviour that the gauge color model may
 be gapped.
@@ -2796,13 +2847,13 @@ be gapped.
 
 \section{Cheeger cuts}
 
-%In this final section we give some heuristic
-%arguments for how the size of stabilizers is
-%related to the gap of the code. 
-%Unfortunately, this does not lead to 
-%definitive conclusions; it appears that new
-%ideas are required.
-
+In this final section of Chapter 2 
+we give some heuristic
+arguments for why the size of the stabilizers is
+related to the gap of the code. 
+%This does not lead to 
+%definitive conclusions. It appears that much more 
+%work is required.
 
 The Perron-Frobenius structure theory places
 strong constraints on the first and second
@@ -2983,21 +3034,13 @@ In summary, the idea is that large stabilizers lead to
 widely separated well potentials and hence gapless behaviour,
 while stabilizers of bounded weight force the cuts to
 appear close to the wells and hence maintain a gap.
-Making these arguments rigorous appears to be difficult.
-
-\todo{actually the wavefunction becomes
-exponentially small but also it is exponentially wide}
-
-Finally, we suspect that $H_{0,0}$ will not be gapped in
-the generic case. Numerics show that these stabilizer-less
-Hamiltonians can be constructed with small gap. It appears
-that double well behaviour can still be imitated even without
-stabilizers: merely having a large region of almost-stabilizer
-behaviour (large shallow well) could be enough to send the gap
-to zero.
+Even though numerics show the wavefunction becoming 
+exponentially small away from well potentials,
+it is also exponentially wide.
+So making these arguments rigorous appears to be difficult.
 
 The following fact would appear to be true under certain conditions,
-but is not at all true for example when $T$ is trivial.
+but is not at all true for example when $T$ is trivial:
 \begin{framed}
 \noindent{\bf Proto-fact:}
 For a sufficiently ``well-behaved''
@@ -3009,8 +3052,29 @@ gauge code Hamiltonian $H$
     &= \min_{t_Z\ne 0} \lambda_1(\Ham_{0,t_Z}).
 \end{align*}
 \end{framed}
+Indeed, contrary to this proto-fact
+we suspect that $H_{0,0}$ will not be gapped in
+the generic case. 
+Numerics suggest that
+there is no lower bound on the gap of 
+randomly constructed stabilizer-less gauge code Hamiltonians.
+Perhaps double well behaviour can still be imitated even without
+stabilizers: merely having a large region of almost-stabilizer
+behaviour (large shallow well) could be enough to send the gap to zero.
+
+There are also results that state that generic 
+local Hamiltonians are gapless \cite{Movassagh2016}.
 
 \subsection{Cheeger inequalities}
+
+We saw above how the Cheeger cut gives a variational ansatz
+for building a second eigenvector to the Hamiltonian and hense
+an upper bound on the gap.
+
+In this section we show how the Cheeger cut also 
+yields a lower bound on the gap.
+%an upper bound on the second eigenvalue of a Perron-Frobenius
+%operator $H.$
 
 In \cite{Friedland2002}, they derive the following Cheeger inequality
 by considering bi-partitions of the graph. We will do the
@@ -3051,9 +3115,9 @@ $$
     \lambda_2 \le \nu(\Ham) \le \lambda_1.
 $$
 
-To bound $\lambda_2$ from below, we use a variational argument.
-For any unit vector $v$ orthogonal to the top eigenspace of $\Ham$ we
-have $v^\top \Ham v \le \lambda_2.$
+%To bound $\lambda_2$ from below, we use a variational argument.
+%For any unit vector $v$ orthogonal to the top eigenspace of $\Ham$ we
+%have $v^\top \Ham v \le \lambda_2.$
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -3084,7 +3148,9 @@ have $v^\top \Ham v \le \lambda_2.$
 
 \subsection{Perturbation of the Perron vector}
 
-Lemma:
+Here we note the relation of
+perturbations to the Perron-Frobenius theory.
+
 Let $A$ be non-negative irreducible $n\times n$ matrix.
 Let $v\ne 0$ be a non-negative $n$ vector, and $B = A + \ket{e_i}\bra{v}.$
 Then 
@@ -3115,38 +3181,38 @@ where $(H-\lambda)^{-1}$ is the Moore-Penrose inverse of $H-\lambda.$ See \cite{
 %
 
 
-\subsection{Discussion}
-
-In \cite{AlShimary2010}, they 
-build a kind of graph laplacian from a known ground state:
-``This is not a major drawback as there
-are large families of physically relevant states, e.g. the
-Matrix Product States, that are ground states of Hamil-
-tonians which are not known to be gapped or not in two
-or higher dimensions. Such an important example is
-the two-dimensional AKLT model that can support uni-
-versal quantum computation by measurements only, but
-it is not proven yet if it is gapped which would establish
-its fault-tolerance.''
-This Laplacian has the same gap as the Hamiltonian.
-
-It would be nice to connect geometric properties of the
-graph to spectral gap properties. For example, the spectral gap of
-the normalized graph laplacian can be bounded from below
-by the Coarse Ricci curvature \cite{Lin2011}. 
-Unfortunately, it appears
-that there are no good connections between the spectrum
-of the normalized graph laplacian and the spectrum of the adjacency matrix.
-% http://mathoverflow.net/questions/118870/connection-between-eigenvalues-of-matrix-and-its-laplacian
-
-See also \cite{Jarret2014,Jarret2015}. 
-In \cite{Jarret2015modulus} they
-write the Hamiltonian as a sum of the
-the combinatorial graph Laplacian and a (diagonal) potential, 
-and then employ methods from PDE theory \cite{Andrews2011}.
-Also: \cite{Baume2016}. % Michaels' Phd thesis
-
-We expect generic local Hamiltonians to be gapless \cite{Movassagh2016}.
+%\subsection{Discussion}
+%
+%In \cite{AlShimary2010}, they 
+%build a kind of graph laplacian from a known ground state:
+%``This is not a major drawback as there
+%are large families of physically relevant states, e.g. the
+%Matrix Product States, that are ground states of Hamil-
+%tonians which are not known to be gapped or not in two
+%or higher dimensions. Such an important example is
+%the two-dimensional AKLT model that can support uni-
+%versal quantum computation by measurements only, but
+%it is not proven yet if it is gapped which would establish
+%its fault-tolerance.''
+%This Laplacian has the same gap as the Hamiltonian.
+%
+%It would be nice to connect geometric properties of the
+%graph to spectral gap properties. For example, the spectral gap of
+%the normalized graph laplacian can be bounded from below
+%by the Coarse Ricci curvature \cite{Lin2011}. 
+%Unfortunately, it appears
+%that there are no good connections between the spectrum
+%of the normalized graph laplacian and the spectrum of the adjacency matrix.
+%% http://mathoverflow.net/questions/118870/connection-between-eigenvalues-of-matrix-and-its-laplacian
+%
+%See also \cite{Jarret2014,Jarret2015}. 
+%In \cite{Jarret2015modulus} they
+%write the Hamiltonian as a sum of the
+%the combinatorial graph Laplacian and a (diagonal) potential, 
+%and then employ methods from PDE theory \cite{Andrews2011}.
+%Also: \cite{Baume2016}. % Michaels' Phd thesis
+%
+%We expect generic local Hamiltonians to be gapless \cite{Movassagh2016}.
 
 %Suzuki-Trotter expansions
 %https://en.wikipedia.org/wiki/Baker%E2%80%93Campbell%E2%80%93Hausdorff_formula
