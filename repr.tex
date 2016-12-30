@@ -2786,18 +2786,19 @@ $n$ &  $t_X$    & $w(s_Z)$ & $\lambda_1$ & $\ \ \ \ \lambda_2$ ?  & gap \\
 \end{center}
 \end{samepage}
 
-\begin{figure}\label{PicGap}
+\begin{figure*}
 \begin{center}
 \includegraphics[width=1.0\columnwidth]{pic-gap.pdf}
 \caption{The spectral gap of four different gauge code Hamiltonians, versus the number
 of qubits $n$. The gap is defined as the difference between
-the ground eigenvalue and the first excited state.
-These results are obtained by exact diagonalization methods.
+the ground eigenvalue and the first excited eigenvalue.
+These results are obtained by exact diagonalization.
 }
+\label{PicGap}
 \end{center}
-\end{figure}
+\end{figure*}
 
-\begin{figure}\label{PicGapStabs}
+\begin{figure*}
 \begin{center}
 \includegraphics[width=1.0\columnwidth]{pic-gap-stabs.pdf}
 \caption{
@@ -2808,18 +2809,19 @@ This gap is defined as $\lambda_1(H) - \lambda_1(H_{t_X,0}).$
 Each point is colored according to the weight of the
 frustrated stabilizer.
 }
+\label{PicGapStabs}
 \end{center}
-\end{figure}
+\end{figure*}
 
 The gap of the 3D gauge color code is clearly far more
-robust than the other models.
+robust than the other models, see Figure \ref{PicGap}.
 %This is solely due to the geometry of the code...
 It does decrease with $n$, but note also that the
 stabilizers in the code are also growing.
 %They do not get any bigger after this.
 For larger codes in this family the stabilizers do not get
 bigger than weight at most 24.
-To emphasize this point we show another figure with
+To emphasize this point we show in Figure \ref{PicGapStabs}
 the ground eigenvalues of all of these blocks $H_{t_X,0}.$
 
 There are two main points to make about these numerics.
@@ -2844,7 +2846,7 @@ This would suggest that if this is the mechanism for
 gapless behaviour that the gauge color model may
 be gapped.
 
-
+\newpage
 \section{Cheeger cuts}
 
 In this final section of Chapter 2 
