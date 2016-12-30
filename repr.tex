@@ -58,6 +58,7 @@ representation theory, with a view to extracting
 spectral information about the Hamiltonian.
 Group theory representations give 
 a block diagonalisation of the Hamiltonian as labeled by stabilizer eigenvalues.
+
 The coarser tool of Perron-Frobenius theory gives information about the
 spectral layout of these blocks in the case of CSS gauge codes.
 At the finest level, the operators in each of these blocks form a semisimple Lie
@@ -69,6 +70,17 @@ large instances of the 3-dimensional gauge color code Hamiltonian.
 These numerics support the conjecture that these models are gapped,
 which in turn lends weight to the possibility that these may
 be self-correcting quantum memories.
+
+ People (physicists) always do this stuff using a spin transform.
+ But we can also work with transformations on the group level,
+ and later on figure out the spin transform (if needed).
+ This is in line with Gottesman's thesis, where states are
+ specified by the operators that act on them, instead of
+ actually performing operations on states. This is also
+ the philosophy of category theory, which tries to lift
+ information about elements of some mathematical object
+ up to the level of the operators (morphisms) on the
+ objects themselves.
 
 While there are
 some hints of this theory in the literature 
@@ -86,6 +98,26 @@ is part of the story of topologically ordered phases
 %\cite{Wen1991} % 
 
 %In \SRef{GroupReps} we do the group reps
+
+
+%From http://arxiv.org/pdf/1504.01444 page 90:
+%A complete classification of the topological stabilizer codes in 2D has been obtained
+%by Yoshida [Yos11a] (see also the classification by Bombin et al.[BDCP12]). Specifically,
+%the quantum phases of the 2D stabilizer Hamiltonians are classified by the geometric
+%shapes of the logical operators. The thermal stability of the topological order in stabilizer
+%Hamiltonian systems at finite temperatures has also been studied via quantum coding
+%theory by Bravyi and Terhal [BT09] for 2D, and Yoshida for 3D [Yos11b].
+%If there is a thermally stable topological order, we can store quantum information re-
+%liably even at a finite temperature without any active error correction, i.e., we have a self-
+%correcting quantum memory. Of course, if a fault-tolerant quantum computer were real-
+%ized, we could store quantum information reliably with a repetitively performing quantum
+%error correction, which, however, requires selective addressing of each individual qubits.
+%There are also several intermediate approaches for a reliable quantum storage without
+%selective addressing using global dissipative dynamics [FNIK14], an interaction with an
+%engineered environment [HCC09, PHWL13, KCS14], and decoding by cellular automata
+%with local update rules [HCEK14, Har04]. However, a genuine topologically ordered self-
+%correcting quantum memory seems to be hard to achieve in 2D even in the presence of
+%effective long-range interactions [LCYPP15].
 
 \subsection{Some motivating examples}
 
@@ -243,7 +275,7 @@ general gauge group $G$ below and summarized in Section 2.2.6.
 %  &= (I+\Zt_2)\Xt_4 + (I+\Zt_3) \Zt_4.
 %\end{align*}
 
-\section{Group theoretic representations}\label{GroupReps}
+\section{Group representations}\label{GroupReps}
 
 \subsection{The Pauli group}
 
@@ -799,20 +831,59 @@ of spins and identical Hamiltonian up to some signs.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 
-\subsection{The 1D $XY$-model}
+\subsection{The 1D models}
 
-This example shares features of both the previous and the next examples.
-The $XY$-model lives on a one dimensional chain of $n$ qubits.
+We define the \emph{Jordan-Wigner presentation} of $\Pauli_n$
+using the following set of $2n$ independent generators:
+$$
+\mathrm{JW}_Z :=
+\big\{c_{2j}:=Z_1...Z_{j-1} X_j,\ c_{2j+1}:=Z_1...Z_{j-1} Y_j\ \ 
+\mbox{for}\ 1\le j\le n\big\}.
+$$
+That these operators generate $\Pauli_n$ can be seen by considering
+the abelianization of $\Pauli_n$ which is the group $\Z_2^{2n}.$
+There are two other ways of writing this presentation:
+\begin{align*}
+\mathrm{JW}_X &:=
+\big\{c_{2j}:=X_1...X_{j-1} Y_j,\ c_{2j+1}:=X_1...X_{j-1} Z_j\ \ 
+\mbox{for}\ 1\le j\le n\big\},\\
+\mathrm{JW}_Y &:=
+\big\{c_{2j}:=Y_1...Y_{j-1} X_j,\ c_{2j+1}:=Y_1...X_{j-1} Z_j\ \ 
+\mbox{for}\ 1\le j\le n\big\}.
+\end{align*}
+
+%This example shares features of both the previous and the next examples.
+The $XY$-model 
+lives on a one dimensional chain of $n$ qubits.
 We write the gauge group generators as
 $$
-    G_0 = \{ X_i X_{i+1}, Z_i Z_{i+1} \ \mbox{for}\ i=1,...,n \}
+    G_0 = \{ X_i X_{i+1}, Z_i Z_{i+1}\ \ \mbox{for}\ \ i=1,...,n \}
 $$
 with periodic boundary conditions.
-
-Normally these operators are written as 
+For $n$ even this model has no logical operators, one 
+$X$-type stabilizer and one $Z$-type stabilizer.
+With $n$ odd, there are no stabilizers and $k=1.$
+Normally the gauge operators are written as 
 $\{ X_i X_{i+1}, Y_i Y_{i+1} \ \mbox{for}\ i=1,...,n \}$
-but note that there is an automorphism of the Pauli group...
-\todo{XXX}
+but note that there is an automorphism of the Pauli group
+that sends $G_0$ to these operators.
+For $n$ even, this model is exactly solvable,
+and the gap goes to zero
+as the system size grows \cite{Lieb1961}.
+
+For the one dimensional transverse field
+Ising model, we have 
+$$
+    G_0 = \{ X_i, Z_i Z_{i+1}\ \ \mbox{for}\ \ i=1,...,n \}.
+$$
+This model has one 
+$X$-type stabilizer and no logical operators.
+This model is also exactly solvable, with gap going to zero
+as the system size grows \cite{Pfeuty1970}.
+
+
+%A similar analysis applies to the Ising model, Jordan-Wigner... 
+%http://arxiv.org/pdf/1504.01444 page 86.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -934,7 +1005,7 @@ The bijection is constrained
 by setting $\phi(g_{ij1}):=c_{2j'+1}$
 and $\phi(g_{ij2}):=c_{2j'}$
 where $j'$ is chosen uniquely for each $i, j.$
-The $c_j$ are paired Majorana fermion operators \cite{Kitaev2006}.
+The $c_j$ are paired Majorana fermion operators  \cite{Jordan1928, Kitaev2006}.
 
 %We construct an isomorphism $\phi: R\to \Pauli_r$
 %by setting $\phi(g_{ij1}):=c_{2j'}$
@@ -1007,9 +1078,6 @@ The coefficients $\Gamma_{ij}$ are dependant on the irrep $\rho.$
 
 In \cite{Kells2009} they introduce a similar set of
 mutually anti-commuting string operators $R_0.$
-
-%A similar analysis applies to the ising model, Jordan-Wigner... 
-%http://arxiv.org/pdf/1504.01444 page 86.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
@@ -2096,7 +2164,7 @@ We use the software library {\tt nauty}\cite{McKay2014} for computing graph auto
 %        & 11 & 10 & 0 & $\Z_2\ltimes\Z_{11}$                & 22 & 63 & 22  \\
 %        & 12 & 10 & 0 & $\Z_2\ltimes(\Z_{12}\times\Z_{12})$ & 288 & 36 & 24  \\
 %%\hline
-%%    1D ising &   &   &   &   &   &   \\
+%%    1D Ising &   &   &   &   &   &   \\
 %\hline
 %    2D compass & 9 & 4 & 0 & & 72 & 3 & 36 \\
 %            & 9 & 4 &    & & 12 & 4 &  \\
@@ -2130,7 +2198,7 @@ $|\mathrm{Aut(code)}|$ \\
         & 11 & 10 & 0 & 22 & 63 & 22  \\
         & 12 & 10 & 0 & 288 & 36 & 24  \\
 %\hline
-%    1D ising &   &   &   &   &   &   \\
+%    1D Ising &   &   &   &   &   &   \\
 \hline
     2D compass & 9 & 4 & 0 & 72 & 3 & 36 \\
             & 9 & 4 &    & 12 & 4 &  \\
@@ -2540,7 +2608,7 @@ model &\ $n$\ &\ $r$\ &\ $t_X$\ & $\mathfrak{g}_{t_X,0}$   \\
              & 11 &  10 & 0 & $D_{11}$   \\
              & 12 &  10 & 0 & $D_6\oplus D_6$   \\
 \hline
-    1D ising & $4,...,16$  & $n-1$  & 0  & $D_n$   \\
+    1D Ising & $4,...,16$  & $n-1$  & 0  & $D_n$   \\
 \hline
     2D compass & 9 & 4 & 0 &  $A_{15}$  \\
             & 16 & 9 & 0 & $D_{256}$ \\
@@ -2718,7 +2786,7 @@ gives rise to the gap is the one with largest weight.
 This is a crucial connection to make because the
 stabilizers of the compass model grow with the linear
 size of the model\footnote{Note the similar
-behaviour of the 1D $XY$-model and transverse field ising model.},
+behaviour of the 1D $XY$-model and transverse field Ising model.},
 while those of the gauge color model
 do not need to grow beyond a constant bound.
 This would suggest that if this is the mechanism for
