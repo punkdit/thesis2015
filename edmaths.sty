@@ -186,7 +186,7 @@
 }
 
 \newcommand{\declaration}{%
-  \chapter*{Declaration}
+  \chapter*{Statement of Originality}
   \begin{singlespace}
   I declare that this thesis was composed by myself 
   and that the work contained therein is my own, 
@@ -198,7 +198,20 @@
   }
 }
 
-\renewenvironment{abstract}{\chapter*{\abstractname}}{\addcontentsline{toc}{chapter}{\abstractname}}
+\newcommand{\attribution}{%
+  \chapter*{Statement of Authorship Attribution}
+  \begin{singlespace}
+Capter 3 of this thesis is available as preprint \cite{Burton2016},
+of which I am the sole author.
+Chapter 4 is based on collaborative work, available as preprint \cite{Burton2015}.
+The algorithm used was co-designed with the co-authors.
+I implemented, tested and ran the algorithms.
+  \end{singlespace}
+%\includegraphics[width=0.2\columnwidth]{signature.jpg}
+%  {\raggedleft\vspace{2cm}(\textit{\@author})
+}
+
+%\renewenvironment{abstract}{\chapter*{\abstractname}}{\addcontentsline{toc}{chapter}{\abstractname}}
 
 \newcommand{\dedication}[1]{%
   \clearpage
