@@ -93,7 +93,8 @@
 \DeclareOption{colour}{\setboolean{with-colour}{true}}
 \DeclareOption{fancyhdr}{\setboolean{with-fancyhdr}{true}}
 
-\DeclareOption{phd}{\renewcommand{\degreetext}{Doctor of Philosophy}}
+%\DeclareOption{phd}{\renewcommand{\degreetext}{Doctor of Philosophy}}
+\DeclareOption{phd}{\renewcommand{\degreetext}{A thesis submitted in partial fulfilment of requirements for the degree of Doctor of Philosophy}}
 \DeclareOption{firstyear}{\renewcommand{\degreetext}{First-Year Report\\Graduate School of Mathematics}}
 \DeclareOption{secondyear}{\renewcommand{\degreetext}{Second-Year Report\\Graduate School of Mathematics}}
 \DeclareOption{thirdyear}{\renewcommand{\degreetext}{Third-Year Report\\Graduate School of Mathematics}}
@@ -172,7 +173,8 @@
       \end{center}
     \end{minipage}
     \vfill
-    {\Large\degreetext \par University of Sydney \par\@date \par}
+    %{\Large\degreetext \par Faculty of Science \par\@date \par}
+    {\Large\degreetext \vskip 20pt \par Faculty of Science \par The University of Sydney \par\@date \par}
     \end{center}
   \end{titlepage}
   \if@twoside
@@ -190,7 +192,7 @@
   and that the work contained therein is my own, 
   except where explicitly stated otherwise in the text.
   \end{singlespace}
-
+\includegraphics[width=0.2\columnwidth]{signature.jpg}
   {\raggedleft\vspace{2cm}(\textit{\@author})
 
   }
