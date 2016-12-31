@@ -2,7 +2,8 @@
 %Model LaTeX file for Ph.D. thesis at the 
 %School of Mathematics, University of Edinburgh
 
-\documentclass[11pt,twoside,openright]{report} 
+%\documentclass[11pt,twoside,openright]{report} 
+\documentclass[11pt,oneside]{report} 
 
 %% \titleformat{command}[shape]{format}{label}{sep}{before}[after]
 
@@ -64,7 +65,7 @@
 %\includegraphics{pic-deco.pdf}
 %%\includegraphics{plot-011-tt.pdf}
 %\end{center}
-\newpage
+%\newpage
 ]
 
 
@@ -129,19 +130,47 @@
 \date{2016}
 
 \usepackage[phd]{edmaths}
+\flushbottom
 
 \begin{document}
+
+\pagenumbering{roman}
 
 \maketitle
 
 %\doublespacing
 %\onehalfspacing
 
+\begin{abstract}
+Like their classical counterparts,
+quantum codes are designed to protect quantum
+information from noise.
+From the perspective of information theory
+one considers the operations required to restore
+the encoded information given a syndrome which
+diagnoses the noise.
+From a more physics perspective, one considers
+systems whose energetically protected groundspace
+encodes information.
+In this work we show that standard error correction
+procedures can be applied to systems where the
+noise appears as non-abelian Fibonacci anyons.
+In the case of a Hamiltonian with non-commuting
+terms, we build a theory describing the spectrum of
+these models,  
+with particular focus on the 3D gauge color code model.
+Numerics support the conjecture that this model is gapped,
+which one would expect for a self-correcting quantum memory.
+\end{abstract}
+
 \declaration
 
 %\dedication{To X Y Z}
 
 \tableofcontents
+%\addcontentsline{toc}{chapter}{Contents}
+\newpage
+\pagenumbering{arabic}
 
 \chapter{Introduction}
 
