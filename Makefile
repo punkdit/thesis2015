@@ -1,7 +1,7 @@
 
 
-out: thesis
-	open thesis.pdf 
+#out: thesis
+#	open thesis.pdf 
 
 thesis: thesis.tex refs.bib
 	cp ../spectrum2015/pic-gap.pdf .

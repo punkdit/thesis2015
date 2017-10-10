@@ -7,6 +7,8 @@
 
 %% \titleformat{command}[shape]{format}{label}{sep}{before}[after]
 
+% bug in titlesec:
+% https://bugs.launchpad.net/ubuntu/+source/texlive-extra/+bug/1574052
 \usepackage{titlesec}
 %\usepackage[tracking=true]{microtype}
 %\titleformat{\chapter}[display]
@@ -83,7 +85,8 @@
 
 \usepackage{setspace}   %Allows double spacing with the \doublespacing command
 
-\newcommand{\todo}[1]{\textcolor{red}{#1}}
+\newcommand{\todo}[1]{\ \textcolor{red}{\{#1\}}\ }
+\newcommand{\danbrowne}[1]{\ \textcolor{red}{\{#1\}}\ }
 
 \newcommand{\Eref}[1]{(\ref{#1})}
 \newcommand{\Fref}[1]{Fig.~\ref{#1}}
@@ -185,7 +188,7 @@ This will form the foundation for the rest of the thesis,
 in terms of being the ``easy'' version of all that follows.
 
 We begin with a consideration of ``size'', or ``counting''.
-To count the size of something $A$ we write $\euler(A).$
+To denote the size of something $A$ we write $\euler(A).$
 Size is \emph{additive} in the sense of 
 $\euler(A\cup B) = \euler(A) + \euler(B)$ except that
 $A$ and $B$ may have intersection.
@@ -341,7 +344,7 @@ Now we have a new formula for the Euler characteristic,
 which follows from
 %from the homology condition
 %$\partial_i \circ \partial_{i+1}=0$  and
-an application of the rank-nullity theorem to
+an application of the rank-nullity theorem \danbrowne{What's this?} to
 equation \Eref{EulerEq}.
 
 Going back to the torus example, with four faces,
@@ -375,7 +378,8 @@ characteristic of the torus.
 %\end{align}
 
 This is all great but what does it have to do with quantum codes?
-Well, before we talk quantum it is worth first going over what we
+Well, before we talk about the quantum case,
+it is worth first going over what we
 mean by a code in the classical sense of the word.
 We wish to communicate a single bit of information, 
 but the communication channel we use suffers from random noise.
@@ -496,7 +500,7 @@ This is known as a \emph{CSS stabilizer code}\ \cite{Gottesman1996,Calderbank199
 
 Both of $\Pauli_n^X$ and $\Pauli_n^Z$ are abelian and
 isomorphic as groups to the $n$-fold product of $\Z_2$.
-But $Z_2$ is more than an abelian group, it's also a field,
+But $\Z_2$ is more than an abelian group, it's also a field,
 which we have been notating as $\Field.$
 In this way, we identify these groups with the $n$-dimensional
 vector space over the field $\Field:$
@@ -517,6 +521,7 @@ is essentially equivalent to a homology!
 
 We show how this works by 
 using the above example of torus homology.
+This example is known as the \emph{Kitaev toric code}\ \cite{Dennis2002}.
 Here we separately number
 the faces, edges and vertices as
 \begin{center}
@@ -577,11 +582,11 @@ exactly the commutativity requirement $S_Z S_X^\top = 0$ for
 a stabilizer code.
 Writing $m_X$ for the rows of $S_X$ and $m_Z$ for the rows
 of $S_Z$ we have the following sequence:
-$$
+\begin{equation}\label{eq:homology}
     \Field^{m_X} \xrightarrow{\ \ S_X^\top\ \ } 
     \Field^{n} \xrightarrow{\ \ S_Z\ \ } 
     \Field^{m_Z}.
-$$
+\end{equation}
 
 The $S_Z$ operators detect bitflip errors $u\in\Field^n$
 via $\Field$-linear multiplication on the left:
@@ -624,9 +629,9 @@ by deleting rows:
 \end{align*}
 We find a right inverse to $\tilde{S}_Z$ and form the matrix $T_X$:
 $$
-    T_X^\top \tilde{S}_Z = I
+    \tilde{S}_Z T_X^\top = I
 $$
-where $I$ here is the appropriate $F$-linear identity.
+where $I$ here is the appropriate $\Field$-linear identity.
 This $T_X$ matrix has as rowspace the \emph{detectable errors:}
 \begin{align*}
 T_X = \left( \begin{array}{cccccccc}
@@ -648,6 +653,7 @@ L_X = \left( \begin{array}{cccccccc}
 \end{align*}
 Together this forms an $(L,S,T)$-decomposition of the CSS
 stabilizer code $S$\ \ \cite{Duclos-Cianci2010a,Yoshida2010}.
+\danbrowne{What is the point of this?}
 
 To see the error correction process more vividly, we expand the
 code dimensions.
@@ -674,10 +680,23 @@ If the resulting operator $c+c'$ is in the image of $S_X,$
 ie. a boundary, then the error correction has succeeded.
 
 Otherwise, $c+c'$ is not a boundary and represents a non-trivial
-operator in $H_1$ and will therefore alter the encoded qubits:
+operator in $H_1$ and will therefore alter the encoded qubits\danbrowne{If this is the first place you introduce a homologically non-trivial operator you need to explain why it corresponds to a non-trivial logical operator.}:
 \begin{center}
 \includegraphics[width=0.8\columnwidth]{pic-toric-fail.pdf}
 \end{center}
+
+To detect phase-flip errors, we can perform a change of basis on each qubit ... \todo{fixme}
+this swaps the matrices of the $X$ and $Z$ operators and so 
+the above sequence \Eref{eq:homology} becomes:
+$$
+    \Field^{m_Z} \xrightarrow{\ \ S_Z^\top\ \ } 
+    \Field^{n} \xrightarrow{\ \ S_X\ \ } 
+    \Field^{m_X}
+$$
+and we can repeat the same error correction analysis that
+we did for bitflip errors.
+
+...\todo{fixme}
 
 Given any homology $\partial_1 \partial_2 = 0$
 we get another homology by taking the transpose:
@@ -686,18 +705,15 @@ $\partial_2^\top \partial_1^\top = 0.$
 %\includegraphics[width=1.0\columnwidth]{pic-bdy.pdf}
 \includegraphics{pic-cobdy.pdf}
 \end{center}
-In this way we can examine the effect of phase flip errors:
-$$
-    \Field^{m_Z} \xrightarrow{\ \ S_Z^\top\ \ } 
-    \Field^{n} \xrightarrow{\ \ S_X\ \ } 
-    \Field^{m_X}.
-$$
+
 
 % ------------------------------------------------------------------
 
 \begin{center}
 * \ \ \ \ \ \ \ \ \ \ * \ \ \ \ \ \ \ \ \ \ *
 \end{center}
+%\newpage
+\danbrowne{newpage or stars?}
 
 So far we have been considering how to protect quantum information
 using the framework of error correction.
@@ -724,14 +740,14 @@ In other words, the syndrome is interpreted as a collection of particles.
 These particles are called \emph{anyons}
 because of their unusual exchange statistics.
 
-We can write down a basis for the groundspace by summing over
+We can write down elements of a basis for the groundspace by summing over
 the orbit of the stabilizer code,
 $$
     \sum_{g_X\in S_X} g_X \ket{l_X},
 $$
-where $l_X$ is any logical bitflip operator, written as a computational
-basis element (inside the ket).
-Such a basis element looks like a so-called string-net condensate:
+where $l_X$ is any logical bitflip operator,
+written as a computational basis element (inside the ket).
+Such a basis element looks like a so-called string-net condensate\ \cite{Levin2005}:
 \begin{center}
 \includegraphics[width=0.8\columnwidth]{pic-toric-liquid.pdf}
 \end{center}
@@ -799,6 +815,7 @@ long after the mathematicians
 themselves have finished being excited by them.
 This would suggest the following algorithm for
 success in theoretical physics:
+\danbrowne{This is verging on too informal for a thesis. }
 \begin{enumerate}
 \item look at what mathematicians were getting excited about several decades ago,
 \item ???

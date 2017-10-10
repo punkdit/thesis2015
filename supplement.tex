@@ -199,7 +199,9 @@ resulting in an empty syndrome.
 We consider encoding a qubit of quantum information in the global degeneracy associated
 with the topology of the manifold of our system.
 The manifold underlying our system is a torus.
+\danbrowne{Clarify this with a figure. In chapter 3 you have only considered surfaces with boundary. How is a logical qubit encoded on a surface with no boundary?  Why is there a single qubit here (and not a higher number)?  How are logical operations implemented in this model? Important to introduce the logical operators that will form your logical errors.  Why did you choose this qubit encoding?}
 We endow this with an $L\times L$ square lattice of observables:
+\danbrowne{Add a link to refer back to the section in chapter 3 where you introduced observables. }
 $$
     \Lambda := \bigl\{ \gamma_{ij} \bigr\}_{i,j=1,...,L}
 $$
@@ -212,6 +214,7 @@ to reflect an actual physical gap.
 
 The noise process acts to populate the manifold with
 a randomly distributed set of pair creation processes,
+\danbrowne{What's the (physical) justification for this error model? Would thermal excitations manifest themselves like this?}
 whose size is much smaller than the resolution of the lattice.
 We model this as a random distribution of pair-of-pants:
 \begin{center}
@@ -246,6 +249,7 @@ the result of which is recorded on the original curve:
 %the data structures and algorithm, we have not yet described
 %and this is what we turn to next.
 
+\danbrowne{Have you explained this measurement rule anywhere? In particular, how is the outcome of the measurement derived from the curve? Is this measurement deterministic or non-deterministic?}
 We consider this treatment of anyon dynamics to be a phenomenological model in that
 it neglects any microscopic details of the system.
 This is consistent with the principles of topologically
@@ -256,6 +260,7 @@ a less important (and non-universal) role. Note also that our analysis applies e
 
 In order to perform a logical error on our code, a noise process must have support on a
 a homologically nontrivial region of the manifold.
+\danbrowne{Why does homology play a role here? Don't forget to introduce the logical operators of this qubit. }
 These correspond to processes in which anyonic charge is transported around a non-trivial loop before
 annihilating to vacuum.
 
