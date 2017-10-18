@@ -160,15 +160,15 @@ The non-trivial $R$-moves are:
 For more details of the Fibonacci anyon
 theory, see e.g.\ Ref.~\cite{Nayak2008} and references therein.
 
-In addition to the fusion space there is also a
-global degeneracy associated with the topology of the
-manifold on which the anyons reside.
-We consider systems on a torus,
-which for the Fibonacci anyons gives rise to a 2-fold degeneracy.
-This extra degree of freedom can be thought of being
-associated with the total anyonic charge (or flux) running through
-the torus itself. Since there are two different possible charges
-in the Fibonacci anyon model, the global degeneracy is 2.
+%In addition to the fusion space there is also a
+%global degeneracy associated with the topology of the
+%manifold on which the anyons reside.
+%We consider systems on a torus,
+%which for the Fibonacci anyons gives rise to a 2-fold degeneracy.
+%This extra degree of freedom can be thought of being
+%associated with the total anyonic charge (or flux) running through
+%the torus itself. Since there are two different possible charges
+%in the Fibonacci anyon model, the global degeneracy is 2.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -194,14 +194,24 @@ resulting in an empty syndrome.
 \label{PicProcess}
 \end{figure}
 
+%\danbrowne{Clarify this with a figure. In chapter 3 you have only considered surfaces with boundary. How is a logical qubit encoded on a surface with no boundary?  Why is there a single qubit here (and not a higher number)?  How are logical operations implemented in this model? Important to introduce the logical operators that will form your logical errors.  Why did you choose this qubit encoding?}
 
+We consider encoding quantum information in the fusion space of a torus.
+As we saw in the previous chapter, 
+the dimension of this space is equal to the number of
+charges (the cardinality of $\mathcal{A}$).
+For Fibonacci anyons, we have two charges, $\vac$ and $\tau$,
+so this gives a fusion space equal to one qubit.
+In this work we do not consider the logical operators that
+act on the encoded state, but merely note that it is sufficient
+to protect the state if all operations remain local.
+\footnote{For an example of a \emph{non-local} operation we
+create a pair of charges and take one of the charges around
+a non-contractible loop of the torus.}
 
-We consider encoding a qubit of quantum information in the global degeneracy associated
-with the topology of the manifold of our system.
-The manifold underlying our system is a torus.
-\danbrowne{Clarify this with a figure. In chapter 3 you have only considered surfaces with boundary. How is a logical qubit encoded on a surface with no boundary?  Why is there a single qubit here (and not a higher number)?  How are logical operations implemented in this model? Important to introduce the logical operators that will form your logical errors.  Why did you choose this qubit encoding?}
-We endow this with an $L\times L$ square lattice of observables:
-\danbrowne{Add a link to refer back to the section in chapter 3 where you introduced observables. }
+We endow the torus with an $L\times L$ square lattice of observables
+\footnote{We defined the observables associated to a modular functor in section 3.3.}:
+%\danbrowne{Add a link to refer back to the section in chapter 3 where you introduced observables. }
 $$
     \Lambda := \bigl\{ \gamma_{ij} \bigr\}_{i,j=1,...,L}
 $$
@@ -211,16 +221,35 @@ We call each such $\gamma_{ij}$ a \emph{tile.}
 In the diagrams below 
 there is a small gap between the tiles but this is not meant
 to reflect an actual physical gap.
+\begin{center}
+\includegraphics[width=0.3\columnwidth ]{pic-torus-tiles.pdf}
+\end{center}
 
-The noise process acts to populate the manifold with
+We also use these observables to construct an
+idealized Hamiltonian of the form
+$H = -\sum_{\gamma\in\Lambda} \ket{\vac}\bra{\vac}_\gamma,$
+where $\ket{\vac}\bra{\vac}_\gamma$ is the projector to vacuum charge
+at tile $\gamma.$ Therefore, the ground space of the model has
+vacuum total charge on each tile.
+Typical thermal noise processes would act to
+create charges locally on the manifold.
+This has the effect of
+populating the manifold with
 a randomly distributed set of pair creation processes,
-\danbrowne{What's the (physical) justification for this error model? Would thermal excitations manifest themselves like this?}
 whose size is much smaller than the resolution of the lattice.
-We model this as a random distribution of pair-of-pants:
+In the case of abelian anyons, this agrees with
+prior work (such as Ref. \cite{Dennis2002}).
+For non-abelian anyons we could also consider other
+noise processes such as braiding or hopping of anyons, but for
+simplicity we don't consider this here.
+\footnote{It was seen in Ref. \cite{Brell2013} that the pair-creation-only setting was sufficient to capture the qualitative features of an error-correction simulation for the Ising anyons and we have no reason to expect that this would change when considering the Fibonacci anyon model.}
+%\danbrowne{What's the (physical) justification for this error model? Would thermal excitations manifest themselves like this?}
+
+We model this noise by randomly replacing small patches 
+of the surface with pair-of-pants:
 \begin{center}
 \includegraphics[width=0.3\columnwidth ]{pic-pair-create.pdf}
 \end{center}
-
 Each such pair will have vacuum total charge and so the observables
 $\gamma_{ij}$ will only see pairs that intersect, ie. we
 need only consider distributing these pairs
@@ -236,20 +265,53 @@ done in an arbitrary way:
 \end{center}
 
 Working in the basis picked out by the resulting curve
-diagrams, we can calculate measurement outcomes for each tile,
-the result of which is recorded on the original curve:
+diagrams, we can calculate measurement probabilities for each tile.
+The measurement outcomes are then randomly sampled,
+and the results recorded on the original curve:
 \begin{center}
 \includegraphics[width=0.3\columnwidth ]{pic-curve-uniq.pdf}
 \end{center}
 %\cggb{It might be helpful to be a bit more explicit either here or later about exactly how we perform this step, moving charges around with the paperclip algorithm until they are all neighbouring and then we are in a standard basis and can use F-moves to calculate fusion outcomes.}
 %\simon{good idea}
 
+%\danbrowne{Have you explained this measurement rule anywhere? In particular, how is the outcome of the measurement derived from the curve? Is this measurement deterministic or non-deterministic?}
 
-%The details of how this is implemented computationally,
-%the data structures and algorithm, we have not yet described
-%and this is what we turn to next.
+As another example of the kind of calculation that needs to be performed,
+here we zoom-in and show an example involving just two tiles (inside a larger tiling):
+\begin{center}
+\includegraphics[width=0.8\columnwidth]{pic-syndrome.pdf}
+\end{center}
+In (a) we have two pair-creation events, each crossing the boundary of a tile. 
+\todo{The problem we have is...}
+One observable (tile) is solid black, and the other observable is dashed.
+In (b) we join the participating curve 
+diagrams arbitrarily into a single curve diagram.
+%This could already become very complicated, even if we
+%stick to these two tiles
+The curve diagram (c) is the same as (b), we just
+pulled the curve straight (an isotopy).
+%The total charge of each tile can then be found 
+Now we braid anyons around each other until all charges within 
+a tile are neighbors on the curve, as in (d).  
+%\footnote{This is a standard POP decomposition, see section 3.3.}
+The red lines then correspond to the worldlines for these braids.
+The state (d) is equivalent to the original
+state (a), but now the observables we need (the solid and dashed
+black lines) are at most a few $F-$moves away.
 
-\danbrowne{Have you explained this measurement rule anywhere? In particular, how is the outcome of the measurement derived from the curve? Is this measurement deterministic or non-deterministic?}
+If the reader finds this confusing, that's because it \emph{is}
+confusing. This is why so much care and detail was taken in chapter 3.
+The systematic implementation of these calculations relies on all the
+machinery developed in chapter 3, in particular the refactoring theorem of
+section 3.4.
+%We have yet to describe the details of this is implementation:
+The data structure we will use is called a \emph{combinatorial curve diagram}
+and is described in section 4.4.1.
+The algorithm that operates on this data is called the 
+\emph{paper-clip algorithm} and will be described in section 4.4.2.
+This data structure and algorithm is a combinatorial version of the theory
+of modular functors suitable for implementation on a classical computer.
+
 We consider this treatment of anyon dynamics to be a phenomenological model in that
 it neglects any microscopic details of the system.
 This is consistent with the principles of topologically
@@ -259,11 +321,11 @@ a less important (and non-universal) role. Note also that our analysis applies e
 %Additionally, while we model a continuum anyon theory, our analysis can be trivially reinterpreted to apply directly to lattice spin models or other systems where space is fundamentally discrete.
 
 In order to perform a logical error on our code, a noise process must have support on a
-a homologically nontrivial region of the manifold.
-\danbrowne{Why does homology play a role here? Don't forget to introduce the logical operators of this qubit. }
-These correspond to processes in which anyonic charge is transported around a non-trivial loop before
-annihilating to vacuum.
-
+a region of the manifold that is non-local, (cannot be contracted).
+%\danbrowne{Why does homology play a role here? Don't forget to introduce the logical operators of this qubit. }
+These correspond to processes in which anyonic charge is transported around a non-trivial loop before annihilating to vacuum.
+We do not consider these processes as we regard the decoding
+to have failed if any such non-local process would occur.
 
 
 
@@ -304,7 +366,7 @@ we show this in a process diagram, with time running up
 the page.
 Note that unlike the case of abelian anyons, the decoder
 cannot determine the charge of each cluster 
-given only the syndrome information (as in \cite{Bravyi2011}),
+given only the syndrome information (as in Ref. \cite{Bravyi2011}),
 and so must repeatedly physically query the system to measure these charges.
 
 
@@ -627,7 +689,7 @@ In the description of the refactoring theorem
 in Section \ref{RefactoringTheorem}
 we thought of $R$-moves as acting on the basis of
 the system as in the Heisenberg picture.
-Now we switch to an equivelant perspective and
+Now we switch to an equivalent perspective and
 consider $R$-moves as transport of anyon charges
 as in a Schrodinger picture.
 The anyons will be transported around the lattice
@@ -777,6 +839,12 @@ as the lattice size grows.
 %
 %where $f_k$ is the $k$-th element of the Fibonacci
 %sequence $\{1, 1, 2, 3...\}.$
+
+
+\section{Summary}
+
+\todo{we did stuff}
+
 
 
 

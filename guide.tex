@@ -798,9 +798,13 @@ the seam in $N.$
 
 {\bf Unitarity axiom.}
 Reversing the orientation of the surface $M$
-to form $\overline{M}$ we get the dual of the fusion space:
-$\F(\overline{M})=\F(M)^*.$
-\danbrowne{Why is this unitarity?}
+to form $\overline{M}$ we get the dual of the fusion space.
+That is, we have the following isomorphism:
+$$
+\F(\overline{M}) \xrightarrow{\cong} \F(M)^*.
+$$
+%$\F(\overline{M})=\F(M)^*.$
+%\danbrowne{Why is this unitarity?}
 %\simon{i don't think we use this for anything}
 
 \subsub{Compatibility axioms.}
@@ -945,14 +949,14 @@ seams in a larger manifold.
 %\simon{***at this point we specialize to considering only discs with holes***}
 
 \subsub{POP decomposition.}
-\danbrowne{What does POP stand for?}
+%\danbrowne{What does POP stand for?}
 %The reverse process of cutting a surface up
 %into pair-of-pants induces a direct sum decomposition
 %of the fusion space.
 Given a manifold $M$ which is
 a disc with two or more holes, 
 we show how to present $M$ as the gluing of various
-pair-of-pants. Such an arrangement will be termed a \emph{POP decomposition.}
+pair-of-pants (\emph{POP}). Such an arrangement will be termed a \emph{POP decomposition.}
 (We refer to Ref.~\cite{Ivanov2001} for more details on this construction,
 and Ref.~\cite{Ghrist2014} for a leisurely description of Morse theory.)
 This will yield a decomposition of $\F(M)$ into a direct
@@ -1455,7 +1459,6 @@ between using $R$ and $R^{-1}.$
 We continue in this way moving backwards (from
 head to tail) sequentially applying this procedure.
 
-\danbrowne{Needs summary and conclusions and link to next chapter. }
 
 %\simon{what if the direction of $f$ is reversed??
 %eg. $f$ and $f'$ are the same except one has reverse direction?}
@@ -1481,4 +1484,40 @@ head to tail) sequentially applying this procedure.
 %$$
 %    c : [0, 1] \to D_n.  
 %$$
+
+\section{Summary}
+%\danbrowne{Needs summary and conclusions and link to next chapter. }
+
+The formalism of modular functors is needed to justify and
+explain the simulation used in the next chapter.
+Anyon simulations in the physics literature are typically
+conceived of as one-dimensional arrays of anyons, but for
+our simulation we really do need to consider these anyons as
+living in a two-dimensional system, and also to account
+for observables that wind arbitrarily around the anyons.
+
+In the next
+chapter we will use as underlying manifold for our system a torus.
+As we have seen the modular functor axioms force 
+the dimensionality of the fusion space of a torus 
+to be equal to the number of charges.
+This can be seen by gluing one end
+of a cylinder (annulus) to the other, and applying the gluing axiom.
+This fusion space contains the protected quantum information.
+
+The noise processes will be modelled by replacing small
+patches of the torus with pair-of-pants that have vacuum
+total charge.
+Physically accessible
+observables will be associated with fixed ``tiles'' on the torus,
+whose observation outcomes will serve to diagnose the noise process.
+
+In order to calculate the probabilities for these observation outcomes
+we will need to be able to move curve diagrams
+around until the observables of the curve diagram (these are
+the standard POP decompositions) contain the desired observable.
+That we can always do this (at least for planar surfaces) was
+shown by the refactoring theorem.
+This will be re-formalized in a combinatorial way below
+as the \emph{paperclip algorithm}.
 
