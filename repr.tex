@@ -1636,14 +1636,22 @@ $$
 %$$
 The general form of
 each Hamiltonian block is:
-\begin{align*}
-H_{t_X,t_Z} = &\sum_{\substack{v\in\Frd\\g_X\in G_X } }
+%\begin{align*}
+%H_{t_X,t_Z} = &\sum_{\substack{v\in\Frd\\g_X\in G_X } }
+%    \eta(t_Z g_X^\top)
+%  \ \ket{v+g_X  R_Z^\top}\bra{v} \\
+%  &+ \sum_{v\in\Frd} \bigl(
+%    |G_Z| - 2w(G_Z R_X^\top v^\top + G_Z t_X^\top)
+%    \bigr) \ \ket{v}\bra{v}.
+%\end{align*}
+\begin{equation}\label{hamiltonian}
+H_{t_X,t_Z} = \sum_{\substack{v\in\Frd\\g_X\in G_X } }
     \eta(t_Z g_X^\top)
-  \ \ket{v+g_X  R_Z^\top}\bra{v} \\
-  &+ \sum_{v\in\Frd} \bigl(
+  \ \ket{v+g_X  R_Z^\top}\bra{v} 
+  + \sum_{v\in\Frd} \bigl(
     |G_Z| - 2w(G_Z R_X^\top v^\top + G_Z t_X^\top)
     \bigr) \ \ket{v}\bra{v}.
-\end{align*}
+\end{equation}
 Here we use $\eta$ to send 
 $t_Zg_X^\top$ which is an $\Field$ value
 to the multiplicative subgroup $\{\pm1\}$
@@ -1803,7 +1811,25 @@ $$
 $$
 
 \doproof
-because why?
+We identify the computational basis with
+the elements of $\Field_n.$
+As a graph, $\Gamma$ has edges starting from $\ket{v}$
+that are given by
+$$
+\ket{v} \mapsto g \ket{v}, \smbox{for} v\in\Fnd, g\in G_X.
+$$
+This means that paths starting from $\ket{v}$ are given by
+products $g_i...g_1$ of the elements of the group $G_X:$
+$$
+    \ket{v} \mapsto g_1 \ket{v} \mapsto ... \mapsto g_i...g_1 \ket{v}
+$$
+Switching to the additive $\Field_n$ notation, we
+therefore have that $\ket{v}$ and $\ket{u}$ are in the
+same component of $\Gamma$ iff $u = v+g$ for some $g\in\Span{G_X}.$
+%We write $\Gamma_0$ for the component of the vector $\ket{0}$
+The vectors
+$$\{ \ket{t_X + l_X} \}_{t_X\in\Span{T_X}, l_X\in\Span{L_X}}$$
+of $\Gamma$ 
 \tombstone
 
 %Using the $\Field$-linear $(L,S,T,R)$-decomposition of the gauge group
@@ -1860,7 +1886,7 @@ $$
 
 
 \dolemma{2.3}
-For any weakly self-dual gauge code Hamiltonian $H$,
+For any gauge code Hamiltonian $H$,
 every groundstate of $H$ is stabilized.
 
 \doproof
@@ -1885,7 +1911,39 @@ $$
 $$
 must contain a basis for the groundspace of $H.$
 Let such a basis vector be $v_1(\Gamma_{t_X})$ for some $t_X.$
-...
+This vector is positive by Lemma 2.2.
+We have the commutativity
+$$
+    \Gamma_{t_X} s = s \Gamma_{t_X}
+$$
+for any $s\in S_X.$
+\todo{why?} 
+Therefore $\ket{v_1}$ is an eigenvector for every $X$-type
+stabilizer, but the eigenvalue must be $+1$ because any
+$X$-type operator acts by permuting basis elements and
+$\ket{v_1}$ is positive.
+
+We have that
+$$
+    \Gamma_{t_X} = \bigoplus_{t_Z\in\Span{T_Z}} H_{t_X,t_Z}
+$$
+\todo{why?} 
+and so $\ket{v_1}$ must be an eigenvector of
+the $Z-$type stabilizers.
+Using \Eref{hamiltonian}
+we have that 
+\begin{align*}
+    \Gamma_{0} - \Gamma_{t_X}
+    &= \sum_{t_Z\in\Span{T_Z}} H_{0,t_Z} - H_{t_X,t_Z} \\
+    &= \sum_{t_Z\in\Span{T_Z}} G_z t_X^\top \sum_{u\in\Field_r} \ket{u}\bra{v}
+\end{align*}
+\todo{basis fail}
+And therefore, if $t_X\ne 0:$
+$$
+    \bra{v_1} \Gamma_0 \ket{v_1} > \bra{v_1} \Gamma_{t_X} \ket{v_1}
+$$
+so we must have that $t_X=0$. Therefore 
+$\ket{v_1}$ is stabilized by the $Z-$type stabilizers.
 \tombstone
 
 \doproposition{2.4}
