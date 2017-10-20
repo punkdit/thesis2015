@@ -1266,7 +1266,7 @@ we are going to rewrite the gauge group generators
 as a union of stabilizer generators $S_0 = S_X \cup S_Z$
 and reduced gauge generators $R_0 = R_X \cup R_Z.$
 Similarly, the error operators
-will be split into $X$ and $Z$ type
+will be split into $X$-type and $Z$-type
 operators $T_X$ and $T_Z$ and
 finally the logical operators
 $L_X$ and $L_Z.$
@@ -1570,7 +1570,7 @@ In summary, we have the following contributions from the
 $G_X$ terms of the Hamiltonian:
 $$
 %    H_{0,0}(v, v+g_X  R_Z^\top) \ne 0,\ \ \mbox{for}\ g_X\in G_X, v\in \Frd
-    \bra{v} H_{0,0} \ket{v+g_X  R_Z^\top} 
+    \bbra{v} H_{0,0} \bket{v+g_X  R_Z^\top} 
         \pluseq 1,\ \ \mbox{for}\ g_X\in G_X, v\in \Frd
 $$
 where we use the $\pluseq$ notation
@@ -1597,7 +1597,7 @@ the number of non-zero entries in any $\Field$-vector
 we have the following contributions to
 the Hamiltonian:
 $$
-    \bra{v} H_{0,0} \ket{v} 
+    \bbra{v} H_{0,0} \bket{v} 
         \pluseq |G_Z| - 2w(G_Z R_X^\top v^\top),
 $$
 for $v\in \Frd.$
@@ -1606,9 +1606,9 @@ Adding up all of the above we
 have in summary,
 $$
 H_{0,0} = \sum_{\substack{v\in\Frd\\g_X\in G_X } }
-  \ket{v+g_X  R_Z^\top}\bra{v} 
+  \bket{v+g_X  R_Z^\top}\bbra{v} 
   + \sum_{v\in\Frd} \bigl(|G_Z| - 2w(G_Z R_X^\top v^\top)
-    \bigr) \ \ket{v}\bra{v}.
+    \bigr) \ \bket{v}\bbra{v}.
 $$
 
 For any $t_X\in \Span{T_X}$ the Hamiltonian block $H_{t_X,0}$
@@ -1621,10 +1621,10 @@ have the same effect on $H_{t_X,0}$
 as $H_{0,0}$ and only the diagonal has changed:
 $$
 H_{t_X,0} = \sum_{\substack{v\in\Frd\\g_X\in G_X } }
-  \ket{v+g_X  R_Z^\top}\bra{v} 
+  \bket{v+g_X  R_Z^\top}\bbra{v} 
   + \sum_{v\in\Frd} \bigl(
     |G_Z| - 2w(G_Z R_X^\top v^\top + G_Z t_X^\top)
-    \bigr) \ \ket{v}\bra{v}.
+    \bigr) \ \bket{v}\bbra{v}.
 $$
 %Writing the difference explicitly:
 %$$
@@ -1632,25 +1632,25 @@ $$
 %  \sum_{v\in\Frd} 2\bigl(
 %    w(G_Z R_X^\top v^\top + G_Z t_X^\top)
 %    -w(G_Z R_X^\top v^\top)
-%    \bigr) \ \ket{v}\bra{v}.
+%    \bigr) \ \bket{v}\bbra{v}.
 %$$
 The general form of
 each Hamiltonian block is:
 %\begin{align*}
 %H_{t_X,t_Z} = &\sum_{\substack{v\in\Frd\\g_X\in G_X } }
 %    \eta(t_Z g_X^\top)
-%  \ \ket{v+g_X  R_Z^\top}\bra{v} \\
+%  \ \bket{v+g_X  R_Z^\top}\bbra{v} \\
 %  &+ \sum_{v\in\Frd} \bigl(
 %    |G_Z| - 2w(G_Z R_X^\top v^\top + G_Z t_X^\top)
-%    \bigr) \ \ket{v}\bra{v}.
+%    \bigr) \ \bket{v}\bbra{v}.
 %\end{align*}
 \begin{equation}\label{hamiltonian}
 H_{t_X,t_Z} = \sum_{\substack{v\in\Frd\\g_X\in G_X } }
     \eta(t_Z g_X^\top)
-  \ \ket{v+g_X  R_Z^\top}\bra{v} 
+  \ \bket{v+g_X  R_Z^\top}\bbra{v} 
   + \sum_{v\in\Frd} \bigl(
     |G_Z| - 2w(G_Z R_X^\top v^\top + G_Z t_X^\top)
-    \bigr) \ \ket{v}\bra{v}.
+    \bigr) \ \bket{v}\bbra{v}.
 \end{equation}
 Here we use $\eta$ to send 
 $t_Zg_X^\top$ which is an $\Field$ value
@@ -1662,11 +1662,11 @@ $$
 The $\eta(t_Zg_X^\top)$ term
 is a kind of parity check that
 picks up one phase flip for (some of)
-the $X$ type stabilizers found in $g_X.$
+the $X$-type stabilizers found in $g_X.$
 This works because $T_Z$ is a left inverse
 of $S_X^\top.$
 The $t_Z\in\Span{T_Z}$ selects which
-$X$ type stabilizers act as $-1$ in this irrep.
+$X$-type stabilizers act as $-1$ in this irrep.
 
 In summary, we have the complete representation
 theory for $CSS$ gauge code Hamiltonians.
@@ -1734,17 +1734,17 @@ as the system size grows \cite{Pfeuty1970}.
 %This is another kind of representation theory of $\Pauli_n.$
 %We are representing either $G_X$ or $G_Z$ as a permutation representation (?)
 %It has the ability to extract irreps of $G$ corresponding to
-%the $X$ type operators as affine subspaces $\{vR_X+t\}$ of $\Fn.$
+%the $X$-type operators as affine subspaces $\{vR_X+t\}$ of $\Fn.$
 %For the $Z$ representations we will still need the complex
 %representation theory to build states on $\Complex[\{vR_X+t\}]$
 %that look like ``waves''.
 %These (stationary) waves do indeed have a geometric interpretation,
 %with the wavefront nodes being identified with so-called Cheeger cuts.
-%To switch back and forth between the $X$ and $Z$ type
+%To switch back and forth between the $X$ and $Z$-type
 %representations 
 
 %We begin this section with the following two definitions.
-A CSS gauge code is \emph{self-dual} when the $X$ and $Z$ type
+A CSS gauge code is \emph{self-dual} when the $X$-type and $Z$-type
 gauge generators are equal: $$G_X = G_Z.$$
 The $XY$-model is an example of a self-dual CSS gauge code.
 A CSS gauge code is \emph{weakly self-dual}
@@ -1766,16 +1766,18 @@ We will call a
 vector \emph{stabilized} if it is a $+1$ eigenvector 
 of every stabilizer in the given gauge group.
 
-We now turn to another notion of reducibility, coarser than
-the group theoretic reducibility.
-One way to understand this is via graph theory.
-Given a CSS gauge code Hamiltonian $H,$ 
-we see that 
+We now turn to the idea of a reducibile matrix.
+In general, this is a coarser notion than
+vector space reducibility used in the representation theory above.
+The reason why is that when reducing a matrix we work
+with a fixed basis.
+
+%One way to understand this is via graph theory.
+Given a CSS gauge code Hamiltonian $H,$ we see that 
 the diagonal terms (working in the computational basis)
-come from the $Z$ operators and the off-diagonal terms
-come from $X$ type operators.
-We think of the $Z$ operators as potential energy, and the
-$X$ operators as kinetic terms.
+come from the $Z$-type operators and the off-diagonal terms
+come from $X$-type operators.
+
 This suggests the following definition.
 We define a graph $\Gamma$ with vertices the $2^n$ computational
 basis elements, and edges:
@@ -1787,20 +1789,26 @@ We also add weighted loops corresponding to the $Z$-type gauge operators:
 $$
     \ket{v} \mapsto \sum_{g_Z\in G_Z} g_Z \ket{v}, \smbox{for all} v\in\Fnd.
 $$
-In this way we can consider $H$ and $\Gamma$ interchangeably,
-as either a matrix or a graph.
-An irreducible matrix is one whose corresponding graph is connected.
+%In this way we can consider $H$ and $\Gamma$ interchangeably,
+%as either a matrix or a graph.
 The examples with diagrams in section 2.1.1 are meant to illustrate this
 graph picture.
+An \emph{irreducible matrix} is one whose corresponding graph is connected.
 
 The off-diagonal entries of $H$ are all positive.
 If we use a spectral shift operator, a constant multiple of the identity $+cI$,
 we find that $H+cI$ is a non-negative matrix. 
 We call such a matrix \emph{Stoquastic} \cite{Bravyi2008}.
 
+We think of the $Z$ operators as potential energy,
+and the $X$ operators as kinetic terms.
+This is consistent with the classical use of the (real) symplectic 
+group.
+
 \dolemma{2.1}
-\todo{Given a ...}
-The matrix $\Gamma$ decomposes into irreducible
+Given a gauge code Hamiltonian $H$, writing
+the matrix for $H$ in the computational basis as $\Gamma,$
+this matrix decomposes into irreducible
 stoquastic matrices $\Gamma_{t_X}$ 
 indexed by $t_X\in\Span{T_X}$
 with multiplicity $2^k$:
@@ -1811,25 +1819,41 @@ $$
 $$
 
 \doproof
-We identify the computational basis with
+Once again, we identify the computational basis with
 the elements of $\Field_n.$
-As a graph, $\Gamma$ has edges starting from $\ket{v}$
-that are given by
-$$
-\ket{v} \mapsto g \ket{v}, \smbox{for} v\in\Fnd, g\in G_X.
-$$
+As a graph, $\Gamma$ has vertices 
+$\ket{v} $ for $v\in\Field_n$, and edges 
+$ \ket{v} \mapsto g \ket{v}$ for  $v\in\Fnd, g\in G_X.$
 This means that paths starting from $\ket{v}$ are given by
-products $g_i...g_1$ of the elements of the group $G_X:$
+words $g_i...g_1$ built from the elements of the group $G_X:$
 $$
-    \ket{v} \mapsto g_1 \ket{v} \mapsto ... \mapsto g_i...g_1 \ket{v}
+    \ket{v} \mapsto g_1 \ket{v} \mapsto ... \mapsto g_i...g_1 \ket{v}.
 $$
 Switching to the additive $\Field_n$ notation, we
-therefore have that $\ket{v}$ and $\ket{u}$ are in the
-same component of $\Gamma$ iff $u = v+g$ for some $g\in\Span{G_X}.$
+therefore have that 
+vertices $\ket{v}$ and $\ket{u}$ are in the
+same component of $\Gamma$ iff $\ket{u} = \ket{v+g_X}$ for some $g_X\in\Span{G_X}.$
 %We write $\Gamma_0$ for the component of the vector $\ket{0}$
-The vectors
-$$\{ \ket{t_X + l_X} \}_{t_X\in\Span{T_X}, l_X\in\Span{L_X}}$$
-of $\Gamma$ 
+The vertices
+$$\Bigl\{ \bket{t_X + l_X} \Bigr\}_{t_X\in\Span{T_X},\ l_X\in\Span{L_X}}$$
+each live in one component of $\Gamma$,
+and each component of $\Gamma$ contains one of these vertices.
+This shows that these components are in bijective correspondence with
+pairs $(t_X, l_X)$ where $t_X\in\Span{T_X},\ l_X\in\Span{L_X}$.
+We write each such component as $\Gamma_{t_X,l_X}$.
+%A basis for each $\Gamma_{t_X,l_X}$ is given by a coset
+The vertices contained in the $\Gamma_{t_X,l_X}$ component
+are given by a coset of $G_X$ in $\Fnd:$
+$$
+    \Bigl\{ \bket{v S_X + u R_X + t_X + l_X} \Bigr\}_{v\in \Field_{m_X}, u\in\Frd}.
+$$
+When comparing these different components of $\Gamma$, we will
+identify these cosets, and so consider $\Gamma_{t_X,l_X}$ as an
+operator:
+$$
+    \Gamma_{t_X,l_X} : \Complex[\Field_{m_X}\oplus\Field_r] \to \Complex[\Field_{m_X}\oplus\Field_r].
+$$
+Because each of these components is independant of $l_X$ we write it as $\Gamma_{t_X}.$
 \tombstone
 
 %Using the $\Field$-linear $(L,S,T,R)$-decomposition of the gauge group
@@ -1855,38 +1879,40 @@ of $\Gamma$
 %raising and lowering operators, and the diagonal
 %terms measure the energy of each level.
 
-%Now we invoke the Peron-Frobenius theorem.
-%Each of the blocks $\Gamma_{t_X}$ is also Perron-Frobenius
-%and in combination with their irreducibility, the Perron-Frobenius
-%theorem gives:
+Using \Eref{hamiltonian}
+we have that 
+\begin{align*}
+    \Gamma_{0} - \Gamma_{t_X}
+    &= \sum_{t_Z\in\Span{T_Z}} H_{0,t_Z} - H_{t_X,t_Z} \\
+    &= \sum_{t_Z\in\Span{T_Z}} \sum_{u\in\Field_r}
+        \bigl( 2w(G_Z R_X^\top v^\top + G_z t_X^\top)
+        - 2w(G_Z R_X^\top v^\top)\bigr)
+        \ket{v}\bra{v}
+\end{align*}
 
 \dolemma{2.2}
-\todo{Given a ...}
-For each $t_X\in\Span{T_X}$
+Given a gauge code Hamiltonian $H$ with irreducible
+components $\Gamma_{t_X}$,
+with $t_X\in\Span{T_X}$,
+%components $\{\Gamma_{t_X}\}_{t_X\in\Span{T_X}}$,
+%for each $t_X\in\Span{T_X}$
 the largest eigenvalue 
-of $\Gamma_{t_X},$
-$\lambda_1(\Gamma_{t_X})$
-is non-degenerate,
+of each $\Gamma_{t_X}$
+%$\lambda_1(\Gamma_{t_X})$
+is non-degenerate
 and is associated with an eigenvector 
-$v_1(\Gamma_{t_X})$
+%$v_1(\Gamma_{t_X})$
 with positive components.
 
 \doproof
-By the previous Lemma, 
-we can apply the  Perron-Frobenius theorem
-to the matrices $\Gamma_{t_X}$.
+We already established that $\Gamma$ and therefore
+$\Gamma_{t_X}$ is stoquastic.
+By the previous Lemma $\Gamma_{t_X}$ is irreducible.
+We apply the Perron-Frobenius theorem and the result follows.
 \tombstone
 
-A basis for each $\Gamma_{t_X}$ is given by a coset
-of $G_X$ in $\Fnd:$
-$$
-    \bigl\{ \ket{v S_X + u R_X + t_X} \bigr\}_{v\in \Field_{m_X}, u\in\Frd}.
-$$
-
-
-
 \dolemma{2.3}
-For any gauge code Hamiltonian $H$,
+Given a gauge code Hamiltonian $H$,
 every groundstate of $H$ is stabilized.
 
 \doproof
@@ -1898,52 +1924,55 @@ every groundstate of $H$ is stabilized.
 %Because $v_1$ has all positive components
 %it will be fixed by  any operator
 %$s\in\Span{S_Z}$.
-%To show that the $X$ type stabilizers
+%To show that the $X$-type stabilizers
 %also fix $v_1$ 
 %we use weak self-duality
 %and see that by change of basis
-%we can swap the roles of the $X$ and $Z$ type operators.
-We will construct a basis for the groundspace consisting of
-vectors that are stabilized.
+%we can swap the roles of the $X$ and $Z$-type operators.
+%We will construct a basis for the groundspace consisting of
+%vectors that are stabilized.
 The set of top eigenvectors 
 $$
-    \{ v_1(\Gamma_{t_X}) \}_{t_X\in\Span{T_X}}
+    \bigl\{ v_1(\Gamma_{t_X}) \bigr\}_{t_X\in\Span{T_X}}
 $$
 must contain a basis for the groundspace of $H.$
-Let such a basis vector be $v_1(\Gamma_{t_X})$ for some $t_X.$
+Let such a basis vector be $\ket{v} = v_1(\Gamma_{t_X})$ for some $t_X.$
 This vector is positive by Lemma 2.2.
-We have the commutativity
-$$
-    \Gamma_{t_X} s = s \Gamma_{t_X}
-$$
-for any $s\in S_X.$
-\todo{why?} 
-Therefore $\ket{v_1}$ is an eigenvector for every $X$-type
-stabilizer, but the eigenvalue must be $+1$ because any
-$X$-type operator acts by permuting basis elements and
-$\ket{v_1}$ is positive.
+Any stabilizer commutes with
+every element of the gauge group and so
+must have $\ket{v}$ as an eigenvector.
+%acts as a symmetry of the graph $\Gamma_{t_X}:$
+%$$
+%    \Gamma_{t_X} s_X = s_X \Gamma_{t_X}.
+%$$
+%Therefore $\ket{v}$ is an eigenvector of $s_X.$
+%But the eigenvalue must be $+1$ 
+Because any
+$X$-type operator acts by permuting the computational basis elements 
+and $\ket{v}$ is positive it must be stabilized by the
+$X$-type stabilizers.
+Therefore, we can find a basis for the groundspace of
+$H$ consisting of vectors that are fixed by $X$-type
+stabilizers.
+%We have that
+%$$
+%    \Gamma_{t_X} = \bigoplus_{t_Z\in\Span{T_Z}} H_{t_X,t_Z}
+%$$
+%\todo{why?} 
+%and so $\ket{v}$ must be an eigenvector of
+%the $Z-$type stabilizers.
+%And therefore, if $t_X\ne 0:$
+%$$
+%    \bra{v} \Gamma_0 \ket{v} > \bra{v} \Gamma_{t_X} \ket{v}
+%$$
+%so we must have that $t_X=0$. Therefore 
+%$\ket{v}$ is stabilized by the $Z-$type stabilizers.
 
-We have that
-$$
-    \Gamma_{t_X} = \bigoplus_{t_Z\in\Span{T_Z}} H_{t_X,t_Z}
-$$
-\todo{why?} 
-and so $\ket{v_1}$ must be an eigenvector of
-the $Z-$type stabilizers.
-Using \Eref{hamiltonian}
-we have that 
-\begin{align*}
-    \Gamma_{0} - \Gamma_{t_X}
-    &= \sum_{t_Z\in\Span{T_Z}} H_{0,t_Z} - H_{t_X,t_Z} \\
-    &= \sum_{t_Z\in\Span{T_Z}} G_z t_X^\top \sum_{u\in\Field_r} \ket{u}\bra{v}
-\end{align*}
-\todo{basis fail}
-And therefore, if $t_X\ne 0:$
-$$
-    \bra{v_1} \Gamma_0 \ket{v_1} > \bra{v_1} \Gamma_{t_X} \ket{v_1}
-$$
-so we must have that $t_X=0$. Therefore 
-$\ket{v_1}$ is stabilized by the $Z-$type stabilizers.
+We repeat this argument for $H$ switching to the
+$\ket{\pm}$ basis. This will give a basis for the groundspace
+consisting of vectors that are fixed by the $Z$-type
+stabilizers.
+Therefore the entire groundspace must be stabilized.
 \tombstone
 
 \doproposition{2.4}
@@ -2124,9 +2153,9 @@ We associate operators to other cells, or union of cells,
 by using the contained vertices as support.
 \danbrowne{Is this correct? All the operators here are built from faces, not cells. }
 Because this is a self-dual code, the same goes for
-both the $X$ and $Z$ type operators.
+both the $X$-type and $Z$-type operators.
 %and we confuse the distinction between union of cells
-%and the corresponding $X$ or $Z$ type operator.
+%and the corresponding $X$ or $Z$-type operator.
 The $X/Z-$type gauge group is generated by
 $X/Z-$type operators supported on each face.
 The $X/Z-$type stabilizer group is generated by
@@ -2673,7 +2702,7 @@ the terms $X_{2i}X_{2i+1}$ and $Z_{2i+1}Z_{2i+2}$
 generate one ideal, and the other ideal comes from switching $X$ and $Z.$
 
 We next examine the Lie algebra ideal structure of the gauge color code.
-Two faces operators, of $X$ and $Z$ type,
+Two faces operators, of $X$-type and $Z$-type,
 will anti-commute only when
 they intersect on a single vertex.
 This only happens when such faces have disjoint coloring.
@@ -3233,7 +3262,7 @@ We focus on $\Gamma_0.$
 This must contain the second eigenvector of $H$ by weak self-duality of the code.
 %The matrices $H_{0,t_Z)}$ are Perron-Frobenius (by a change of basis)
 %and so the first eigenvector $v_1(H_{0,t_Z})$ can be taken to be positive.
-$X$ type stabilizers $s_X\in S_X$ act on the $0,t_Z$ irreps in $\Gamma_0$
+$X$-type stabilizers $s_X\in S_X$ act on the $0,t_Z$ irreps in $\Gamma_0$
 by $\pm 1$ according to the commutator $[[s_X, t_Z]].$
 Suppose the second eigenvector of $H$ lives in
 $H_{0,t_Z}$ for $t_Z\ne 0$. 
@@ -3376,6 +3405,10 @@ to extend the representation theory of
 CSS gauge codes in section 2.4 to arbitrary gauge codes
 (not necessarily satisfying the CSS condition).
 We do not need this in the present work.
+
+On an algebraic level, there are plenty of other questions
+to ask. Such as monoid representation theory, locally commuting
+projector Hamiltonians, Kitaev's quantum double construction...
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
