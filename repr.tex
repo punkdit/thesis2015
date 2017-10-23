@@ -175,7 +175,7 @@ We are going to be considering Hamiltonians built from
 summing operators of this form.
 In this paper we use a ``neg-Hamiltonian'' convention,
 to save complicating expressions with negative signs.
-The ground space corresponds to the \emph{largest} eigenvalue.
+The ground space corresponds to the \emph{highest} eigenvalue.
 
 So building a Hamiltonian from a single $X$ or $Z$ term,
 we find the ground space as the stabilized space
@@ -1501,7 +1501,7 @@ $$
 \Complex[\{vR_X+t_X\}_{v\in\Frd}]
 \cong \Complex[\Frd].
 $$
-This will allow us to write the components
+This will allow us to write the matrix entries
 of each block $H_t$ of the Hamiltonian
 as $\bra{u}H_t\ket{v}$ for $u,v\in\Frd.$
 We make this identification of affine subspaces
@@ -1524,7 +1524,8 @@ $$
     \{ v R_X + t_X + l_X \}_{v\in\Frd}
 $$
 for each $t_X \in \Span{T_X}, l_X \in \Span{L_X}.$
-Each such affine subspace forms a basis
+Each such affine subspace forms a
+symmetry invariant basis
 for the irreducible blocks $H_{t_X,t_Z}$ of $H$,
 and can be naturally identified with $\Frd:$
 $$
@@ -1575,7 +1576,7 @@ $$
 $$
 where we use the $\pluseq$ notation
 because there may be other contributions to the
-same component.
+same entry.
 These terms will always be off
 the diagonal unless $g_X$ is a stabilizer.
 
@@ -1589,7 +1590,7 @@ $$
     \mbox{syndrome}(u) = G_Z u^\top
 $$
 for $u^\top \in \Fn.$
-This is an $\Field$-vector that has one component for
+This is an $\Field$-vector that has one entry for
 each row of $G_Z.$
 Writing $|G_Z|$ for the number of these rows, and 
 using a \emph{weight} function $w$ that just counts
@@ -1604,28 +1605,28 @@ for $v\in \Frd.$
 
 Adding up all of the above we
 have in summary,
-$$
+\begin{equation}\label{hamblockgs}
 H_{0,0} = \sum_{\substack{v\in\Frd\\g_X\in G_X } }
   \bket{v+g_X  R_Z^\top}\bbra{v} 
   + \sum_{v\in\Frd} \bigl(|G_Z| - 2w(G_Z R_X^\top v^\top)
     \bigr) \ \bket{v}\bbra{v}.
-$$
+\end{equation}
 
 For any $t_X\in \Span{T_X}$ the Hamiltonian block $H_{t_X,0}$
-has components indexed by basis vectors:
+has entries indexed by basis vectors:
 $$
     u = v R_X + t_X
 $$
 this means that the $G_X$ gauge terms
 have the same effect on $H_{t_X,0}$
 as $H_{0,0}$ and only the diagonal has changed:
-$$
+\begin{equation}\label{hamblocktx}
 H_{t_X,0} = \sum_{\substack{v\in\Frd\\g_X\in G_X } }
   \bket{v+g_X  R_Z^\top}\bbra{v} 
   + \sum_{v\in\Frd} \bigl(
     |G_Z| - 2w(G_Z R_X^\top v^\top + G_Z t_X^\top)
-    \bigr) \ \bket{v}\bbra{v}.
-$$
+    \bigr) \ \bket{v}\bbra{v}
+\end{equation}
 %Writing the difference explicitly:
 %$$
 %    H_{0,0} - H_{t_X,0} = 
@@ -1642,15 +1643,15 @@ each Hamiltonian block is:
 %  \ \bket{v+g_X  R_Z^\top}\bbra{v} \\
 %  &+ \sum_{v\in\Frd} \bigl(
 %    |G_Z| - 2w(G_Z R_X^\top v^\top + G_Z t_X^\top)
-%    \bigr) \ \bket{v}\bbra{v}.
+%    \bigr) \ \bket{v}\bbra{v}
 %\end{align*}
-\begin{equation}\label{hamiltonian}
+\begin{equation}\label{hamblockgen}
 H_{t_X,t_Z} = \sum_{\substack{v\in\Frd\\g_X\in G_X } }
     \eta(t_Z g_X^\top)
   \ \bket{v+g_X  R_Z^\top}\bbra{v} 
   + \sum_{v\in\Frd} \bigl(
     |G_Z| - 2w(G_Z R_X^\top v^\top + G_Z t_X^\top)
-    \bigr) \ \bket{v}\bbra{v}.
+    \bigr) \ \bket{v}\bbra{v}
 \end{equation}
 Here we use $\eta$ to send 
 $t_Zg_X^\top$ which is an $\Field$ value
@@ -1806,7 +1807,7 @@ This is consistent with the classical use of the (real) symplectic
 group.
 
 \dolemma{2.1}
-Given a gauge code Hamiltonian $H$, writing
+Given a CSS gauge code Hamiltonian $H$, writing
 the matrix for $H$ in the computational basis as $\Gamma,$
 this matrix decomposes into irreducible
 stoquastic matrices $\Gamma_{t_X}$ 
@@ -1879,7 +1880,7 @@ Because each of these components is independant of $l_X$ we write it as $\Gamma_
 %raising and lowering operators, and the diagonal
 %terms measure the energy of each level.
 
-Using \Eref{hamiltonian}
+Using \Eref{hamblockgen}
 we have that 
 \begin{align*}
     \Gamma_{0} - \Gamma_{t_X}
@@ -1891,28 +1892,30 @@ we have that
 \end{align*}
 
 \dolemma{2.2}
-Given a gauge code Hamiltonian $H$ with irreducible
+Given a CSS gauge code Hamiltonian $H$, 
+and matrix $\Gamma$ in the computational basis 
+with irreducible
 components $\Gamma_{t_X}$,
 with $t_X\in\Span{T_X}$,
 %components $\{\Gamma_{t_X}\}_{t_X\in\Span{T_X}}$,
 %for each $t_X\in\Span{T_X}$
-the largest eigenvalue 
+the top eigenvalue 
 of each $\Gamma_{t_X}$
 %$\lambda_1(\Gamma_{t_X})$
 is non-degenerate
 and is associated with an eigenvector 
 %$v_1(\Gamma_{t_X})$
-with positive components.
+with positive entries.
 
 \doproof
 We already established that $\Gamma$ and therefore
 $\Gamma_{t_X}$ is stoquastic.
-By the previous Lemma $\Gamma_{t_X}$ is irreducible.
+By the previous lemma $\Gamma_{t_X}$ is irreducible.
 We apply the Perron-Frobenius theorem and the result follows.
 \tombstone
 
 \dolemma{2.3}
-Given a gauge code Hamiltonian $H$,
+Given a CSS gauge code Hamiltonian $H$,
 every groundstate of $H$ is stabilized.
 
 \doproof
@@ -1921,7 +1924,7 @@ every groundstate of $H$ is stabilized.
 %by vectors which are stabilized.
 %To begin, let $v_1$ be the top
 %eigenvector of $\Gamma_{t_X}$ with $t_X\in\Span{T_X}.$
-%Because $v_1$ has all positive components
+%Because $v_1$ has all positive entries
 %it will be fixed by  any operator
 %$s\in\Span{S_Z}$.
 %To show that the $X$-type stabilizers
@@ -1972,11 +1975,14 @@ We repeat this argument for $H$ switching to the
 $\ket{\pm}$ basis. This will give a basis for the groundspace
 consisting of vectors that are fixed by the $Z$-type
 stabilizers.
+% Perhaps another argument:
+%    A stabilizer $s\in\Pauli^Z$ acts trivially
+%    on $\ket{0...0}$ and therefore must also fix any groundstate.
 Therefore the entire groundspace must be stabilized.
 \tombstone
 
 \doproposition{2.4}
-For any weakly self-dual gauge code Hamiltonian $\Ham$
+For any CSS gauge code Hamiltonian $\Ham$
 we have:
 $$\lambda_1(\Ham) = \lambda_1(\Ham_{0,0})$$
 and for $t_X\in\Span{T_X}, t_Z\in\Span{T_Z}$
@@ -1986,17 +1992,21 @@ $$
 $$
 
 \doproof
-Consequence of previous lemma.
+The vectors in the space that 
+$H_{t_X,t_Z}$ operates on 
+are stabilized iff $t_X=0$ and $t_Z=0$,
+and so the result follows as a 
+consequence of the previous lemma.
 \tombstone
 
 %\danbrowne{This is a key result and you speed through it too quickly. Can you write this as a lemma with a formal proof?}
 
-Notice that 
-$H_{0,0}$ is also irreducible stoquastic (in the computational basis)
-and so has non-degenerate
-groundspace, but it appears with multiplicity $2^k$ within
-the Hamiltonian $H$ and this accounts for the degeneracy of the
-groundspace of $H$.
+%From equation \Eref{hamblockgs} we see that 
+%$H_{0,0}$ is also irreducible stoquastic 
+%and so has non-degenerate
+%groundspace, but it appears with multiplicity $2^k$ within
+%the Hamiltonian $H$ and this accounts for the degeneracy of the
+%groundspace of $H$.
 
 %Taken together, these eigenvectors form a basis for the
 %groundspace of the system.
@@ -2019,35 +2029,75 @@ The next goal is to search for
 the second eigenvalue of $H$,
 $\lambda_2(H).$
 
-%Using a basis change and the
-%above equation for $H_{t_X,0}$
-%we have
-%\begin{framed}
+The following lemma is used in section 2.8 below.
+
 %\noindent{\bf Fact 2:}
 \dolemma{2.5}
 Given a 
-gauge code Hamiltonian $\Ham$ and
+CSS gauge code Hamiltonian $\Ham$ and
 $t_X\in \Span{T_X},$
-the blocks $\Ham_{t_X,0}$ 
-are stoquastic.
+the matrices for $\Ham_{t_X,0}$ 
+in the symmetry invariant basis 
+are irreducible stoquastic.
 
 \doproof
-because why?
+From equation \Eref{hamblocktx} we see that 
+the nonzero, nondiagonal entries of the matrices
+$\Ham_{t_X,0}$ are $+1,$ and so this matrix is stoquastic.
+This matrix is irreducible because as an operator it is
+irreducible.
+\tombstone
+%\todo{i don't think we will need this lemma..}
+
+\dolemma{2.6}
+Let $H$ be a CSS gauge code Hamiltonian,
+with matrix $\Gamma$ in the computational basis 
+and irreducible components $\Gamma_{t_X}$.
+We have
+$$
+    \Gamma_{t_X} = \bigoplus_{t_Z\in\Span{T_Z}}
+        H_{t_X,t_Z}.
+$$
+
+\doproof
+%The irreducible matrix blocks contain the irreducible
+%representations 
+Irreducibility of matrices is a coarser property than irreducibility of 
+representations. 
+The result follows by considering eigenspaces of stabilizers.
 \tombstone
 
-
-\doproposition{2.6}
-For a weakly self-dual gauge code Hamiltonian $H$,
+\doproposition{2.7}
+For a gauge code Hamiltonian $H$,
 \begin{align*}
-\lambda_1(\Ham_{t_X,0}) &< 
+\lambda_1(\Ham_{t_X,0}) &> 
     \lambda_1(\Ham_{t_X,t_Z}) \ \smbox{and}\\
-\lambda_1(\Ham_{0,t_Z}) &< 
+\lambda_1(\Ham_{0,t_Z}) &> 
     \lambda_1(\Ham_{t_X,t_Z}),
 \end{align*}
 where $t_X\ne 0$ and $t_Z\ne 0.$
 
 \doproof
-because why?
+Let $H$ be a CSS gauge code Hamiltonian.
+Let $\Gamma$ be the matrix for $H$ in the computational basis,
+with $\Gamma_{t_X}$ the irreducible matrix components.
+From Lemma 2.6,
+$$
+    \Gamma_{t_X} = \bigoplus_{t_Z\in\Span{T_Z}}
+        H_{t_X,t_Z}.
+$$
+%By the previous Lemma we apply the Perron-Frobenius theorem
+%to find that the top eigenvector of $\Gamma_{t_X}$ is positive.
+And by Lemma 2.2 the top eigenvector of $\Gamma_{t_X}$ is 
+non-degerate and positive.
+This will be an eigenvector of each stabilizer, and in particular
+must be fixed by the $X$-type stabilizers.
+Therefore, this eigenvalue is in the spectrum of $H_{t_X,0}$ and
+no other $H_{t_X,t_Z}$ with $t_Z\ne 0.$
+This shows 
+$\lambda_1(\Ham_{t_X,0}) > \lambda_1(\Ham_{t_X,t_Z}).$
+We switch to the $\ket{\pm}$ basis and repeat this argument
+to obtain the second inequality.
 \tombstone
 
 %\danbrowne{Please spell out the argument more clearly. It isn't immediate that this follows from your two facts. }
@@ -2058,7 +2108,7 @@ we need only examine the top two eigenvalues of $H_{0,0}$ and
 the top eigenvalue of $H_{t_X,0}$ for each $t_X\in T_X.$ 
 We summarize this in the theorem:
 
-\dotheorem{2.7}
+\dotheorem{2.8}
 For a weakly self-dual gauge code Hamiltonian $H$,
 the spectral gap is given by:
 $$
@@ -2067,7 +2117,10 @@ $$
          \{ \lambda_1(H_{0,0}) - \lambda_2(H_{t_X,0}) \} \bigr\}
 $$
 \doproof
-Combine Proposition 2.4 with Proposition 2.6.
+Combine Proposition 2.4 with Proposition 2.7.
+By weak self-duality, the spectrum of $H_{t_X,t_Z}$ equals
+the spectrum of $H_{t'_X,t'_Z}$ for some 
+$t'_X\in\Span{T_X}, t'_Z\in\Span{T_Z}.$
 \tombstone
 
 
@@ -2170,52 +2223,221 @@ $X/Z-$type operators supported on any region.
 
 \section{The orbigraph}
 
-Performing numerics on small gauge code models makes
-it evident that there is a great deal more symmetry than
-we have found using the above techniques.
-In particular, the components of eigenvectors 
-have many identical values.
-This motivates the following exploration of the symmetry 
-of the Hamiltonian.
+So far we have seen how the group structure of a gauge code 
+Hamiltonian gives rise to operators that commute with
+the Hamiltonian. These are symmetries of the system given
+by stabilizers and logical operators.
+Performing numerics on small gauge code Hamiltonians makes
+it evident that there is a great deal more symmetry to be found.
+In particular, the entries of eigenvectors 
+often have repeated values.
+This motivates investigating the symmetries of the 
+Hamiltonian that permute the basis vectors.
+This idea is also found in the
+spectral graph theory literature, see for example Ref.~\cite{Cvetkovic1980}
+chapter 5.
 
 \def\auto{\mathcal{A}}
 
-A \emph{graph automorphism} is a permutation matrix $P$
-such that 
-$$P^T \Ham P = \Ham.$$
-The set of all such graph automorphisms 
-form a group $\auto$.
-The goal here is to find eigenvectors of $H$ that are
-invariant under the action of $\auto.$
-Such an eigenvector will have components that
-are constant on the orbits of $\auto,$
-so therefore it will live naturally on the
-vector space whose basis is these orbits.
-We can do better than this, and actually 
-project the graph itself down onto this space.
-We do this by constructing a new graph
-which we call the \emph{orbigraph}.
-%form a group $\auto(H)$ or just $\auto$ when the graph is understood.
-%We now define a new matrix $\Ham/\auto$
-The matrix for the orbigraph is written $\Ham/\auto$
-and acts on the vector space with basis consisting
-of the orbits of $\auto.$
-It follows that the components of $\Ham/\auto$,
-indexed by a pair of $\auto-$orbits $i$ and $j$, is defined by
+Let $\Gamma$ be a weighted graph on a set of vertices $V$:
 $$
-    (\Ham/\auto)_{ij} = |\{ g\in G \smbox{s.t.} gv \in j \}| \smbox{where}v\in i.
+    \Gamma : \Complex[V] \to \Complex[V].
 $$
-In other words, 
-$(\Ham/\auto)_{ij} $ counts the number of gauge group
-elements that sends any particular element $v$ of the 
-$\auto-$orbit $i$ to the $\auto-$orbit $j.$
+Given a permutation of the vertices $\sigma:V\to V$ we
+extend by linearity to form the permutation matrix:
+$$
+    \Complex[\sigma] : \Complex[V] \to \Complex[V].
+$$
+A \emph{graph automorphism} of $\Gamma$ is a permutation
+$\sigma:V\to V$ that ``commutes'' with $\Gamma:$
+$$
+    \Gamma \Complex[\sigma] = \Complex[\sigma] \Gamma.
+$$
+The set of all such graph automorphisms of $\Gamma$ is denoted $\auto$.
+The set of \emph{orbits} of $\auto$ is written $ V / \auto.$
+These are equivelance classes on $V,$ where two vertices $v_1, v_2$ are
+deemed equivelant iff there is a graph automorphism that sends $v_1$ to $v_2.$
+%Let $\auto$ be the group of \emph{graph automorphisms} of $\Gamma:$
+%$$
+%    \auto := \mbox{Aut}(\Gamma) =
+%        \bigl\{ P\ \bigl|\ \Gamma P = P \Gamma,\ 
+%        \mbox{where $P$ is a permutaion matrix} \bigr\}.
+%$$
+
+An \emph{$\auto$-invariant} vector $\ket{v}\in\Complex[V]$
+is such that $\Complex[\sigma]\ket{v}=\ket{v}$ for all $\sigma\in\auto.$
+These vectors are characterized as those vectors that are constant
+on the $\auto$-orbits.
+In other words, an $\auto$-invariant vector is
+defined by its value on each $\auto$-orbit.
+Let $C:\Complex[V/\auto]\to\Complex[V]$ be
+this defining map, and 
+$D:\Complex[V]\to\Complex[V/\auto]$ any left inverse of $C$:
+$$
+    DC = I.
+$$
+We define the \emph{orbigraph} of $\Gamma$ as:
+$$
+    \Gamma/\auto := D\Gamma C.
+$$
+As a commutative square we have:
+\[
+\begin{tikzcd}
+\Complex[V] \arrow{r}{\Gamma} & \Complex[V] \arrow{d}{D} \\
+\Complex[V/\auto] \arrow{u}{C} \arrow{r}{\Gamma/\auto} & \Complex[V/\auto] 
+\end{tikzcd}
+\]
+
+%A \emph{graph automorphism} is a permutation matrix $P$
+%such that 
+%$$P^T \Ham P = \Ham.$$
+%The set of all such graph automorphisms 
+%form a group $\auto$.
+%The goal here is to find eigenvectors of $H$ that are
+%invariant under the action of $\auto.$
+%Such an eigenvector will have entries that
+%are constant on the orbits of $\auto,$
+%so therefore it will live naturally on the
+%vector space whose basis is these orbits.
+%We can do better than this, and actually 
+%project the graph itself down onto this space.
+%We do this by constructing a new graph
+%which we call the \emph{orbigraph}.
+%%form a group $\auto(H)$ or just $\auto$ when the graph is understood.
+%%We now define a new matrix $\Ham/\auto$
+%The matrix for the orbigraph is written $\Ham/\auto$
+%and acts on the vector space with basis consisting
+%of the orbits of $\auto.$
+%It follows that the off-diagonal matrix entries of $\Ham/\auto$,
+%indexed by a pair of $\auto-$orbits $i$ and $j$,
+%$i\ne j$,
+%are defined by
+%$$
+%    (\Ham/\auto)_{ij} = \bigl|\bigl\{ g\in G \smbox{s.t.} gv \in j \bigr\}\bigr| \smbox{where}v\in i.
+%$$
+%In other words, 
+%$(\Ham/\auto)_{ij}$ with $i\ne j,$ counts the number of gauge group
+%elements that sends any particular element $v$ of the 
+%$\auto-$orbit $i$ to the $\auto-$orbit $j.$
+
+%Note that the orbigraph is no longer Hermitian,
+%and in general will not even be normal.
+
+%The automorphisms of the gauge group, $Aut(G)$ will induce an
+%automorphism of the graph by \todo{XXX}...
+%In particular, elements of the stabilizer group $\Stab$ induce graph 
+%automorphisms by \todo{XXX}...
+%In general there may be more symmetry in the graph that
+%we cannot access via a group automorphism.
+
+%We will apply this orbigraph construction
+%to each of the blocks $H_{t_X,0}$.
+%From Lemma 2.5 above, and using the fact that we are
+%summing over a trivial representation of $\auto$ we have the following:
+
+We now show that the apparent arbitrariness in the choice of $D$ does
+not lead to different orbigraphs.
+
+\dolemma{2.9}
+The definition of the orbigraph $\Gamma/\auto = D\Gamma C$ does not depend on the
+choice of $D$, a left inverse of $C$.
+\doproof
+\todo{why?}
+\tombstone
+
+We will see the following lemma demonstrated by numerics in section 2.8.1 and
+section 2.8.2 below.
+
+\dolemma{2.10}
+Given a weighted graph $\Gamma$ with graph automorphism group $\auto:$
+$$
+    \Spec(\Gamma/\auto) \subseteq \Spec(\Gamma).
+$$
+\doproof
+Let $\ket{u}$ be an eigenvector of the orbigraph with eigenvalue $\lambda$,
+$$
+    D\Gamma C\ket{u} = \lambda\ket{u}.
+$$
+Then $\Gamma C\ket{u}$ is $\auto$-invariant because $C\ket{u}$ is $\auto$-invariant.
+Let $\ket{u'}\in\Complex[V/\auto]$ be such that
+$$
+    \Gamma C\ket{u} = C\ket{u'}.
+$$
+Multiplying on the left by $D$,
+$$
+    D \Gamma C\ket{u} = DC\ket{u'} = \ket{u'},
+$$
+and so $\ket{u'}=\lambda{u}$, and
+$$
+    \Gamma C\ket{u} = \lambda C\ket{u}
+$$
+showing that $\lambda\in\Spec(\Gamma)$.
+\tombstone
+
+
+\dolemma{2.11}
+The orbigraph of an irreducible stoquastic matrix is also
+irreducible stoquastic.
+\doproof
+Let $\Gamma:\Complex[V]\to\Complex[V]$ be an irreducible stoquastic matrix
+with graph automorphism group $\auto.$
+\todo{finish this}
+\tombstone
+
+\dotheorem{2.12}
+%The spectrum of the orbigraph of $\Ham_{t_X,0}$ contains the top eigenvalue of $\Ham_{t_X,0}.$
+The top eigenvalue of 
+an irreducible stoquastic matrix 
+$$\Gamma:\Complex[V]\to\Complex[V]$$
+equals the top eigenvalue of its orbigraph:
+$$
+    \lambda_1(\Gamma) = \lambda_1(\Gamma/\auto).
+$$
+\doproof
+We apply the Perron-Frobenius theorem to the matrix
+$\Gamma$ to find the top eigenvalue $\lambda$ is non-degenerate
+with eigenvector $\ket{v}:$
+$$
+    \Gamma\ket{v} = \lambda \ket{v}.
+$$
+This vector is positive and the automorphisms of $\Gamma$
+act by permuting basis vectors, so $\ket{v}$ must be constant on
+the orbits of $\auto.$
+Therefore, there is a vector $\ket{u}\in\Complex[V/\auto]$ such that
+$$
+    C\ket{u} = \ket{v}.
+$$
+Then we have,
+\begin{align*}
+    D\Gamma C\ket{u} 
+    &= D\Gamma\ket{v} \\
+    &= \lambda D\ket{v} \\
+    &= \lambda DC\ket{u} \\
+    &= \lambda \ket{u}
+\end{align*}
+where we used the fact that $D$ is a left inverse for $C$.
+This shows $\lambda$ is an eigenvalue for $\Gamma/\auto.$
+By the previous lemma $\Gamma/\auto$ is irreducible
+stoquastic and since $\ket{u}$ is positive it must correspond to the
+top eigenvalue of $\Gamma/\auto$ by the Perron-Frobenius theorem.
+%Graph automorphisms act by permuting vertices, which
+%correspond to symmetry invariant basis vectors for $\Ham_{t_X,0}.$
+%By Lemma 2.5, the top eigenvector for this operator is
+%positive and non-degenerate.
+%This eigenvector must be fixed by
+%every graph automorphism
+%of $\Ham_{t_X,0}$.
+%$F$ because $F$ commutes with $\Ham_{t_X,0}.$
+\tombstone
+
+%\danbrowne{Please prove this.}
 
 Here is a simple example. % potential only depends on hamming weight: Jarret
 We take as gauge group 
 $$G = \{XII, IXI, IIX, ZII, IZI, IIZ\}.$$
 The Hamiltonian $H = \sum_{g\in G} g$ has matrix:
 $$
-H = \left(\begin{array}{rrrrrrrr}
+\Gamma = \left(\begin{array}{rrrrrrrr}
  3 &  1 &  1 &  1 &  . &  . &  . &  . \cr
   1 &  1 &  . &  . &  1 &  1 &  . &  . \cr
   1 &  . &  1 &  . &  1 &  . &  1 &  . \cr
@@ -2227,33 +2449,11 @@ H = \left(\begin{array}{rrrrrrrr}
 \end{array}\right)
 $$
 where we indicate zero entries with a dot.
-In this case, the automorphism group is $\auto=S_3,$
-there are four $\auto-$orbits, and
+The graph automorphisms come from permuting the
+three qubits, and so this group is $\auto=S_3.$
+There are four $\auto-$orbits, and
 $$
-H/\auto = \left(\begin{array}{rrrr}
- 3 &  3 &  . &  . \cr
-  1 &  1 &  2 &  . \cr
-  . &  2 & -1 &  1 \cr
-  . &  . &  3 & -3
-\end{array}\right).
-$$
-In this case the automorphism group $\auto$ of the graph
-is the same as the automorphism group $Aut(G)$ of the gauge group,
-but in general it is possible that $Aut(G) < \auto.$
-
-Note that the orbigraph is no longer Hermitian,
-and in general will not even be normal.
-
-We can also write $H/\auto = QHP$ using the following two matrices for $P$ and $Q:$
-$$
-Q = 
-\left(\begin{array}{rrrrrrrr}
- 1 &  . &  . &  . &  . &  . &  . &  . \cr
-  . &  1 &  . &  . &  . &  . &  . &  . \cr
-  . &  . &  . &  . &  1 &  . &  . &  . \cr
-  . &  . &  . &  . &  . &  . &  . &  1
-\end{array}\right),\ \ \ 
-P = 
+C = 
 \left(\begin{array}{rrrr}
  1 &  . &  . &  . \cr
   . &  1 &  . &  . \cr
@@ -2263,27 +2463,42 @@ P =
   . &  . &  1 &  . \cr
   . &  . &  1 &  . \cr
   . &  . &  . &  1
+\end{array}\right),\ \ \ 
+D = 
+\left(\begin{array}{rrrrrrrr}
+ 1 &  . &  . &  . &  . &  . &  . &  . \cr
+  . &  1 &  . &  . &  . &  . &  . &  . \cr
+  . &  . &  . &  . &  1 &  . &  . &  . \cr
+  . &  . &  . &  . &  . &  . &  . &  1
 \end{array}\right).
 $$
-The idea is that each column of $P$ sums over an orbit,
-and each row of $Q$ chooses one member of each orbit.
+Each column of $C$ sums over an orbit,
+and each row of $D$ chooses one member from each orbit.
+This gives orbigraph
+$$
+\Gamma/\auto = D\Gamma C = \left(\begin{array}{rrrr}
+ 3 &  3 &  . &  . \cr
+  1 &  1 &  2 &  . \cr
+  . &  2 & -1 &  1 \cr
+  . &  . &  3 & -3
+\end{array}\right).
+$$
+We see here that even though $\Gamma$ is Hermitian,
+the orbigraph is not Hermition, and not even a normal operator.
+
+%In this case the automorphism group $\auto$ of the graph
+%is the same as the automorphism group 
+%$Aut(G)$ of the gauge group.
+%In general it is true that $Aut(G) \le \auto.$
+
+%We can also write $H/\auto = EHF$ using the following two matrices for $F$ and $E:$
 %See also \cite{Cvetkovic1980} chapter 5.
 
-%The automorphisms of the gauge group, $Aut(G)$ will induce an
-%automorphism of the graph by \todo{XXX}...
-%In particular, elements of the stabilizer group $\Stab$ induce graph 
-%automorphisms by \todo{XXX}...
-%In general there may be more symmetry in the graph that
-%we cannot access via a group automorphism.
 
-In general, we will apply this idea to each of the blocks $H_{t_X,0}$.
-From {\bf Fact 2} above, and using the fact that we are
-summing over a trivial representation of $\auto$ we have the following:
-\begin{framed}
-\noindent{\bf Fact 3:}
-The spectrum of the orbigraph of $\Ham_{t_X,0}$ contains the ground eigenvalue of $\Ham_{t_X,0}.$
-\end{framed}
-\danbrowne{Please prove this.}
+For the remainder of this section 2.8,
+we will be applying Theorem 2.12 to the
+Hamiltonian blocks $\Ham_{t_X,0}$ which are irreducible stoquastic by 
+Lemma 2.5.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
@@ -2482,6 +2697,8 @@ $|\mathrm{Aut(code)}|$ \\
 \end{tabular}
 \end{center}
 
+The rows without $t_X$ specified correspond to a choice of $t_X\ne 0$ 
+such that a single stabilizer generator is frustrated.
 We also show the order of Aut(code) which is
 the automorphism group of the gauge code, defined as follows.
 Elements of this group act by permuting the $n$ qubits.
@@ -2493,7 +2710,7 @@ $P_n, P_Z$ and $P_X,$ such that the following $\Field$-linear equations hold:
     P_Z G_Z P_n &= G_Z.
 \end{align*}
 This implies that the action of Aut(code)
-commutes with the Hamiltonian and preserves eigenvalues of
+commutes with the Hamiltonian and so preserves eigenvalues of
 the stabilizers. Therefore this group action restricts to an action
 on $H_{0,0}.$
 %For $t_X\ne0$ we take the subgroup of Aut(code) that preserves
@@ -3141,7 +3358,7 @@ and $U$ is a diagonal potential energy term.
 For $d\gg 1$, the largest
 eigenvalue is $\lambda_1 \cong \frac{5}{2}$.
 The corresponding eigenvector $\ket{v_1}$
-has all positive components that
+has all positive entries that
 decay exponentially away from the well sites
 at $\ket{1}$ and $\ket{d}:$
 $$
@@ -3220,7 +3437,7 @@ but it is exponentially small.
 %In summary, we note the important
 %features of this model.
 %The groundstate wavefunction has all
-%positive components, which implies
+%positive entries, which implies
 %that the size of the gap is controlled
 %by the ``weight'' of a cut.
 %Also, we are hinting at the role
@@ -3335,7 +3552,7 @@ v_2 = \left( \begin{array}{l}
 x\\
 y\end{array} \right)\quad
 $$
-with $x\ge 0$ and $y\le 0,$ component-wise.
+with $x\ge 0$ and $y\le 0,$ entry-wise.
 Let the blocks of $\Ham$ under the same partition be:
 $$
 \Ham = \left( \begin{array}{ll}
