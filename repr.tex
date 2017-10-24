@@ -2255,8 +2255,8 @@ $$
 $$
 The set of all such graph automorphisms of $\Gamma$ is denoted $\auto$.
 The set of \emph{orbits} of $\auto$ is written $ V / \auto.$
-These are equivelance classes on $V,$ where two vertices $v_1, v_2$ are
-deemed equivelant iff there is a graph automorphism that sends $v_1$ to $v_2.$
+These are equivalence classes on $V,$ where two vertices $v_1, v_2$ are
+deemed equivalent iff there is a graph automorphism that sends $v_1$ to $v_2.$
 %Let $\auto$ be the group of \emph{graph automorphisms} of $\Gamma:$
 %$$
 %    \auto := \mbox{Aut}(\Gamma) =
@@ -2335,18 +2335,28 @@ As a commutative square we have:
 %From Lemma 2.5 above, and using the fact that we are
 %summing over a trivial representation of $\auto$ we have the following:
 
-We now show that the apparent arbitrariness in the choice of $D$ does
+In the proofs below we make repeated use of the fact that if
+$\ket{v}\in\Complex[V]$ is $\auto$-invariant, then $\Gamma\ket{v}$
+is also $\auto$-invariant.
+We first show that the apparent arbitrariness in the choice of $D$ does
 not lead to different orbigraphs.
 
 \dolemma{2.9}
 The definition of the orbigraph $\Gamma/\auto = D\Gamma C$ does not depend on the
 choice of $D$, a left inverse of $C$.
 \doproof
-\todo{why?}
+Let $D$ and $D'$ be left inverses of $C,$ so that $DC=I$ and $D'C=I.$
+Then 
+$ (D'-D)C = 0,$ which means that $\Im(C)\le \Ker(D-D').$
+This says that any $\auto$-invariant vector $\ket{v}\in\Complex[V]$
+is in the kernel of $D'-D.$
+Since $\Gamma$ preserves the $\auto$-invariant property,
+$\Im(\Gamma C)\le \Ker(D-D')$. That is, $(D'-D)\Gamma C=0$ and so
+$D'\Gamma C=D\Gamma C$ and the result follows.
 \tombstone
 
-We will see the following lemma demonstrated by numerics in section 2.8.1 and
-section 2.8.2 below.
+The following lemma is demonstrated in the numerics in section 2.8.1 and
+section 2.8.2.
 
 \dolemma{2.10}
 Given a weighted graph $\Gamma$ with graph automorphism group $\auto:$
@@ -2374,6 +2384,41 @@ $$
 showing that $\lambda\in\Spec(\Gamma)$.
 \tombstone
 
+In the next lemma we make use of an explicit formula
+for the orbigraph.
+%for the linear operators $C$ and $D.$
+The definition of $C$ gives 
+$$
+    C = \sum_{a\in V/\auto, v\in a} \ket{v}\bra{a},
+$$
+where we treat the orbits $a\in V/\auto$ as equivalence classes of vertices
+so the notation $v\in a$ makes sense.
+Another way to write this uses the function 
+$$
+    f : V \to V/\auto
+$$
+that sends each vertex to the $\auto$-orbit containing it.
+This gives 
+\begin{equation}\label{eqforC}
+    C = \sum_{v\in V} \ket{v}\bra{f(v)}.
+\end{equation}
+We also let the function 
+$$
+    g : V/\auto \to V
+$$
+be a right inverse of $f.$ In other words, $g$ picks a
+representative vertex from each $\auto$-orbit.
+We now let  
+\begin{equation}\label{eqforD}
+    %D = \sum_{i\in V/\auto} \ket{i}\bra{v_i}
+    D = \sum_{a\in V/\auto} \ket{a}\bra{g(a)},
+\end{equation}
+%where $v_i\in i$ for each $i\in V/\auto$.
+and the equation $DC=I$ follows from $fg$ being the identity on $V/\auto.$
+A direct computation gives a formula for the orbigraph as
+\begin{equation}\label{eqforOrbi}
+    D\Gamma C = \sum_{a\in V/\auto, v\in V} \bra{g(a)} \Gamma \ket{v}\ \ket{a}\bra{f(v)}.
+\end{equation}
 
 \dolemma{2.11}
 The orbigraph of an irreducible stoquastic matrix is also
@@ -2381,7 +2426,70 @@ irreducible stoquastic.
 \doproof
 Let $\Gamma:\Complex[V]\to\Complex[V]$ be an irreducible stoquastic matrix
 with graph automorphism group $\auto.$
-\todo{finish this}
+%    Let $i\in V/\auto$ be an $\auto$-orbit.
+%    Then $C\ket{i}$ is $\auto$-invariant
+%    and so $\Gamma C\ket{i}$ is also $\auto$-invariant.
+%    Let $\ket{u}\in\Complex[V/A]$ be such that
+%    $$
+%    \Gamma C\ket{i} = C\ket{u}.
+%    $$
+%    Now we let $j\in V/\auto$ and compute
+%    \begin{align*}
+%    \braket{j}{u} 
+%        &= \bra{j} D C \ket{u} \\
+%        &= \bra{j} D \Gamma C \ket{i} \\
+%        &= \bra{j} D \Gamma \sum_{v\in i} \ket{v} \ \ \ \mbox{using eq. \Eref{eqforC}}\\
+%        &= \sum_{v\in i} \bra{v'} \Gamma \ket{v} \ \ \ \mbox{using eq. \Eref{eqforD}, with $v'\in j$.}\\
+%        %&\ge 0 \ \ \ \mbox{if $i\ne j$.}
+%    \end{align*}
+%    And so $\braket{j}{u}\ge 0$ if $i\ne j$ because $\Gamma$ is stoquastic.
+We first show that the orbigraph of $\Gamma$ is stoquastic.
+Let $a, b\in V/\auto$, be distinct $\auto$-orbits. We use equation \Eref{eqforOrbi}:
+\begin{align*}
+   \bra{a} D\Gamma C \ket{b}
+        &= \sum_{v\in V} \bra{g(a)}\Gamma \ket{v}\braket{f(v)}{b} \\
+        &= \sum_{v\in b} \bra{g(a)}\Gamma \ket{v} \\
+        &\ge 0
+\end{align*}
+because $\Gamma$ is stoquastic.
+To show that the orbigraph is irreducible we need to construct a sequence of orbits
+$\{ a_1=a,a_2,...,a_n=b \}$ such that 
+$$
+    \bra{a_{i+1}}D\Gamma C\ket{a_{i}}>0\ \ \mbox{ for $i=1,...,n-1.$}
+$$
+Using the fact that $\Gamma$ is irreducible, there is a sequence
+in $V$,
+$$
+    \{ u_1=g(a), u_2, ..., u_n=g(b) \},
+$$ such that 
+$$
+    \bra{u_{i+1}}\Gamma \ket{u_{i}}>0\ \ \mbox{ for $i=1,...,n-1.$}
+$$
+Now we examine the sequence $\{f(u_i)\in V/\auto\}$.
+We already see that $f(u_1)=a$ and $f(u_n)=b$. By passing to
+a subsequence if necessary, we can assume that $f(u_i)\ne f(u_{i+1}).$
+Computing as follows 
+\begin{align*}
+    \bra{f(u_{i+1})} D\Gamma C \ket{f(u_i)} 
+        &= \sum_{v\in f(u_i)} \bra{gf(u_{i+1})} \Gamma \ket{v} \ \ \ 
+        \mbox{by equation \Eref{eqforOrbi}}\\
+        &= \sum_{v\in f(u_i)} \bra{u_{i+1}} \Gamma \ket{v}\ \ \ 
+        \mbox{using $\sigma\in\auto$, $\sigma:gf(u_{i+1})\mapsto u_{i+1}$} \\
+        &\ge \bra{u_{i+1}} \Gamma \ket{u_i}\ \ \ 
+        \mbox{because $\Gamma$ is stoquastic}\\
+        &> 0
+\end{align*}
+by assumption,
+and so $D\Gamma C$ is irreducible.
+There is a slight wrinkle in the above argument in that we passed
+to a subsequence of the $\{u_i\}$ in order to assume $f(u_i)\ne f(u_{i+1}).$ 
+This is no obstruction because $\auto$ is transitive on its orbits.
+In the term 
+$$
+        \sum_{v\in f(u_i)} \bra{u_{i+1}} \Gamma \ket{v}
+$$
+we sum over an orbit $f(u_i)$ and so 
+we may replace the vertex $u_{i+1}$ by any other vertex in its orbit.
 \tombstone
 
 \dotheorem{2.12}
@@ -2415,7 +2523,7 @@ Then we have,
     &= \lambda DC\ket{u} \\
     &= \lambda \ket{u}
 \end{align*}
-where we used the fact that $D$ is a left inverse for $C$.
+%where we used the fact that $D$ is a left inverse for $C$.
 This shows $\lambda$ is an eigenvalue for $\Gamma/\auto.$
 By the previous lemma $\Gamma/\auto$ is irreducible
 stoquastic and since $\ket{u}$ is positive it must correspond to the
@@ -2941,7 +3049,7 @@ diagonalization numerical results below.
 %The (bare) logical operators are derived in \cite{Bombin2015single} proposition 23.
 %gauge fixing: \cite{Bombin2015}...
 %error correction: \cite{Brown2015fault}
-%equivelance to toric: \cite{Kubica2015unfolding}
+%equivalence to toric: \cite{Kubica2015unfolding}
 
 %A complex lie algebra is the direct sum of simple ideals iff it is semisimple
 %http://math.stackexchange.com/questions/405261/a-complex-lie-algebra-is-the-direct-sum-of-simple-ideals-iff-it-is-semisimple
