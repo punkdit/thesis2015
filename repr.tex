@@ -759,7 +759,7 @@ We will notate each block as
 $\Ham_t := \sum_{g\in G_0}\rho_t(g)$
 for each irrep $\rho_t$ appearing in $\Ham.$
 \begin{framed}
-\noindent{\bf Fact 0:}
+\noindent
 The Hamiltonian is block diagonalized, with blocks indexed by operators $t$ in
 the abelian group $T$ and multiplicity $2^k:$
 $$
@@ -1511,7 +1511,7 @@ the Hamiltonian blocks $H_t$ below.
 \danbrowne{I'd suggest you introduce Ht and Htx,tz more prominently. }
 
 \begin{framed}
-\noindent{\bf Important:}
+\noindent
 The computational basis identifies
 basis vectors of $\Complex[2^n]$
 with elements of a finite vector space $\Fnd$:
@@ -1716,6 +1716,38 @@ as the system size grows \cite{Pfeuty1970}.
 
 \danbrowne{You need to make it clearer how much of this is newly defined and how much is developing previous work. Is the Perron-Frobenius construction your own?}
 
+A \emph{non-negative matrix} is a real matrix
+$\Gamma$ with entries $\Gamma_{ij}\ge 0.$
+A \emph{positive vector} $\ket{v}$ is a real vector 
+with all-positive entries. Similarly, a \emph{non-negative vector}
+has all entries real and non-negative.
+
+A non-negative matrix 
+$\Gamma : \Complex[V] \to \Complex[V]$
+is called \emph{irreducible} if the following holds:
+for any pair $u, v\in V$ with $u\ne v$ there is
+a sequence $\{u_i \}_{i=1,...,n}$ such that $u_1=u$
+and $u_n=v$ and
+$$
+    \bra{u_{i+1}}\Gamma\ket{u_i} > 0\ \ \ \mbox{for}\ \ i=1,...,n-1.
+$$
+This says that viewed as a weighted directed graph, $\Gamma$ is
+``connected''.
+That is, we can find a directed path in $\Gamma$
+from any vertex $u$
+to any other vertex $v$.
+
+\dotheorem{(Perron-Frobenius)}
+Let $\Gamma$ be a non-negative irreducible matrix.
+Then $\Gamma$ has a positive real eigenvalue
+$\lambda$ equal to its spectral radius,
+this eigenvalue is non-degenerate and can be associated 
+with a positive eigenvector $\ket{v}$.
+Furthermore, any other non-negative eigenvector of 
+$\Gamma$ is a scalar multiple of $\ket{v}.$
+\tombstone
+
+
 %We restrict our attention to Hamiltonians whose off-diagonal entries
 %are non-negative (in some basis).
 %These are also known as \emph{stoquastic} Hamiltonians \cite{Bravyi2006}.
@@ -1799,7 +1831,7 @@ An \emph{irreducible matrix} is one whose corresponding graph is connected.
 The off-diagonal entries of $H$ are all positive.
 If we use a spectral shift operator, a constant multiple of the identity $+cI$,
 we find that $H+cI$ is a non-negative matrix. 
-We call such a matrix \emph{Stoquastic} \cite{Bravyi2008}.
+We call such a matrix \emph{Stoquastic} \cite{Bravyi2008,Bravyi2015}.
 
 We think of the $Z$ operators as potential energy,
 and the $X$ operators as kinetic terms.
@@ -1899,7 +1931,7 @@ components $\Gamma_{t_X}$,
 with $t_X\in\Span{T_X}$,
 %components $\{\Gamma_{t_X}\}_{t_X\in\Span{T_X}}$,
 %for each $t_X\in\Span{T_X}$
-the top eigenvalue 
+the first eigenvalue 
 of each $\Gamma_{t_X}$
 %$\lambda_1(\Gamma_{t_X})$
 is non-degenerate
@@ -2088,7 +2120,7 @@ $$
 $$
 %By the previous Lemma we apply the Perron-Frobenius theorem
 %to find that the top eigenvector of $\Gamma_{t_X}$ is positive.
-And by Lemma 2.2 the top eigenvector of $\Gamma_{t_X}$ is 
+And, by Lemma 2.2 the first eigenvector of $\Gamma_{t_X}$ is 
 non-degerate and positive.
 This will be an eigenvector of each stabilizer, and in particular
 must be fixed by the $X$-type stabilizers.
@@ -2204,7 +2236,7 @@ Using this cellulation we now construct the gauge code.
 Qubits are associated with the $n$ vertices.
 We associate operators to other cells, or union of cells,
 by using the contained vertices as support.
-\danbrowne{Is this correct? All the operators here are built from faces, not cells. }
+%\danbrowne{Is this correct? All the operators here are built from faces, not cells. }
 Because this is a self-dual code, the same goes for
 both the $X$-type and $Z$-type operators.
 %and we confuse the distinction between union of cells
@@ -2233,9 +2265,12 @@ In particular, the entries of eigenvectors
 often have repeated values.
 This motivates investigating the symmetries of the 
 Hamiltonian that permute the basis vectors.
-This idea is also found in the
-spectral graph theory literature, see for example Ref.~\cite{Cvetkovic1980}
-chapter 5.
+
+The orbigraph idea is also found in the
+spectral graph theory literature, see Ref. \cite{Daly2017}.
+The orbigraph also appears in disguise in Ref. \cite{Cvetkovic1980} chapter 5, 
+see in particular the example on page 148-149.
+Lemma 2.11 and Theorem 2.12 below appear to be new results.
 
 \def\auto{\mathcal{A}}
 
@@ -2675,6 +2710,7 @@ See \cite{Cvetkovic1980} chapter 5 for more details.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
+
 \subsection{The gauge color code model}
 The smallest gauge color code has $n=15$ qubits,
 $G_0$ has $18$ each of X/Z-type gauge operators,
@@ -3719,7 +3755,7 @@ graph $\Gamma$, in particular the size of stabilizers.
 This analysis is too weak to show any result, and so
 further work is needed.
 If this approach is to succeed, a much sharper
-bound on the shape of the wavefunction is needed.
+bound on the shape of groundspace wavefunctions is needed.
 
 The perturbation theory for stabilizer Hamiltonians has good
 results, we would also want something like this for gapped
