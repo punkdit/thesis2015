@@ -282,8 +282,10 @@ here we zoom-in and show an example involving just two tiles (inside a larger ti
 \includegraphics[width=0.8\columnwidth]{pic-syndrome.pdf}
 \end{center}
 In (a) we have two pair-creation events, each crossing the boundary of a tile. 
-\todo{The problem we have is...}
 One observable (tile) is solid black, and the other observable is dashed.
+The problem we solve here is that 
+these observables are different from the observables making up the
+pair-creation events.
 In (b) we join the participating curve 
 diagrams arbitrarily into a single curve diagram.
 %This could already become very complicated, even if we
@@ -777,8 +779,9 @@ We run a monte-carlo simulation, for various lattice sizes $L$,
 and error rate per edge $t_{\mathrm{sim}}.$
 The number of pair-creation
 processes accross each edge of the lattice
-is sampled from a poisson process,
-and $t_{\mathrm{sim}}$ indicates the expected value of this number.
+is sampled from a Poisson process,
+and $t_{\mathrm{sim}}$ indicates the expected value of this 
+Poisson process.
 
 The decoder failure rate shows a clear threshold at around 
 $t_{\mathrm{sim}}=0.125\pm0.003.$ 
@@ -841,11 +844,46 @@ as the lattice size grows.
 %sequence $\{1, 1, 2, 3...\}.$
 
 
-\section{Summary}
+\section{Discussion}
 
-\todo{we did stuff}
+In this chapter we simulated a non-abelian anyon system acting as
+a quantum error correcting code.
 
+The algorithms for simulating non-abelian anyons in general require
+the machinery of modular functors which was described in Chapter 3.
+We reformulated this theory in a combinatorial way suitable for
+simulation on a classical computer.
 
+Because the anyons involved are universal for quantum computing it
+would at first sight appear to be too difficult to simulate,
+but we are able to succeed anyway by decomposing the system into smaller
+non-interacting parts. This turns out to work 
+sufficiently well in the regime of interest, where there are
+few anyons widely separated.
+
+We use a standard error correction algorithm that involves
+clustering together nearby anyons, and fusing these until there
+are no anyons remaining.
+
+We present numerical evidence of threshold behaviour:
+below a certain noise rate, the code error rate decreases as
+the system size grows.
+
+The simulation algorithms used here
+would apply to any other anyon system by merely replacing
+the $F$ and $R$ matrices.
+Higher genus surfaces could also be simulated, these would store
+more qubits, but would involve a more complicated tiling structure.
+
+Quantum information can also be stored in the fusion space of
+four widely separated anyons, but this may be computationally
+harder to simulate
+as the system does not decompose into non-interacting parts in an
+obvious way as above.
+
+%It is not so clear how to simulate a
+%It would seem likely
+%that similar threshold numerics would be obtained.
 
 
 

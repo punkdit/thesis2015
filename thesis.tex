@@ -135,7 +135,7 @@
 
 \title{Non-Abelian Quantum Codes}
 \author{Simon David Burton}
-\date{2016}
+\date{2017}
 
 \usepackage[phd]{edmaths}
 \flushbottom
@@ -181,12 +181,17 @@ which one would expect for a self-correcting quantum memory.
 \newpage
 \pagenumbering{arabic}
 
+\setcounter{chapter}{-1}
+\chapter{Overview}
+
+\danbrowne{motivate the research area and summarise key results}
+
+blah de blah blah blah
+
 \chapter{Introduction}
 
 %\chapter{A Homological Perspective on Quantum Codes}
 %\input{stabilizer.tex}
-
-\danbrowne{motivate the research area and summarise key results}
 
 
 In this chapter we give a brief introduction to
@@ -354,8 +359,17 @@ Now we have a new formula for the Euler characteristic,
 which follows from
 %from the homology condition
 %$\partial_i \circ \partial_{i+1}=0$  and
-an application of the rank-nullity theorem \danbrowne{What's this?} to
-equation \Eref{EulerEq}.
+an application of the rank-nullity theorem
+\footnote{The rank-nullity theorem of linear algebra
+states that
+given a linear map $f:V\to W$ on a finite-dimensional
+vector space $V$,
+we have $\Dim(\Im(f)) + \Dim(\Ker(f)) = \Dim(V).$}
+%the sum of the
+%dimension of the image of $f$ and the
+%dimension of the kernel of $f,$ equals the dimension of $V.$}
+%\danbrowne{What's this?}
+to equation \Eref{EulerEq}.
 
 Going back to the torus example, with four faces,
 eight edges and four vertices:
@@ -665,7 +679,7 @@ L_X = \left( \begin{array}{cccccccc}
 \end{align*}
 Together this forms an $(L,S,T)$-decomposition of the CSS
 stabilizer code $S$\ \ \cite{Duclos-Cianci2010a,Yoshida2010}.
-\danbrowne{What is the point of this?}
+%\danbrowne{What is the point of this?}
 
 To see the error correction process more vividly, we expand the
 code dimensions.
@@ -823,9 +837,9 @@ While chapter 4 relies on chapter 3, chapter 2 is independent of these.
 %* \ \ \ \ \ \ \ \ \ \ * \ \ \ \ \ \ \ \ \ \ *
 %\end{center}
 
-\section{Philosophy}
+\section{Discussion}
 
-\begin{samepage}
+%\begin{samepage}
 It seems that physics has a long history of surprising encounters
 with advanced mathematical concepts,
 long after the mathematicians
@@ -838,16 +852,12 @@ success in theoretical physics:
 \item ???
 \item profit!
 \end{enumerate}
-\end{samepage}
+%\end{samepage}
 This is somewhat the philosophy of the present thesis.
 The downfall of this is perhaps that some concepts are
 elucidated in an overly technical manner. However, the
 author feels this approach to be useful as it makes contact
 with a shared mathematical language.
-
-\section{Summary of thesis}
-
-\todo{we gonna say some stuff}
 
 \section{Acknowledgement}
 
