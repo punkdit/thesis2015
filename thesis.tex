@@ -108,6 +108,7 @@
 \def\Stab{S}
 
 
+
 \newcommand{\ket}[1]{|{#1}\rangle}
 \newcommand{\expect}[1]{\langle{#1}\rangle}
 \newcommand{\bra}[1]{\langle{#1}|}
@@ -118,6 +119,8 @@
 \newcommand{\bbra}[1]{\bigl\langle\,{#1}\,\bigr|}
 \newcommand{\bketbra}[2]{\bket{#1}\!\bra{#2}}
 \newcommand{\bbraket}[2]{\bigl\langle\,{#1}\,\bigr|\,{#2}\,\bigr\rangle}
+
+\def\Span#1{\langle #1 \rangle}
 
 %\newcommand{\todo}[1]{\textcolor{red}{#1}}
 
@@ -680,6 +683,28 @@ L_X = \left( \begin{array}{cccccccc}
 Together this forms an $(L,S,T)$-decomposition of the CSS
 stabilizer code $S$\ \ \cite{Duclos-Cianci2010a,Yoshida2010}.
 %\danbrowne{What is the point of this?}
+We summarize this in the following dictionary that
+relates the language of $\Field_2$-linear algebra, homology and
+CSS stabilizer codes:
+\begin{center}
+\bgroup
+\def\arraystretch{1.3}
+\begin{tabular}{ ccc }
+\underline{$\Field_2$-linear algebra}
+& \ \ \ \underline{homology}\ \ \   
+& \ \ \ \underline{quantum code}\ \ \  \\
+%\hline
+$S_Z S_X^\top = 0$ & $\partial_1 \partial_2 = 0$ & commutativity of $S$ \\
+$S_Z$ & boundary operator $\partial_1$  & bitflip parity checks \\
+$\Ker(S_Z)$ & 1-dim cycles                      & undetectable bitflips \\
+$\Span{T_X}$ &                                  & detectable bitflips \\
+$\Span{S_X}$ & 1-dim boundaries                 & no effect on codespace \\
+$\Span{L_X}$ & cycles minus boundaries          & effect the codespace \\
+\end{tabular}
+\egroup
+\end{center}
+
+
 
 To see the error correction process more vividly, we expand the
 code dimensions.
@@ -706,26 +731,48 @@ If the resulting operator $c+c'$ is in the image of $S_X,$
 ie. a boundary, then the error correction has succeeded.
 
 Otherwise, $c+c'$ is not a boundary and represents a non-trivial
-operator in $H_1$ and will therefore alter the encoded qubits\danbrowne{If this is the first place you introduce a homologically non-trivial operator you need to explain why it corresponds to a non-trivial logical operator.}:
+operator in $H_1$ and will therefore alter the encoded qubits:
+%\danbrowne{If this is the first place you introduce a homologically non-trivial operator you need to explain why it corresponds to a non-trivial logical operator.}
 \begin{center}
 \includegraphics[width=0.8\columnwidth]{pic-toric-fail.pdf}
 \end{center}
 
-To detect phase-flip errors, we can perform a change of basis on each qubit ... \todo{fixme}
-this swaps the matrices of the $X$ and $Z$ operators and so 
-the above sequence \Eref{eq:homology} becomes:
+To detect phase-flip errors, we can perform a change of basis on each qubit
+using the Hadamard transform:
 $$
-    \Field^{m_Z} \xrightarrow{\ \ S_Z^\top\ \ } 
-    \Field^{n} \xrightarrow{\ \ S_X\ \ } 
-    \Field^{m_X}
+H = \frac{1}{\sqrt{2}} \left( \begin{array}{ll}
+1&1\\
+1&-1\end{array} \right).
 $$
-and we can repeat the same error correction analysis that
-we did for bitflip errors.
+This swaps the roles of the $X$ and $Z$ operators:
+\begin{align*}
+    H^\dag X H &= Z,\\
+    H^\dag Z H &= X.\\
+\end{align*}
+Applying this to our matrices $S_Z$ and $S_X$ we get 
+two new matrices $\widetilde{S_X}$ and $\widetilde{S_Z}$:
+\begin{align*}
+    S_Z &\mapsto \widetilde{S_X} \\
+    S_X &\mapsto \widetilde{S_Z},
+\end{align*}
+The above sequence \Eref{eq:homology} becomes:
+$$
+    \Field^{\widetilde{m_Z}} \xrightarrow{\ \ \widetilde{S_Z}^\top\ \ } 
+    \Field^{n} \xrightarrow{\ \ \widetilde{S_X}\ \ } 
+    \Field^{\widetilde{m_X}}.
+$$
+Taking the transpose of the operators gives: 
+$$
+    \Field^{\widetilde{m_X}} \xrightarrow{\ \ \widetilde{S_X}^\top\ \ } 
+    \Field^{n} \xrightarrow{\ \ \widetilde{S_Z}\ \ } 
+    \Field^{\widetilde{m_Z}}
+$$
+and we repeat the same bitflip error correction analysis as 
+above on this new quantum code.
 
-...\todo{fixme}
-
+This transpose idea also applies in the homology context.
 Given any homology $\partial_1 \partial_2 = 0$
-we get another homology by taking the transpose:
+we get another homology, or \emph{co-homology}, by taking the transpose:
 $\partial_2^\top \partial_1^\top = 0.$
 \begin{center}
 %\includegraphics[width=1.0\columnwidth]{pic-bdy.pdf}
@@ -753,7 +800,7 @@ $$
     H = \sum_{g\in G_0} g.
 $$
 Note that in this thesis we use a neg-Hamiltonian convention,
-so that the groundspace belongs to the largest eigenvalue of $H$.
+so that the groundspace belongs to the top eigenvalue of $H$.
 Because all the terms in $H$ commute, we can label the eigenspaces of
 this Hamiltonian uniquely by the eigenvalues of the stabilizers.
 The groundspace is the simultaneous $+1$ eigenspace of the stabilizers
@@ -761,7 +808,7 @@ and therefore corresponds exactly to the stabilized codespace above.
 
 In terms of error correction,
 we think of noise processes as being diagnosed by a syndrome. 
-But here 
+But here the
 effects of noise are now interpreted energetically, as particle creation.
 Any bitflip error ``creates'' particles at the vertex endpoints.
 In other words, the syndrome is interpreted as a collection of particles.
@@ -844,19 +891,26 @@ It seems that physics has a long history of surprising encounters
 with advanced mathematical concepts,
 long after the mathematicians
 themselves have finished being excited by them.
-This would suggest the following algorithm for
-success in theoretical physics:
-\danbrowne{This is verging on too informal for a thesis. }
-\begin{enumerate}
-\item look at what mathematicians were getting excited about several decades ago,
-\item ???
-\item profit!
-\end{enumerate}
+Homology theory was originally invented by 19th century
+mathematicians to help with complex analysis and number theory.
+The Euler characteristic is even older.
+This would suggest that to be successful in
+theoretical physics
+would involve looking closely
+at what mathematicians were getting excited about several decades ago.
+%This would suggest the following algorithm for
+%success in theoretical physics:
+%\danbrowne{This is verging on too informal for a thesis. }
+%\begin{enumerate}
+%\item look at what mathematicians were getting excited about several decades ago,
+%\item ???
+%\item profit!
+%\end{enumerate}
 %\end{samepage}
 This is somewhat the philosophy of the present thesis.
 The downfall of this is perhaps that some concepts are
 elucidated in an overly technical manner. However, the
-author feels this approach to be useful as it makes contact
+author feels this approach can still be useful as it makes contact
 with a shared mathematical language.
 
 \section{Acknowledgement}
