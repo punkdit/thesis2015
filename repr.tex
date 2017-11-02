@@ -1714,7 +1714,10 @@ as the system size grows \cite{Pfeuty1970}.
 
 \section{Perron-Frobenius theory}
 
-\danbrowne{You need to make it clearer how much of this is newly defined and how much is developing previous work. Is the Perron-Frobenius construction your own?}
+%\danbrowne{You need to make it clearer how much of this is newly defined and how much is developing previous work. Is the Perron-Frobenius construction your own?}
+In this section we present 
+applications of Perron-Frobenius theory to finding bounds on the spectrum of
+CSS gauge code Hamiltonians. These are new results.
 
 A \emph{non-negative matrix} is a real matrix
 $\Gamma$ with entries $\Gamma_{ij}\ge 0.$
@@ -3728,50 +3731,99 @@ $$
 
 \section{Discussion}
 
-\danbrowne{Needs a concluding section summarising results and discussing open questions and potential research directions. }
+%\danbrowne{Needs a concluding section summarising results and discussing open questions and potential research directions. }
 
-In section 1 we apply general principles of group
-representation theory to block diagonalize Hamiltonians.
-The terms of the Hamiltonian generate a group (by multiplication),
-and we also have a ....
-\todo{fixme}
+The goal of this chapter is to understand the spectra of
+certain frustrated qubit Hamiltonians. Of particular interest is
+to understand how 
+the gap between the first two eigenvalues behaves as we 
+increase the number of qubits.
+For a system to maintain a topologically ordered groundstate
+we would expect this gap to be bounded away from zero, or ``gapped''.
 
-In summary, we have the complete representation
-theory for $CSS$ gauge code Hamiltonians.
+The numerical results obtained show some evidence for
+this gapped behaviour for the 3D gauge color code Hamiltonian.
+To get these numerics we rely on several key results.
+The first is to decompose the Hamiltonian into a direct sum
+of operators labelled by stabilizer eigenvalues.
+This is essentially group representation theory as applied to
+gauge codes.
+The second result was obtained using Perron-Frobenius theory, as the
+Hamiltonians of interest are stoquastic.
+This theory shows where the first and second eigenvalue
+is to be found in the block decomposition of the Hamiltonian
+which leads to a polynomial reduction in the numeric workload.
+Also, the Perron-Frobenius theory gives geometric reasons as to
+why the size of stabilizers is related to the gap.
 
-analyse spectrum of weakly self-dual $CSS$ gauge code
-Hamiltonians using Perron-Frobenius theory.
+The third main result of this chapter is the decomposition of
+each Hamiltonian block into mutually commuting ``pieces''.
+This is explained using the theory of finite-dimensional semi-simple
+Lie algebras.
+In the case of the 3D gauge color code Hamiltonian, this
+decomposition yields an exponential reduction in 
+the numeric workload, by dividing the number of qubits by 6.
 
-It is clear from numerics that nothing as simple as the proto-fact
-holds. Roughly speaking, larger stabilizers lead to gapless behaviour,
-but 
+Finally, the connection between stabilizer size and the gap is further 
+investigated via the idea of the Cheeger cut. 
+This builds on the Perron-Frobenius theory results.
+If the groundstate wavefunction is sufficiently concentrated
+into potential wells, then we can construct an excited state
+that has eigenvalue close to the ground eigenvalue.
+And the distance between potential wells is controlled by
+the size of stabilizers.
+The conjecture we would like to make would state 
+how this spectral gap is controlled by the size of the frustrated
+stabilizers: large stabilizers lead to gappless behaviour while
+small stabilizers maintain a gap.
+However, it is not clear how to formulate this conjecture, and
+even less clear how to prove it. 
+More numerics need to be performed, with the specific
+goal of understanding the shape of the groundspace wavefunction,
+and how this relates to the geometry of the underlying code.
 
-more models need to be considered,  numerics obtained,
-including codes chosen from random ensembles.
-
-The Cheeger inequalities are a first attempt to
-relate the gap to the geometric structure of the
-graph $\Gamma$, in particular the size of stabilizers.
-This analysis is too weak to show any result, and so
-further work is needed.
-If this approach is to succeed, a much sharper
-bound on the shape of groundspace wavefunctions is needed.
-
-The perturbation theory for stabilizer Hamiltonians has good
-results, we would also want something like this for gapped
-gauge code Hamiltonians, to establish physicality.
-
-We leave as an open problem 
-to extend the representation theory of
-CSS gauge codes in section 2.4 to arbitrary gauge codes
-(not necessarily satisfying the CSS condition).
-We do not need this in the present work.
-
-On an algebraic level, there are plenty of other questions
-to ask. Such as monoid representation theory, locally commuting
-projector Hamiltonians, Kitaev's quantum double construction...
-
-Can you hear the sound of a semi-simple Lie algebra?
+%In section 1 we apply general principles of group
+%representation theory to block diagonalize Hamiltonians.
+%The terms of the Hamiltonian generate a group (by multiplication),
+%and we also have a ....
+%\todo{fixme}
+%
+%In summary, we have the complete representation
+%theory for $CSS$ gauge code Hamiltonians.
+%
+%analyse spectrum of weakly self-dual $CSS$ gauge code
+%Hamiltonians using Perron-Frobenius theory.
+%
+%It is clear from numerics that nothing as simple as the proto-fact
+%holds. Roughly speaking, larger stabilizers lead to gapless behaviour,
+%but 
+%
+%more models need to be considered,  numerics obtained,
+%including codes chosen from random ensembles.
+%
+%The Cheeger inequalities are a first attempt to
+%relate the gap to the geometric structure of the
+%graph $\Gamma$, in particular the size of stabilizers.
+%This analysis is too weak to show any result, and so
+%further work is needed.
+%If this approach is to succeed, a much sharper
+%bound on the shape of groundspace wavefunctions is needed.
+%
+%The perturbation theory for stabilizer Hamiltonians has good
+%results, we would also want something like this for gapped
+%gauge code Hamiltonians, to establish physicality.
+%
+%We leave as an open problem 
+%to extend the representation theory of
+%CSS gauge codes in section 2.4 to arbitrary gauge codes
+%(not necessarily satisfying the CSS condition).
+%We do not need this in the present work.
+%
+%On an algebraic level, there are plenty of other questions
+%to ask. Such as monoid representation theory, locally commuting
+%projector Hamiltonians, Kitaev's quantum double construction...
+%
+%Can you hear the sound of a semi-simple Lie algebra?
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
