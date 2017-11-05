@@ -1725,6 +1725,12 @@ A \emph{positive vector} $\ket{v}$ is a real vector
 with all-positive entries. Similarly, a \emph{non-negative vector}
 has all entries real and non-negative.
 
+Given a non-negative matrix 
+$\Gamma : \Complex[V] \to \Complex[V]$
+we will also view this as a \emph{weighted graph} on a set of vertices $V.$
+This associates a directed edge $i\mapsto j$ for every positive
+entry $\Gamma_{ij}>0.$
+
 A non-negative matrix 
 $\Gamma : \Complex[V] \to \Complex[V]$
 is called \emph{irreducible} if the following holds:
@@ -1734,11 +1740,18 @@ and $u_n=v$ and
 $$
     \bra{u_{i+1}}\Gamma\ket{u_i} > 0\ \ \ \mbox{for}\ \ i=1,...,n-1.
 $$
-This says that viewed as a weighted directed graph, $\Gamma$ is
-``connected''.
+This says that viewed as a weighted graph, $\Gamma$ is ``connected''.
 That is, we can find a directed path in $\Gamma$
-from any vertex $u$
-to any other vertex $v$.
+from any vertex $u$ to any other vertex $v$.
+In general, this is a coarser notion than
+the (vector space) reducibility used in the representation theory above.
+The reason why is that when reducing a matrix we work
+with a fixed basis.
+
+The following theorem originally appeared
+in the work of Frobenius \cite{Frobenius1912}, who
+was building on previous results of Perron \cite{Perron1907}.
+See also the recent book \cite{Baez2012}.
 
 \dotheorem{(Perron-Frobenius)}
 Let $\Gamma$ be a non-negative irreducible matrix.
@@ -1750,6 +1763,24 @@ Furthermore, any other non-negative eigenvector of
 $\Gamma$ is a scalar multiple of $\ket{v}.$
 \tombstone
 
+Therefore, when $\Gamma$ is a symmetric non-negative irreducible matrix,
+we see that this theorem implies that the top eigenvalue of $\Gamma$ is
+non-degenerate and associated with a positive eigenvalue.
+
+Given a matrix $\Gamma$ with $\Gamma_{ij}\ge 0, i\ne j$ we can
+find a spectral shift operator which is a constant multiple of the identity $+cI$,
+such that $\Gamma+cI$ is a non-negative matrix. 
+We refer to such a matrix $\Gamma$ as \emph{stoquastic} \cite{Bravyi2008,Bravyi2015}.
+When $\Gamma$ is also irreducible we can therefore apply the Perron-Frobenius
+theorem with the proviso that the eigenvalues are shifted by some constant.
+
+For a linear operator $A$ we will use notation 
+$\lambda_1(A)$, $\lambda_2(A),$ etc., to denote the (real) eigenvalues of $A$,
+ordered as:
+$$
+    \lambda_1(A) \ge \lambda_2(A) \ge ...
+$$
+Similarly, the notation $v_1(A), v_2(A),$ etc., refers to the associated eigenvectors.
 
 %We restrict our attention to Hamiltonians whose off-diagonal entries
 %are non-negative (in some basis).
@@ -1779,43 +1810,15 @@ $\Gamma$ is a scalar multiple of $\ket{v}.$
 %To switch back and forth between the $X$ and $Z$-type
 %representations 
 
-%We begin this section with the following two definitions.
-A CSS gauge code is \emph{self-dual} when the $X$-type and $Z$-type
-gauge generators are equal: $$G_X = G_Z.$$
-The $XY$-model is an example of a self-dual CSS gauge code.
-A CSS gauge code is \emph{weakly self-dual}
-when there is a permutation $P$ on the set of $n$ qubits
-that induces equality of the gauge generators:
-$$
-    G_X P = G_Z,
-$$
-where we write $P$ as an $n\times n$ permutation matrix.
-The compass model is then weakly self-dual when we transpose
-the square lattice of $l\times l$ qubits.
-
-Any stabilizer that acts as $-1$ in a given block of
-the Hamiltonian we will call a \emph{frustrated stabilizer}
-(with respect to the given block.)
-Similarly, a \emph{satisfied stabilizer} acts as $+1$ in a given
-block of the Hamiltonian.
-We will call a
-vector \emph{stabilized} if it is a $+1$ eigenvector 
-of every stabilizer in the given gauge group.
-
-We now turn to the idea of a reducibile matrix.
-In general, this is a coarser notion than
-vector space reducibility used in the representation theory above.
-The reason why is that when reducing a matrix we work
-with a fixed basis.
-
-%One way to understand this is via graph theory.
-Given a CSS gauge code Hamiltonian $H,$ we see that 
-the diagonal terms (working in the computational basis)
-come from the $Z$-type operators and the off-diagonal terms
+Given a CSS gauge code Hamiltonian $H,$ 
+let the matrix for $H$ in the computational basis be $\Gamma.$
+We see that the diagonal entries of $\Gamma$
+come from the $Z$-type operators and the off-diagonal entries 
 come from $X$-type operators.
-
-This suggests the following definition.
-We define a graph $\Gamma$ with vertices the $2^n$ computational
+Therefore, the off-diagonal entries of $\Gamma$ are non-negative 
+and so this matrix is stoquastic.
+In the language of graph theory,
+$\Gamma$ has vertices the $2^n$ computational
 basis elements, and edges:
 $$
     \ket{v} \mapsto g_X \ket{v}, \smbox{for all} v\in\Fnd, g_X\in G_X.
@@ -1827,19 +1830,14 @@ $$
 $$
 %In this way we can consider $H$ and $\Gamma$ interchangeably,
 %as either a matrix or a graph.
-The examples with diagrams in section 2.1.1 are meant to illustrate this
-graph picture.
-An \emph{irreducible matrix} is one whose corresponding graph is connected.
+%The examples with diagrams in section 2.1.1 are meant to illustrate this
+%graph picture.
+%An \emph{irreducible matrix} is one whose corresponding graph is connected.
 
-The off-diagonal entries of $H$ are all positive.
-If we use a spectral shift operator, a constant multiple of the identity $+cI$,
-we find that $H+cI$ is a non-negative matrix. 
-We call such a matrix \emph{Stoquastic} \cite{Bravyi2008,Bravyi2015}.
-
-We think of the $Z$ operators as potential energy,
-and the $X$ operators as kinetic terms.
-This is consistent with the classical use of the (real) symplectic 
-group.
+We can think of the $Z$-type operators as potential energy,
+and the $X$-type operators as kinetic energy.
+This is consistent with the classical use of the (real) symplectic group,
+where dynamical variables come in position and momentum pairs.
 
 \dolemma{2.1}
 Given a CSS gauge code Hamiltonian $H$, writing
@@ -1915,16 +1913,17 @@ Because each of these components is independant of $l_X$ we write it as $\Gamma_
 %raising and lowering operators, and the diagonal
 %terms measure the energy of each level.
 
-Using \Eref{hamblockgen}
-we have that 
-\begin{align*}
-    \Gamma_{0} - \Gamma_{t_X}
-    &= \sum_{t_Z\in\Span{T_Z}} H_{0,t_Z} - H_{t_X,t_Z} \\
-    &= \sum_{t_Z\in\Span{T_Z}} \sum_{u\in\Field_r}
-        \bigl( 2w(G_Z R_X^\top v^\top + G_z t_X^\top)
-        - 2w(G_Z R_X^\top v^\top)\bigr)
-        \ket{v}\bra{v}
-\end{align*}
+
+%Using \Eref{hamblockgen}
+%we have that 
+%\begin{align*}
+%    \Gamma_{0} - \Gamma_{t_X}
+%    &= \sum_{t_Z\in\Span{T_Z}} H_{0,t_Z} - H_{t_X,t_Z} \\
+%    &= \sum_{t_Z\in\Span{T_Z}} \sum_{u\in\Field_r}
+%        \bigl( 2w(G_Z R_X^\top v^\top + G_z t_X^\top)
+%        - 2w(G_Z R_X^\top v^\top)\bigr)
+%        \ket{v}\bra{v}
+%\end{align*}
 
 \dolemma{2.2}
 Given a CSS gauge code Hamiltonian $H$, 
@@ -1948,6 +1947,15 @@ $\Gamma_{t_X}$ is stoquastic.
 By the previous lemma $\Gamma_{t_X}$ is irreducible.
 We apply the Perron-Frobenius theorem and the result follows.
 \tombstone
+
+Any stabilizer that acts as $-1$ in a given block of
+the Hamiltonian we will call a \emph{frustrated stabilizer}
+(with respect to the given block.)
+Similarly, a \emph{satisfied stabilizer} acts as $+1$ in a given
+block of the Hamiltonian.
+We will call a
+vector \emph{stabilized} if it is a $+1$ eigenvector 
+of every stabilizer in the given gauge group.
 
 \dolemma{2.3}
 Given a CSS gauge code Hamiltonian $H$,
@@ -2060,10 +2068,6 @@ consequence of the previous lemma.
 %(this is the Perron-Frobenius theorem)
 %and therefore is stabilized:
 
-The next goal is to search for
-the second eigenvalue of $H$,
-$\lambda_2(H).$
-
 The following lemma is used in section 2.8 below.
 
 %\noindent{\bf Fact 2:}
@@ -2082,7 +2086,13 @@ $\Ham_{t_X,0}$ are $+1,$ and so this matrix is stoquastic.
 This matrix is irreducible because as an operator it is
 irreducible.
 \tombstone
-%\todo{i don't think we will need this lemma..}
+
+So far, the Perron-Frobenius theory has been fruitful,
+telling us that the first eigenvalue of $H$ resides in
+the spectrum of the block $H_{0,0}$.
+The next goal is to search for
+the second eigenvalue of $H$.
+
 
 \dolemma{2.6}
 Let $H$ be a CSS gauge code Hamiltonian,
@@ -2136,8 +2146,20 @@ to obtain the second inequality.
 \tombstone
 
 %\danbrowne{Please spell out the argument more clearly. It isn't immediate that this follows from your two facts. }
-Therefore,
-to find the spectral gap of a weakly self-dual gauge code Hamiltonian,
+A CSS gauge code is \emph{self-dual} when the $X$-type and $Z$-type
+gauge generators are equal: $$G_X = G_Z.$$
+The $XY$-model is an example of a self-dual CSS gauge code.
+A CSS gauge code is \emph{weakly self-dual}
+when there is a permutation $P$ on the set of $n$ qubits
+that induces equality of the gauge generators:
+$$
+    G_X P = G_Z,
+$$
+where we write $P$ as an $n\times n$ permutation matrix.
+The compass model is then weakly self-dual when we transpose
+the square lattice of $l\times l$ qubits.
+
+To find the spectral gap of a weakly self-dual gauge code Hamiltonian $H$,
 %which is the difference of the top two eigenvalues of the Hamiltonian,
 we need only examine the top two eigenvalues of $H_{0,0}$ and 
 the top eigenvalue of $H_{t_X,0}$ for each $t_X\in T_X.$ 
@@ -3459,10 +3481,7 @@ as this code has $r=94$.
 In this final section of Chapter 2 
 we give some heuristic
 arguments for why the size of the stabilizers is
-related to the gap of the code. 
-%This does not lead to 
-%definitive conclusions. It appears that much more 
-%work is required.
+related to the gap of the Hamiltonian. 
 
 The Perron-Frobenius structure theory places
 strong constraints on the first and second
@@ -3615,7 +3634,7 @@ precisely those with $u=0.$
 We already know this is either the second eigenvector of $H_{0,0}$
 or otherwise the first eigenvector of $H_{t_X,0}$ for some $t_X \ne 0.$
 To relate this to the Perron-Frobenius theory we note the 
-decomposition:
+decomposition from Lemma 2.6:
 $$
     \Gamma_{t_X} = \bigoplus_{t_Z\in\Span{T_Z}} H_{t_X, t_Z}.
 $$
@@ -3824,6 +3843,12 @@ and how this relates to the geometry of the underlying code.
 %projector Hamiltonians, Kitaev's quantum double construction...
 %
 %Can you hear the sound of a semi-simple Lie algebra?
+
+% The spin transform for the symmetry invariant basis involves
+% non-local spin operators, and results in another gauge code
+% Hamiltonian (in general with fewer qubits) for each block. 
+% Is there anything further to be learned from examining these spin transforms,
+% or the resulting Hamiltonian operators?
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
