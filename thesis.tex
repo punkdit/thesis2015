@@ -189,52 +189,132 @@ which one would expect for a self-correcting quantum memory.
 
 %\danbrowne{motivate the research area and summarise key results}
 
-%Rule-of-thumb says that quantum phenomena occupy 
-%the realm of the very small and very short-lived.
-%The existence of 
-%quantum encoded information is a direct assault on this rule-of-thumb,
-%being neither small nor short-lived.
-%%By exploring these codes we are able to 
+An error correcting code aims to store information
+that can survive the effects of noise.
+A classical code will store bits of information,
+robust against bitflip noise.
+A quantum code stores qubits of information,
+robust against quantum noise.
 
-Chapter 1 introduces the subject of quantum error correction,
-from the viewpoint of homology theory. 
-These are abelian quantum codes: the check operators
+Presented as a code we have a set of check operators:
+measuring these gives the syndrome which is used to 
+diagnose the noise and hopefully restore the system
+in such a way as to preserve the encoded information.
+This is active error correction.
+But we can also put the check operators in a Hamiltonian.
+Now the protected state is found in the groundstate of
+the system, and we can ask how this state is effected
+by thermal noise.
+This is passive error correction, where the
+encoded information is protected energetically.
+
+In Chapter 1 we introduce 
+abelian quantum codes: the check operators
 all commute with each other.
-When we turn these check operators into the terms of a
-Hamiltonian, we can easily find all the eigenvectors and
-the spectrum.
+These are the quantum stabilizer codes.
+When we turn the check operators into the terms of a
+Hamiltonian, we can easily find all the eigenvectors and the spectrum.
+We connect quantum codes to classical
+(linear) codes using the viewpoint of homology theory. 
 
-The objects of study in chapter 2 are the spectra of 
-Hamiltonians built from Pauli spin matrices.
-These spin matrices lead a double life:
-both as the energetics of a Hamiltonian model, and as
+The remainder of this thesis aims to generalise these
+ideas to the non-abelian case, 
+and is made up of two parts.
+The first part is Chapter 2, which investigates
+qubit Hamiltonian models with non-commuting terms.
+The second part is Chapter 3 and 4, where we study
+topological systems without reference to any underlying spins.
+As Hamiltonians these will have
+commuting terms, but the associated algebra of observables
+is non-commutative.
+
+In Chapter 2 we study the spectra of 
+Hamiltonians built from Pauli spin (qubit) operators.
+These spin operators lead a double life:
+both as the energetic terms of a Hamiltonian model, and as
 the operators in a quantum error correcting code.
-For the Hamiltonian to act as a quantum memory, we
-would expect there to be a gap between the groundstate
-energy and the first excited state.
-In Section 2.10 we present numerical evidence of such a gap,
-for the three-dimensional gauge color code Hamiltonian.
+When these operators commute, the code is known as a stabilizer code.
+When they don't commute, the code is known as a subsystem code or gauge code.
+The resulting Hamiltonian groundstate becomes frustrated.
+For such a Hamiltonian to have any ability to act as a quantum
+code we would expect a spectral gap between the
+groundspace and first excited states.
+The goal of Chapter 2 is to study this spectral gap.
 
-The second half of the thesis concerns a quantum
+In Section 2.1 we show graphical depictions of
+some simple Hamiltonions and introduce the action of
+the Pauli $X$ and $Z$ operators.
+In Section 2.2 we study the group representation theory
+of subgroups of the (real) Pauli group on $n$ qubits.
+We apply this to the 2D compass model and the
+Kitaev honeycomb model in section 2.3. 
+In Section 2.4 we find the 
+irreducible representations of an arbitrary CSS gauge (subsystem) code.
+This is a new result, and involves solving a quadratic 
+system of equations over a finite field.
+
+In the computational basis, 
+CSS gauge code Hamiltonians have positive off-diagonal
+entries and so can be viewed as the adjacency matrix
+of a weighted graph.
+This motivates the ideas in Section 2.6, where 
+we use Perron-Frobenius theory to
+describe the low energy spectrum such Hamiltonians.
+These are new results.
+In Section 2.7 we introduce the 3D gauge color code Hamiltonian.
+Sections 2.8 and 2.9 discuss further ideas of
+symmetry in these Hamiltonians: the orbigraph and
+the structure of finite dimensional semi-simple Lie algebras.
+Using this we find that the gauge color code Hamiltonian
+decomposes into six mutually commuting ideals.
+This gives an exponential reduction in the numerical
+difficulty of exactly diagonalizing this Hamiltonian,
+results of which we present in Section 2.10.
+These numerics show some evidence of a spectral
+gap, which is contrasted against models that are known
+to be gapless: the two and three dimensional compass model,
+the one dimensional $XY$-model and the one dimensional
+transverse field Ising model.
+The chapter concludes with Section 2.11 where
+we suggest some relation between the size of
+stabilizers and the gapped nature of the Hamiltonian.
+This is further application of the Perron-Frobenius 
+theory in the context of Cheeger inequalities.
+
+Chapters 3 and 4 comprise the the second half of the thesis.
+Here we investigate a quantum 
 code built using a system supporting anyonic excitations.
-These anyons are quasi particles that live in a two
-dimensional system and enjoy exotic exchange statistics. 
+These anyons are quasi-particles that live in a two
+dimensional system and have exotic exchange statistics. 
 Understanding these statistics involves an appreciation of
 how the three-dimensional world-lines of these particles
-get tangled, or braided together. This turns out to be
-a Schrodinger picture of the state, and there is a corresponding
+get tangled, or braided together. This is 
+a Schr\"{o}dinger picture of the state, and there is a corresponding
 Heisenberg picture that involves deforming the underlying
 two-dimensional manifold.
-These ideas are discussed in Chapter 3, leading up to
+These ideas are discussed using the language of modular functors
+in Chapter 3.
+The chapter builds up to 
 a general theorem that allows us to manipulate these
 states in arbitrary ways.
 
 In Chapter 4 we consider a quantum code whose protected
-quantum information is the fusion space of a torus.
-We show numerically, in section 4.5,
+quantum information is stored in the fusion space of a torus.
+This is an active error correction scenario: 
+noise acts to create anyon excitations, the
+decoder measures these charges and tries to restore
+the system to the vacuum state by manipulating the anyons.
+Simulating these systems on a classical computer is not
+expected to be possible, as these systems are sufficient for
+performing arbitrary quantum computing.
+However, by decomposing the system into non-interacting parts,
+we can access the low-noise regime.
+We show numerically, in Section 4.5,
 that this code has a threshold for noise, 
 below which error correction succeeds asymptotically
 as the code size increases.
+Much of this work relies on the theory developed in the
+previous chapter.
 
 \chapter{Introduction}
 
@@ -981,10 +1061,47 @@ His ability to understand my blabbering, even when I did not, saved me many time
 
 \chapter{Conclusions}
 
-\danbrowne{brief chapter summarising all results}
+%\danbrowne{brief chapter summarising all results}
+
+Rule-of-thumb says that quantum phenomena occupy 
+the realm of the very small and very short-lived.
+The existence of 
+quantum encoded information is a direct assault on this rule-of-thumb,
+being neither small nor short-lived.
 
 In this thesis we have presented two approaches to
 Non-abelian quantum codes.
+The first involves energetic protection of a groundstate
+in a frustrated Hamiltonian.
+These Hamiltonians are typically gapless and so are not
+expected to work as stable quantum memories, but we find
+some numerical evidence that the gauge color code Hamiltonian
+is gapped.
+The second approach to non-abelian quantum codes involved
+a two dimensional topologically ordered system supporting
+anyon excitations.
+Here we showed that an active error correction
+procedure (a decoder) can act to restore the
+system to its groundstate.
+We perform numerics that show that if the noise is below
+a threshold this decoder succeeds with probability going to
+one as the system size increases.
+
+The theoretical machinery we develop is
+aimed at enabling numerical exploration of these systems.
+We certainly succeed in this, by probing the behaviour of
+systems previously thought to be too difficult to understand.
+But hopefully this theory will also lead to new insights
+into the existence and stability of these protected quantum states.
+
+Much of the theory developed in the field of quantum
+many-body physics resembles the drunkard searching for his
+keys under the streetlight:
+he has no idea where his keys are
+but at least this part of the street is illuminated.
+Our techniques are feeble indeed. We may need a quantum
+computer before we can really understand how these systems
+behave.
 
 
 %\appendix
