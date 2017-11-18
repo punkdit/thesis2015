@@ -209,12 +209,12 @@ This is passive error correction, where the
 encoded information is protected energetically.
 
 In Chapter 1 we introduce 
-abelian quantum codes: the check operators
+the quantum stabilizer codes.
+These are abelian quantum codes: the check operators
 all commute with each other.
-These are the quantum stabilizer codes.
 When we turn the check operators into the terms of a
 Hamiltonian, we can easily find all the eigenvectors and the spectrum.
-We connect quantum codes to classical
+In this chapter, we connect quantum codes to classical
 (linear) codes using the viewpoint of homology theory. 
 
 The remainder of this thesis aims to generalise these
@@ -259,7 +259,7 @@ entries and so can be viewed as the adjacency matrix
 of a weighted graph.
 This motivates the ideas in Section 2.6, where 
 we use Perron-Frobenius theory to
-describe the low energy spectrum such Hamiltonians.
+describe the low energy spectrum of such Hamiltonians.
 These are new results.
 In Section 2.7 we introduce the 3D gauge color code Hamiltonian.
 Sections 2.8 and 2.9 discuss further ideas of
@@ -276,35 +276,35 @@ to be gapless: the two and three dimensional compass model,
 the one dimensional $XY$-model and the one dimensional
 transverse field Ising model.
 The chapter concludes with Section 2.11 where
-we suggest some relation between the size of
+we suggest a relation between the size of
 stabilizers and the gapped nature of the Hamiltonian.
 This is further application of the Perron-Frobenius 
 theory in the context of Cheeger inequalities.
 
-Chapters 3 and 4 comprise the the second half of the thesis.
-Here we investigate a quantum 
-code built using a system supporting anyonic excitations.
+In Chapters 3 and 4 we investigate a quantum 
+code built from a system supporting anyonic excitations.
 These anyons are quasi-particles that live in a two
 dimensional system and have exotic exchange statistics. 
 Understanding these statistics involves an appreciation of
 how the three-dimensional world-lines of these particles
-get tangled, or braided together. This is 
+become tangled, or braided together. This is 
 a Schr\"{o}dinger picture of the state, and there is a corresponding
-Heisenberg picture that involves deforming the underlying
+Heisenberg picture of the observables
+that involves deforming the underlying
 two-dimensional manifold.
 These ideas are discussed using the language of modular functors
 in Chapter 3.
 The chapter builds up to 
 a general theorem that allows us to manipulate these
-states in arbitrary ways.
+states and observables in arbitrary ways.
 
 In Chapter 4 we consider a quantum code whose protected
 quantum information is stored in the fusion space of a torus.
 This is an active error correction scenario: 
 noise acts to create anyon excitations, the
-decoder measures these charges and tries to restore
+decoder then measures these charges and tries to restore
 the system to the vacuum state by manipulating the anyons.
-Simulating these systems on a classical computer is not
+Simulating this on a classical computer is not
 expected to be possible, as these systems are sufficient for
 performing arbitrary quantum computing.
 However, by decomposing the system into non-interacting parts,
@@ -1059,39 +1059,40 @@ His ability to understand my blabbering, even when I did not, saved me many time
 
 \input{supplement.tex}
 
-\chapter{Conclusions}
+\chapter{Conclusion}
 
 %\danbrowne{brief chapter summarising all results}
 
 Rule-of-thumb says that quantum phenomena occupy 
 the realm of the very small and very short-lived.
 The existence of 
-quantum encoded information is a direct assault on this rule-of-thumb,
+quantum encoded information is a direct confrontation with this rule-of-thumb,
 being neither small nor short-lived.
 
 In this thesis we have presented two approaches to
-Non-abelian quantum codes.
+non-abelian quantum codes.
 The first involves energetic protection of a groundstate
 in a frustrated Hamiltonian.
 These Hamiltonians are typically gapless and so are not
 expected to work as stable quantum memories, but we find
-some numerical evidence that the gauge color code Hamiltonian
+some numerical evidence that the 3D gauge color code Hamiltonian
 is gapped.
-The second approach to non-abelian quantum codes involved
+The second approach to non-abelian quantum codes involves
 a two dimensional topologically ordered system supporting
 anyon excitations.
-Here we showed that an active error correction
+Here we demonstrate that an active error correction
 procedure (a decoder) can act to restore the
 system to its groundstate.
 We perform numerics that show that if the noise is below
-a threshold this decoder succeeds with probability going to
+a threshold, this decoder succeeds with probability going to
 one as the system size increases.
 
-The theoretical machinery we develop is
+The theoretical machinery developed in this thesis is primarily 
 aimed at enabling numerical exploration of these systems.
-We certainly succeed in this, by probing the behaviour of
-systems previously thought to be too difficult to understand.
-But hopefully this theory will also lead to new insights
+We certainly succeed in this, by simulating the behaviour of
+systems previously thought to be too difficult to simulate.
+But hopefully these new theoretical advances
+will also lead to new insights
 into the existence and stability of these protected quantum states.
 
 Much of the theory developed in the field of quantum
@@ -1099,10 +1100,14 @@ many-body physics resembles the drunkard searching for his
 keys under the streetlight:
 he has no idea where his keys are
 but at least this part of the street is illuminated.
-Our techniques are feeble indeed. We may need a quantum
+Faced with these massively entangled quantum states,
+our techniques are feeble indeed. 
+We may need a quantum
 computer before we can really understand how these systems
-behave.
-
+behave, and what they are capable of.
+As with the current technology of classical computers,
+it takes one to build one; 
+they have been bootstrapped into existence.
 
 %\appendix
 %\chapter{First Appendix}
