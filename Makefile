@@ -3,6 +3,10 @@
 #out: thesis
 #	open thesis.pdf 
 
+report: report.tex
+	pdflatex report.tex
+
+
 thesis: thesis.tex refs.bib
 	cp ../spectrum2015/pic-gap.pdf .
 	cp ../spectrum2015/pic-gap-stabs.pdf .

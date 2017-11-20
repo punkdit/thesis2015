@@ -1,0 +1,234 @@
+\documentclass[11pt,oneside]{article} 
+
+%% \titleformat{command}[shape]{format}{label}{sep}{before}[after]
+
+% bug in titlesec:
+% https://bugs.launchpad.net/ubuntu/+source/texlive-extra/+bug/1574052
+\usepackage{titlesec}
+%\usepackage[tracking=true]{microtype}
+%\titleformat{\chapter}[display]
+%  {\normalfont\huge\bfseries}
+%  {\filcenter\underline{\MakeUppercase{\textls[400]{\chaptertitlename}}\ \thechapter}}
+%  {20pt}{\Huge}
+
+%\usepackage{epsf}
+\usepackage{amsmath}
+\usepackage{color}
+\usepackage{natbib}
+\usepackage{framed}
+%\usepackage{cite}
+\usepackage{tikz}
+\usepackage{tikz-cd}
+
+\RequirePackage{amsmath}
+\RequirePackage{amssymb}
+\RequirePackage{amsthm}
+%\RequirePackage{algorithmic}
+%\RequirePackage{algorithm}
+%\RequirePackage{theorem}
+%\RequirePackage{eucal}
+\RequirePackage{color}
+\RequirePackage{url}
+\RequirePackage{mdwlist}
+
+\RequirePackage[all]{xy}
+\CompileMatrices
+%\RequirePackage{hyperref}
+\RequirePackage{graphicx}
+%\RequirePackage[dvips]{geometry}
+
+\usepackage{xcolor}
+\usepackage{amsmath,amsfonts,amssymb}
+\usepackage{graphicx}
+\usepackage[caption=false]{subfig}
+\usepackage{enumerate}
+\usepackage{mathrsfs}
+
+\definecolor{darkblue}{RGB}{0,0,127} % choose colors
+\definecolor{darkgreen}{RGB}{0,150,0}
+%\hypersetup{colorlinks, linkcolor=darkblue, citecolor=darkgreen, filecolor=red, urlcolor=blue}
+%\hypersetup{pdfauthor={Simon Burton}}
+%\hypersetup{pdftitle={Foo Foo}}
+
+\usepackage[normalem]{ulem}
+
+\usepackage{setspace}   %Allows double spacing with the \doublespacing command
+
+\newcommand{\todo}[1]{\ \textcolor{red}{\{#1\}}\ }
+\newcommand{\danbrowne}[1]{\vspace{10pt}\noindent\textcolor{red}{{\it #1}}}
+
+\newcommand{\Eref}[1]{(\ref{#1})}
+\newcommand{\Fref}[1]{Fig.~\ref{#1}}
+%\newcommand{\Aref}[1]{Appendix~\ref{#1}}
+\newcommand{\SRef}[1]{section~\ref{#1}}
+
+
+\def\Complex{\mathbb{C}}
+\def\C{\mathbb{C}}
+\def\R{\mathbb{R}}
+\def\Z{\mathbb{Z}}
+%\def\Ham{\mathcal{H}} % meh..
+\def\Ham{H}
+\def\Pauli{\mathcal{P}}
+\def\Spec{\mbox{Spec}}
+\def\Proveit{{\it (Proof??)}}
+\def\GL{\mathrm{GL}}
+\def\half{\frac{1}{2}}
+\def\Stab{S}
+
+
+
+\newcommand{\ket}[1]{|{#1}\rangle}
+\newcommand{\expect}[1]{\langle{#1}\rangle}
+\newcommand{\bra}[1]{\langle{#1}|}
+\newcommand{\ketbra}[2]{\ket{#1}\!\bra{#2}}
+\newcommand{\braket}[2]{\langle{#1}|{#2}\rangle}
+
+\newcommand{\bket}[1]{\bigl|\,{#1}\,\bigr\rangle}
+\newcommand{\bbra}[1]{\bigl\langle\,{#1}\,\bigr|}
+\newcommand{\bketbra}[2]{\bket{#1}\!\bra{#2}}
+\newcommand{\bbraket}[2]{\bigl\langle\,{#1}\,\bigr|\,{#2}\,\bigr\rangle}
+
+\def\Span#1{\langle #1 \rangle}
+
+%\newcommand{\todo}[1]{\textcolor{red}{#1}}
+
+\def\smbox#1{\ \ \mbox{#1}\ \ }
+
+
+
+\newcommand{\Field}{\mathcal{F}}
+\def\Im{\mathrm{im}}
+\def\Ker{\mathrm{ker}}
+\def\Dim{\mathrm{dim}}
+%\def\euler{\chi}
+\def\euler{\mu}
+
+
+\title{Thesis ``non-abelian quantum codes'' edit summary}
+\author{Simon David Burton}
+\date{November 2017}
+
+\begin{document}
+
+\maketitle
+
+Comments from Dan Browne are highlighted below in red, followed by 
+notes on changes made to the thesis.
+
+The other two reviewers did not require any changes be made to the thesis.
+
+\danbrowne{
+I have noted some typos and minor improvements (such as rephrasing and missing references) for the candidate to consider as
+annotations in a PDF which I can supply to the candidate.
+}
+
+
+\danbrowne{
+Apart from those, I request the following corrections:
+}
+
+\danbrowne{
+Coherence of the thesis:
+Currently the these feels like 4 independent articles without a coherent structure. Furthermore the chapters are missing an
+essential conclusions section, summarising the results, critiquing the methods used, connecting the results with related work in the
+literature and discussing open questions. This can be remedied by the addition of two short extra chapters and a conclusions
+section to each chapter.
+}
+
+Done.
+
+\danbrowne{
+Specifically, I request:
+To add a short pre-introductory chapter (or expanded abstract) motivating the research area, and summarising the key results.
+}
+
+Chapter 0 added.
+
+\danbrowne{
+Conclusions sections to be added to all chapters. These sections should
+1. Summarise the results presented
+2. Discuss any approximations made and any arbitrary choices made (e.g. a choice of code or of topological qubit) and
+discuss how the results obtained in the specific case may give insight into more general cases.
+3. Discuss any recent related work (if any exists)
+4. Identify key open questions and next steps, and potential application of the results in the chapter.
+5. Link to the next chapter (if appropriate)
+}
+
+Done: "Discussion" section added at end of chapters 1-5.
+
+\danbrowne{
+To add a brief concluding chapter summarising all results presented in the thesis.
+}
+
+Chapter 6 added.
+
+\danbrowne{
+I have a small number of technical requests on the chapters to be addressed:
+Chapter 1
+Although I like the unconventional approach here, make sure that the literature is fully cited where appropriate - e.g. when you first
+introduce Kitaev’s topic code and the homological approach to quantum codes, mention him and cite the appropriate literature.
+}
+
+Citations added to chapter 1.
+
+\danbrowne{
+Chapter 2
+This is a strong and very interesting chapter, but the key analytic results are presented as “Fact” boxes without formal proofs.
+Although these results are often explained informally in the text, this is not sufficient. Please add formal proofs of Facts 0 to 3. If
+you don’t want to break the flow of the text I suggest adding an appendix with these proofs.
+}
+
+All results in section 2.6 and 2.8 now have proofs.
+
+\danbrowne{
+Chapter 3
+Please connect with the content of chapter 4. In particular, either here or in chapter 4, introduce a topological qubit (and its logical
+operators) on a toric manifold as considered in chapter 4. There’s a strong disconnect at present that chapter 3 focusses solely on
+manifolds with holes and chapter 4 solely on a manifold without holes.
+}
+
+More discussion added to chapter 3 and 4.
+In particular section 3.5 connects chapter 3 and 4.
+
+\danbrowne{
+Chapter 4
+Please give more justification of your chosen error model.
+Is it the model that one would expect arising from thermal noise?}
+
+added discussion on p75.
+
+\danbrowne{Please explain more clearly how pair creation and curve
+diagrams lead to specific measurement outcomes for the observables
+measured.}
+
+See example on p76.
+
+\danbrowne{
+Please explain in more detail how you simulate the errors,
+and, in particular, what the quantity $t_{sim}$ represents.
+}
+Further discussion added to chapter 4.
+In particular, the example on page 76 and associated discussion.
+
+\danbrowne{
+In the conclusions section, please discuss the extent
+to which this approach to error correction could be modified for error
+correction of other forms of topological qubit, such
+as other anyon species, and scenarios with multiple logical qubits per surface.
+}
+
+Done.
+
+\vspace{10pt}
+\hrule
+\hrule
+\hrule
+
+
+
+
+\end{document}
+
+
+
